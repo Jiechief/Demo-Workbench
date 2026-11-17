@@ -1668,10 +1668,22 @@ input:focus,select:focus{border-color:var(--accent)}
         </div>
         <div class="video-block" style="margin-top:16px">
           <h4>视频生成演示</h4>
-          <video class="video-player" controls preload="metadata">
-            <source src="assets/视频生成素材.mp4" type="video/mp4">
-          </video>
-          <p class="video-desc">设计专家生成的视频内容演示</p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;justify-content:center">
+            <div style="flex:0 0 360px;max-width:360px">
+              <img src="assets/视频生成_设计专家处理.png" alt="设计专家处理过程" style="width:100%;border-radius:8px;border:1px solid var(--border);display:block;cursor:zoom-in" onclick="openLightbox(this.src)">
+              <p style="font-size:12px;color:var(--text-3);text-align:center;margin-top:6px">设计专家处理过程（点击放大）</p>
+            </div>
+            <div style="flex:0 0 360px;max-width:360px">
+              <img src="assets/视频生成_成片结果.png" alt="视频生成成片结果" style="width:100%;border-radius:8px;border:1px solid var(--border);display:block;cursor:zoom-in" onclick="openLightbox(this.src)">
+              <p style="font-size:12px;color:var(--text-3);text-align:center;margin-top:6px">视频生成成片结果（点击放大）</p>
+            </div>
+            <div style="flex:0 0 320px;max-width:320px">
+              <video class="video-player" controls preload="metadata" style="width:100%">
+                <source src="assets/视频生成素材.mp4" type="video/mp4">
+              </video>
+              <p style="font-size:12px;color:var(--text-3);text-align:center;margin-top:6px">生成视频演示</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2697,6 +2709,89 @@ document.querySelectorAll('.bar-fill').forEach(bar=>{
   const h=bar.style.height;
   if(h)bar.style.setProperty('--bar-h',h);
 });
+
+ /* ============================================================
+    图片灯箱 — 点击放大 + 滚轮缩放 + 拖拽
+    ============================================================ */
+// 创建灯箱 DOM
+var _lightbox=document.createElement('div');
+_lightbox.id='imgLightbox';
+_lightbox.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.85);display:none;z-index:9999;overflow:hidden';
+_lightbox.innerHTML='<img id="lbImg" style="max-width:92vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5);transform-origin:center center;transition:transform .15s ease;user-select:none;-webkit-user-drag:none">';
+document.body.appendChild(_lightbox);
+var _lbImg=document.getElementById('lbImg');
+var _lbScale=1,_lbX=0,_lbY=0,_lbDragging=false,_lbStartX=0,_lbStartY=0,_lbStartTX=0,_lbStartTY=0;
+// 应用变换
+function _lbApply(){
+  _lbImg.style.transform='translate('+_lbX+'px,'+_lbY+'px) scale('+_lbScale+')';
+}
+// 关闭灯箱
+function _lbClose(){
+  _lightbox.style.display='none';
+  document.body.style.overflow='';
+  _lbScale=1;_lbX=0;_lbY=0;
+  _lbImg.style.transition='transform .15s ease';
+  _lbApply();
+}
+// 点击空白关闭（图片上的点击不关闭）
+_lightbox.addEventListener('click',function(e){
+  if(e.target===_lightbox||e.target===_lbImg && _lbScale<=1.05){_lbClose();}
+});
+// 阻止图片点击冒泡到灯箱（放大状态下点击图片不关闭）
+_lbImg.addEventListener('click',function(e){
+  if(_lbScale>1.05)e.stopPropagation();
+});
+// 滚轮缩放
+_lightbox.addEventListener('wheel',function(e){
+  e.preventDefault();
+  var delta=e.deltaY>0?0.9:1.1;
+  var newScale=_lbScale*delta;
+  if(newScale<0.3)newScale=0.3;
+  if(newScale>8)newScale=8;
+  _lbScale=newScale;
+  _lbImg.style.transition='none';
+  _lbApply();
+},{passive:false});
+// 拖拽平移（放大状态下）
+_lbImg.addEventListener('mousedown',function(e){
+  if(_lbScale<=1.05)return;
+  e.preventDefault();
+  _lbDragging=true;
+  _lbStartX=e.clientX;_lbStartY=e.clientY;
+  _lbStartTX=_lbX;_lbStartTY=_lbY;
+  _lbImg.style.transition='none';
+  _lbImg.style.cursor='grabbing';
+});
+document.addEventListener('mousemove',function(e){
+  if(!_lbDragging)return;
+  _lbX=_lbStartTX+(e.clientX-_lbStartX);
+  _lbY=_lbStartTY+(e.clientY-_lbStartY);
+  _lbApply();
+});
+document.addEventListener('mouseup',function(){
+  if(_lbDragging){
+    _lbDragging=false;
+    _lbImg.style.cursor=_lbScale>1.05?'grab':'zoom-out';
+  }
+});
+// Esc 关闭
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape' && _lightbox.style.display==='block'){_lbClose();}
+  // 双击重置
+  if(e.key==='r' && _lightbox.style.display==='block'){
+    _lbScale=1;_lbX=0;_lbY=0;_lbApply();
+  }
+});
+// 打开灯箱
+function openLightbox(src){
+  _lbImg.src=src;
+  _lbScale=1;_lbX=0;_lbY=0;
+  _lbImg.style.transition='transform .15s ease';
+  _lbApply();
+  _lbImg.style.cursor='zoom-out';
+  _lightbox.style.display='block';
+  document.body.style.overflow='hidden';
+}
 </script>
 
 
