@@ -1,0 +1,45 @@
+# 临时检查脚本
+_check*.js
+_chk*.py
+_chunk_check.js
+_logic_run.js
+_logic_tests.txt
+_scan_out.json
+_commitmsg*.txt
+_cr_*.txt
+_patch_*.py
+_repair.py
+_resolve_merge.py
+_run_logic_test.py
+_dbg*.py
+_dump_*.py
+_extract_js.py
+_fix_*.py
+_apply_credits.py
+_awb_spec.*
+_ops_setup.js
+_ops_*
+_validate*
+# 临时目录
+_backup/
+_ref/
+_ref_audit/
+browser-results/
+evidence/
+shots/
+ops-shots/
+online-check/
+credits-verify/
+image_generate/
+node-compile-cache/
+phoenix-skills/
+reverse-engineer-anything/
+skill_repack/
+# 不相关的工作台文件
+外贸单证工作台*
+ftd*
+ops_sanitized.js
+page_*.png
+gcp.txt
+auto-clicker/
+Operations-Workbench/

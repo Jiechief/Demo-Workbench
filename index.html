@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AccioWork · 你的 AI 电商业务引擎</title>
+<style>
+/* ============================================================
+   设计令牌 — Premium SaaS 浅色风
+   ============================================================ */
+:root{
+  --bg:#FAFBFD;
+  --bg-2:#FFFFFF;
+  --bg-3:#F2F5FA;
+  --bg-card:#FFFFFF;
+  --bg-hero:#0F172A;
+  --border:#E2E8F0;
+  --border-2:#CBD5E1;
+  --text:#0F172A;
+  --text-2:#475569;
+  --text-3:#94A3B8;
+  --accent:#2563EB;
+  --accent-light:#3B82F6;
+  --accent-bg:#EFF6FF;
+  --teal:#0D9488;
+  --teal-bg:#ECFDF5;
+  --violet:#7C3AED;
+  --violet-bg:#F5F3FF;
+  --amber:#D97706;
+  --amber-bg:#FFFBEB;
+  --rose:#E11D48;
+  --rose-bg:#FFF1F2;
+  --grad-hero:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#1E40AF 100%);
+  --grad-accent:linear-gradient(135deg,#2563EB,#3B82F6);
+  --grad-teal:linear-gradient(135deg,#0D9488,#14B8A6);
+  --grad-violet:linear-gradient(135deg,#7C3AED,#A78BFA);
+  --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+  --shadow:0 4px 12px rgba(15,23,42,.08);
+  --shadow-lg:0 12px 32px rgba(15,23,42,.12);
+  --shadow-xl:0 20px 48px rgba(15,23,42,.16);
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:24px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"SF Mono","Cascadia Code","Consolas",monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+/* ============================================================
+   重置
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+button{font-family:var(--font);cursor:pointer;border:none;outline:none;transition:all .2s var(--ease)}
+input,select{font-family:var(--font);background:var(--bg-2);color:var(--text);border:1.5px solid var(--border-2);border-radius:8px;padding:10px 14px;outline:none;transition:border-color .2s;font-size:14px}
+input:focus,select:focus{border-color:var(--accent)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-3)}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-3)}
+.tabular{font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   数据呈现动效
+   ============================================================ */
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes growBar{from{height:0}to{height:var(--bar-h,100%)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* 数字滚动动效 */
+.num-roll{display:inline-block;animation:countUp .8s var(--ease) forwards}
+
+/* KPI 卡片入场 */
+.kpi-card{animation:fadeIn .4s var(--ease)}
+
+/* 柱状图增长动效 */
+.bar-fill{animation:growBar .8s var(--ease) forwards}
+
+/* 标签切换平滑 */
+.dash-pane.active,.demo-pane.active,.agent-pane.active{animation:fadeIn .25s var(--ease)}
+
+/* 渐变文字 */
+.hl{
+  background:linear-gradient(90deg,var(--accent),var(--violet));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ============================================================
+   导航栏
+   ============================================================ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 32px;gap:32px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--text);white-space:nowrap}
+.nav-brand .logo{
+  width:32px;height:32px;border-radius:8px;background:var(--grad-accent);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;
+}
+.nav-links{display:flex;gap:2px;flex:1}
+.nav-links a{
+  color:var(--text-2);font-size:14px;font-weight:500;padding:8px 16px;border-radius:8px;
+ transition:all .15s;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--bg-3);color:var(--text)}
+.nav-links a.active{background:var(--accent-bg);color:var(--accent)}
+.nav-cta{display:flex;gap:10px}
+
+/* 按钮 */
+.btn{padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .2s var(--ease);white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 4px 16px rgba(37,99,235,.3)}
+.btn-dark{background:var(--text);color:#fff}
+.btn-dark:hover{background:#1E293B;transform:translateY(-1px);box-shadow:0 4px 16px rgba(15,23,42,.2)}
+.btn-ghost{background:var(--bg-2);color:var(--text);border:1.5px solid var(--border-2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{padding:7px 16px;font-size:13px}
+
+/* ============================================================
+   Hero 区
+   ============================================================ */
+.hero{
+  background:linear-gradient(180deg,#D6F2E4 0%,#E5F6EE 35%,#F0F9F4 65%,#FFFFFF 100%);
+  color:#0D3B2E;
+  padding:120px 32px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-150px;right:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(13,148,136,.1),transparent 70%);
+}
+.hero::after{
+  content:'';position:absolute;bottom:-150px;left:-80px;
+  width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,.08),transparent 70%);
+}
+.hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 18px;
+  background:#fff;border:1px solid #C8E6D5;
+  border-radius:20px;font-size:13px;color:#0D9488;margin-bottom:28px;
+  box-shadow:var(--shadow-sm);
+}
+.hero-badge .dot-live{width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 8px #10B981}
+.hero h1{
+  font-size:52px;font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:24px;color:#0D3B2E;
+}
+.hero h1 .hl{
+  background:linear-gradient(135deg,#0D9488,#056B60);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero .lead{
+  font-size:19px;color:#3D5A52;margin-bottom:40px;line-height:1.6;
+}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero .btn-primary{background:#0D9488;color:#fff}
+.hero .btn-primary:hover{background:#0A7A70}
+.hero .btn-ghost{background:#fff;color:#0D3B2E;border-color:#B8DCC8}
+.hero .btn-ghost:hover{background:#F0F9F4;border-color:#0D9488}
+.hero-stats{
+  display:flex;gap:0;justify-content:center;margin-top:64px;
+  background:#fff;border:1px solid #C8E6D5;
+  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
+}
+.hero-stat{
+  flex:1;padding:28px 20px;text-align:center;
+  border-right:1px solid #E0EFE5;
+}
+.hero-stat:last-child{border-right:none}
+.hero-stat .num{font-size:32px;font-weight:800;font-family:var(--mono);color:#0D9488}
+.hero-stat .label{font-size:12px;color:#5A7569;margin-top:4px}
+
+/* ============================================================
+   通用区块
+   ============================================================ */
+.section{padding:80px 32px;max-width:1200px;margin:0 auto}
+.section-center{text-align:center}
+.section-center .section{max-width:920px}
+.eyebrow{
+  display:inline-block;font-size:13px;font-weight:600;color:var(--accent);
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;
+}
+.section h2{
+  font-size:36px;font-weight:800;line-height:1.25;letter-spacing:-.5px;margin-bottom:16px;
+}
+.section h2 .hl{color:var(--accent)}
+.section .subtitle{
+  font-size:18px;color:var(--text-2);margin-bottom:48px;line-height:1.6;
+}
+
+/* ============================================================
+   核心能力区
+   ============================================================ */
+.capability-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.cap-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px;transition:all .3s var(--ease);position:relative;overflow:hidden;
+}
+.cap-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.cap-card .cap-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;
+}
+.cap-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.cap-card p{font-size:14px;color:var(--text-2);line-height:1.7}
+.cap-card .cap-examples{
+  margin-top:16px;padding-top:16px;border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.cap-card .cap-examples .tag{
+  font-size:12px;padding:4px 10px;border-radius:6px;
+  background:var(--bg-3);color:var(--text-2);font-weight:500;
+}
+
+/* ============================================================
+   经营链路区
+   ============================================================ */
+.flow-section{background:var(--bg-3);padding:80px 0 40px}
+.flow-section .section{padding-left:32px;padding-right:32px}
+.flow-chain{
+  display:flex;align-items:stretch;gap:0;margin-bottom:48px;overflow-x:auto;
+  padding-bottom:8px;
+}
+.flow-step{
+  flex:1;min-width:160px;text-align:center;position:relative;padding:20px 12px;
+}
+.flow-step .step-icon{
+  width:56px;height:56px;border-radius:16px;margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  transition:transform .3s;
+}
+.flow-step:hover .step-icon{transform:scale(1.1)}
+.flow-step .step-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.flow-step .step-desc{font-size:12px;color:var(--text-3)}
+.flow-step:not(:last-child)::after{
+  content:'';position:absolute;top:48px;right:-12px;width:24px;height:2px;
+  background:var(--border-2);
+}
+.flow-step:not(:last-child)::before{
+  content:'';position:absolute;top:44px;right:-14px;
+  width:0;height:0;border-left:8px solid var(--border-2);
+  border-top:5px solid transparent;border-bottom:5px solid transparent;
+}
+
+/* 场景详情卡 */
+.scene-detail{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-xl);
+  overflow:hidden;margin-bottom:24px;
+}
+.scene-detail .sd-head{
+  display:flex;align-items:center;gap:16px;padding:24px 32px;
+  border-bottom:1px solid var(--border);background:var(--bg-2);
+}
+.scene-detail .sd-icon{
+  width:52px;height:52px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+}
+.scene-detail .sd-title h3{font-size:20px;font-weight:700}
+.scene-detail .sd-title .sd-tagline{font-size:14px;color:var(--text-2);margin-top:2px}
+.scene-detail .sd-body{padding:32px}
+.scene-detail .sd-triple{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
+}
+.triple-col h4{
+  font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:14px;display:flex;align-items:center;gap:6px;
+}
+.triple-col .triple-icon{font-size:16px}
+.triple-pain h4{color:var(--rose)}
+.triple-do h4{color:var(--accent)}
+.triple-gain h4{color:var(--teal)}
+.triple-col ul{list-style:none}
+.triple-col ul li{
+  font-size:14px;color:var(--text-2);padding:8px 0;
+  display:flex;align-items:flex-start;gap:8px;line-height:1.6;
+}
+.triple-col ul li::before{
+  content:'';width:5px;height:5px;border-radius:50%;margin-top:8px;flex-shrink:0;
+}
+.triple-pain li::before{background:var(--rose)}
+.triple-do li::before{background:var(--accent)}
+.triple-gain li::before{background:var(--teal)}
+.triple-col .metric{
+  margin-top:12px;padding:12px 14px;border-radius:10px;font-size:13px;
+}
+.triple-pain .metric{background:var(--rose-bg);color:var(--rose);font-weight:600}
+.triple-do .metric{background:var(--accent-bg);color:var(--accent);font-weight:600}
+.triple-gain .metric{background:var(--teal-bg);color:var(--teal);font-weight:600}
+
+/* 素材占位 */
+.asset-slot{
+  margin-top:16px;border:2px dashed var(--border-2);border-radius:var(--radius);
+  min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;background:var(--bg-3);
+}
+.asset-slot .ph-icon{font-size:28px;opacity:.4}
+.asset-slot .ph-label{font-weight:600;color:var(--text-2);font-size:14px}
+.asset-slot .ph-hint{font-size:12px}
+
+/* 场景素材预览区 — iframe 竖向滚动 */
+.scene-preview{
+  margin-top:16px;border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;background:var(--bg-3);
+}
+.scene-preview-head{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:var(--bg-card);border-bottom:1px solid var(--border);
+}
+.scene-preview-head .sp-badge{
+  font-size:11px;padding:2px 8px;border-radius:4px;
+  background:var(--accent-bg);color:var(--accent);font-weight:600;
+}
+.scene-preview-head .sp-title{font-size:13px;font-weight:600;color:var(--text)}
+.scene-preview-head .sp-hint{font-size:11px;color:var(--text-3);margin-left:auto}
+
+/* iframe 竖向滚动容器 */
+.scene-iframe-wrap{
+  height:600px;overflow:hidden;position:relative;
+}
+.scene-iframe{
+  width:100%;height:600px;border:none;display:block;
+}
+.scene-iframe-fallback{
+  display:none;padding:20px;text-align:center;font-size:13px;color:var(--text-3);line-height:1.6;
+}
+
+/* ============================================================
+   数据看板演示区
+   ============================================================ */
+.dash-section{padding:40px 32px 80px;background:var(--bg-3)}
+.dash-section .section{max-width:1200px;margin:0 auto;padding:0}
+.dash-tabs{
+  display:flex;gap:4px;margin-bottom:24px;border-bottom:2px solid var(--border);
+  overflow-x:auto;
+}
+.dash-tabs button{
+  background:transparent;color:var(--text-2);font-size:14px;font-weight:600;
+  padding:12px 20px;border-bottom:3px solid transparent;margin-bottom:-2px;
+  white-space:nowrap;transition:all .2s;
+}
+.dash-tabs button:hover{color:var(--text)}
+.dash-tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.dash-board{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px;min-height:400px;
+}
+.dash-pane{display:none}
+.dash-pane.active{display:block;animation:fadeIn .3s var(--ease)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* KPI 卡片 */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{
+  background:var(--bg-3);border-radius:var(--radius);padding:18px 20px;
+  border:1px solid var(--border);
+}
+.kpi-label{font-size:12px;color:var(--text-3);margin-bottom:6px;font-weight:500}
+.kpi-value{font-size:26px;font-weight:800;font-family:var(--mono);color:var(--text);line-height:1.1}
+.kpi-value.warn{color:var(--amber)}
+.kpi-value.danger{color:var(--rose)}
+.kpi-trend{font-size:12px;margin-top:6px;font-weight:600}
+.kpi-trend.up{color:var(--teal)}
+.kpi-trend.down{color:var(--rose)}
+.kpi-trend.warn{color:var(--amber)}
+.kpi-spark{display:flex;align-items:flex-end;gap:3px;height:28px;margin-top:10px}
+.kpi-spark span{flex:1;background:var(--accent);opacity:.3;border-radius:2px 2px 0 0;min-height:4px;transition:opacity .2s}
+.kpi-card:hover .kpi-spark span{opacity:.6}
+
+/* 图表卡片 */
+.dash-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:0}
+.dash-chart-card{
+  background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;margin-bottom:20px;
+}
+.dash-split .dash-chart-card{margin-bottom:0}
+.dash-chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.dash-chart-head h4{font-size:15px;font-weight:700}
+.dash-chart-tag{
+  font-size:11px;padding:3px 10px;border-radius:4px;
+  background:var(--accent-bg);color:var(--accent);font-weight:600;
+}
+
+/* 环形图 */
+.donut-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.donut{
+  width:140px;height:140px;border-radius:50%;flex-shrink:0;position:relative;
+  background:conic-gradient(
+    var(--accent) 0% var(--seg1),
+    var(--violet) var(--seg1) calc(var(--seg1) + var(--seg2)),
+    var(--teal) calc(var(--seg1) + var(--seg2)) calc(var(--seg1) + var(--seg2) + var(--seg3)),
+    var(--amber) calc(var(--seg1) + var(--seg2) + var(--seg3)) calc(var(--seg1) + var(--seg2) + var(--seg3) + var(--seg4)),
+    var(--rose) calc(var(--seg1) + var(--seg2) + var(--seg3) + var(--seg4)) 100%
+  );
+}
+.donut::before{
+  content:'';position:absolute;inset:22px;border-radius:50%;background:var(--bg-3);
+}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
+.donut-num{font-size:18px;font-weight:800;color:var(--text)}
+.donut-lbl{font-size:11px;color:var(--text-3);margin-top:2px}
+.donut-legend{display:flex;flex-direction:column;gap:6px}
+.donut-legend span{font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:6px}
+.donut-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+/* 柱状图 */
+.bar-chart{display:flex;align-items:flex-end;gap:16px;height:200px;padding-top:20px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
+.bar-fill{
+  width:100%;max-width:50px;background:var(--grad-accent);border-radius:6px 6px 0 0;
+  position:relative;display:flex;align-items:flex-start;justify-content:center;
+  transition:opacity .2s;
+}
+.bar-fill:hover{opacity:.8}
+.bar-fill span{font-size:11px;color:#fff;font-weight:600;margin-top:6px;white-space:nowrap}
+.bar-label{font-size:11px;color:var(--text-2);margin-top:8px;text-align:center;font-weight:500}
+
+/* 横向条形图 */
+.hbar-list{display:flex;flex-direction:column;gap:10px}
+.hbar-item{display:flex;align-items:center;gap:10px}
+.hbar-label{font-size:13px;color:var(--text-2);width:60px;flex-shrink:0;text-align:right}
+.hbar-track{flex:1;height:20px;background:var(--bg-2);border-radius:4px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:4px;transition:width .3s var(--ease)}
+.hbar-val{font-size:12px;font-weight:600;color:var(--text);font-family:var(--mono);width:60px;flex-shrink:0}
+
+/* 热力图 */
+.heatmap{display:flex;flex-direction:column;gap:4px}
+.hm-row{display:flex;align-items:center;gap:4px}
+.hm-label{font-size:11px;color:var(--text-3);width:36px;flex-shrink:0;text-align:right}
+.hm-cell{flex:1;height:24px;border-radius:3px}
+.hm-cell.l1{background:#EFF6FF}
+.hm-cell.l2{background:#BFDBFE}
+.hm-cell.l3{background:#93C5FD}
+.hm-cell.l4{background:#3B82F6}
+.hm-cell.l5{background:#1D4ED8}
+.hm-legend{display:flex;align-items:center;gap:4px;margin-top:12px;justify-content:flex-end}
+.hm-legend span{font-size:11px;color:var(--text-3)}
+.hm-legend .hm-cell{width:18px;height:18px;flex:none}
+
+/* 漏斗图 */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 0}
+.funnel-stage{
+  height:42px;border-radius:6px;color:#fff;font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;transition:opacity .2s;
+}
+.funnel-stage:hover{opacity:.85}
+
+/* 数据表格 */
+.dash-table{width:100%;border-collapse:collapse;font-size:13px}
+.dash-table thead th{
+  text-align:left;padding:10px 12px;background:var(--bg-2);
+  color:var(--text-2);font-weight:600;font-size:12px;
+  border-bottom:2px solid var(--border);
+}
+.dash-table tbody td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+.dash-table tbody tr:hover{background:var(--bg-2)}
+.dash-table .st-warn{color:var(--amber);font-weight:600}
+.dash-table .st-danger{color:var(--rose);font-weight:600}
+.dash-table .num-warn{color:var(--amber);font-weight:700}
+.dash-table .num-danger{color:var(--rose);font-weight:700}
+.dash-table .num-up{color:var(--teal);font-weight:600}
+.dash-table .num-down{color:var(--rose);font-weight:600}
+.channel-table .ch-name{display:flex;align-items:center;gap:8px;font-weight:600}
+.channel-table .ch-name i{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0}
+
+/* 气泡图 */
+.bubble-area{position:relative;height:220px;background:var(--bg-2);border-radius:8px;border:1px solid var(--border);overflow:hidden}
+.bubble{
+  position:absolute;border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;
+  transition:transform .2s;
+}
+.bubble:hover{transform:scale(1.1)}
+.bubble .b-sub{font-size:8px;opacity:.8}
+.b-ok{background:var(--teal);opacity:.7}
+.b-warn{background:var(--amber);opacity:.75}
+.b-danger{background:var(--rose);opacity:.8}
+.b-stale{background:var(--text-3);opacity:.5}
+.bubble-legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.bubble-legend span{font-size:12px;color:var(--text-2);display:flex;align-items:center;gap:6px}
+.bubble-legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* 雷达图 */
+.radar-wrap{display:flex;justify-content:center;padding:12px}
+.radar-svg{width:180px;height:180px}
+
+/* 多折线图 */
+.multi-line-chart{display:flex;flex-direction:column;gap:10px}
+.ml-svg{width:100%;height:120px}
+.ml-legend{display:flex;gap:12px;flex-wrap:wrap}
+.ml-legend span{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:5px}
+.ml-legend i{width:12px;height:2px;display:inline-block}
+
+/* 看板使用提示 */
+.dash-note{
+  margin-top:20px;padding:14px 18px;background:var(--accent-bg);border-radius:10px;
+  display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-2);line-height:1.7;
+}
+.dash-note-icon{flex-shrink:0;font-size:18px}
+.dash-note b{color:var(--text)}
+
+/* 看板形式总结 */
+.dash-formats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px;
+}
+.dash-format-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;
+}
+.dash-format-card .df-icon{font-size:24px;margin-bottom:8px}
+.dash-format-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.dash-format-card p{font-size:13px;color:var(--text-2);line-height:1.6}
+
+/* 适用场景 */
+.dash-scenarios{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;
+}
+.ds-item{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.ds-tag{
+  font-size:11px;font-weight:700;padding:3px 12px;border-radius:12px;align-self:flex-start;
+  background:var(--accent-bg);color:var(--accent);
+}
+.ds-tag-2{background:var(--teal-bg);color:var(--teal)}
+.ds-item p{font-size:13px;color:var(--text-2);line-height:1.6}
+
+@media(max-width:900px){
+  .dash-split{grid-template-columns:1fr}
+  .dash-scenarios{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:1fr}
+  .bar-chart{gap:8px}
+  .dash-board{padding:16px}
+}
+
+/* ============================================================
+   专家 Agent 演示区
+   ============================================================ */
+.agent-section{padding:80px 32px;background:var(--bg-2)}
+.agent-section .section{max-width:1200px;margin:0 auto;padding:0}
+.agent-intro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.agent-intro-card{
+  background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px;text-align:center;transition:all .2s;cursor:pointer;position:relative;
+}
+.agent-intro-card:hover{border-color:var(--accent);box-shadow:var(--shadow-lg)}
+.agent-intro-card.active{border-color:var(--accent);box-shadow:var(--shadow-lg)}
+.agent-avatar{
+  width:56px;height:56px;border-radius:50%;margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;
+}
+.agent-avatar.procurement{background:linear-gradient(135deg,#10B981,#059669)}
+.agent-avatar.design{background:linear-gradient(135deg,#8B5CF6,#6D28D9)}
+.agent-avatar.ecommerce{background:linear-gradient(135deg,#3B82F6,#1D4ED8)}
+.agent-intro-card h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.agent-intro-card .agent-id{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-bottom:12px}
+.agent-intro-card p{font-size:13px;color:var(--text-2);line-height:1.6}
+.agent-intro-card .agent-stats{display:flex;justify-content:center;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.agent-intro-card .agent-stat{text-align:center}
+.agent-intro-card .agent-stat .num{font-size:20px;font-weight:800;color:var(--accent)}
+.agent-intro-card .agent-stat .lbl{font-size:10px;color:var(--text-3);margin-top:2px}
+
+/* Agent 标签切换 */
+.agent-tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:2px solid var(--border);overflow-x:auto}
+.agent-tabs button{
+  background:transparent;color:var(--text-2);font-size:14px;font-weight:600;
+  padding:12px 20px;border-bottom:3px solid transparent;margin-bottom:-2px;
+  white-space:nowrap;transition:all .2s;
+}
+.agent-tabs button:hover{color:var(--text)}
+.agent-tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.agent-pane{display:none}
+.agent-pane.active{display:block;animation:fadeIn .3s var(--ease)}
+
+/* 能力全景表 */
+.cap-flow{display:flex;gap:0;flex-wrap:wrap;margin-bottom:32px}
+.cap-flow-step{
+  flex:1;min-width:130px;background:var(--bg-3);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 14px;position:relative;margin-right:-1px;
+}
+.cap-flow-step .cap-num{
+  width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  margin-bottom:8px;
+}
+.cap-flow-step .cap-title{font-size:13px;font-weight:700;margin-bottom:6px}
+.cap-flow-step .cap-desc{font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:8px}
+.cap-flow-step .cap-output{
+  font-size:11px;padding:6px 10px;background:var(--accent-bg);border-radius:6px;
+  color:var(--accent);font-weight:600;
+}
+
+/* 截图展示 — 横向滚动轮播 */
+.module-block{margin-bottom:40px}
+.module-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.module-head h4{font-size:16px;font-weight:700}
+.module-head .mod-badge{font-size:11px;padding:3px 10px;border-radius:4px;background:var(--accent-bg);color:var(--accent);font-weight:600}
+.module-head .mod-count{font-size:12px;color:var(--text-3)}
+
+.carousel{
+  position:relative;overflow:hidden;
+}
+.carousel-track{
+  display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:4px 4px 16px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
+}
+.carousel-track::-webkit-scrollbar{height:6px}
+.carousel-track::-webkit-scrollbar-track{background:var(--bg-3);border-radius:3px}
+.carousel-track::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:3px}
+.carousel-track::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.carousel-item{
+  flex:0 0 720px;scroll-snap-align:start;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;transition:border-color .2s;
+}
+.carousel-item:hover{border-color:var(--accent)}
+.carousel-item img{width:100%;height:480px;object-fit:contain;background:#f8f9fb;display:block}
+.carousel-item .ci-info{padding:12px 16px}
+.carousel-item .ci-info h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.carousel-item .ci-info p{font-size:12px;color:var(--text-2);line-height:1.5}
+.carousel-nav{display:flex;gap:8px;margin-top:4px}
+.carousel-nav button{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);
+  background:var(--bg-card);color:var(--text-2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.carousel-nav button:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+
+/* 小图轮播（产品图） */
+.carousel-mini .carousel-item{flex:0 0 460px}
+.carousel-mini .carousel-item img{height:320px}
+
+/* 视频板块 */
+.video-block{
+  background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:24px;margin-bottom:24px;
+}
+.video-block h4{font-size:16px;font-weight:700;margin-bottom:12px}
+.video-player{
+  width:100%;border-radius:var(--radius);border:1px solid var(--border);
+  background:#000;display:block;margin:0 auto;
+}
+.video-block .video-desc{font-size:13px;color:var(--text-2);margin-top:12px;text-align:center}
+
+/* 数据展示卡 */
+.data-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.data-cell{background:var(--bg-3);border:1px solid var(--border);border-radius:8px;padding:14px}
+.data-cell .dc-val{font-size:22px;font-weight:800;color:var(--accent)}
+.data-cell .dc-lbl{font-size:12px;color:var(--text-3);margin-top:2px}
+.data-cell .dc-tag{font-size:11px;margin-top:4px;font-weight:600;color:var(--teal)}
+
+/* 分析结论卡 */
+.insight-card{
+  background:var(--bg-3);border:1px solid var(--border);border-left:4px solid var(--amber);
+  border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:12px;
+}
+.insight-card.danger{border-left-color:var(--rose)}
+.insight-card.success{border-left-color:var(--teal)}
+.insight-card h5{font-size:14px;font-weight:700;margin-bottom:4px}
+.insight-card p{font-size:13px;color:var(--text-2);line-height:1.6}
+
+/* 平台规则卡片 */
+.platform-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.pr-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;border-top:3px solid var(--accent);
+}
+.pr-card.temu{border-top-color:var(--amber)}
+.pr-card.tiktok{border-top-color:var(--rose)}
+.pr-card.ebay{border-top-color:var(--teal)}
+.pr-card.shopify{border-top-color:var(--violet)}
+.pr-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.pr-card .pr-sub{font-size:11px;color:var(--text-3);margin-bottom:10px;font-weight:600}
+.pr-card ul{list-style:none;padding:0;margin:0}
+.pr-card li{font-size:12px;color:var(--text-2);line-height:1.6;padding:3px 0;padding-left:14px;position:relative}
+.pr-card li::before{content:'•';position:absolute;left:0;color:var(--accent)}
+
+/* 报告展示（已整合到轮播模块中，保留备用样式） */
+
+/* 视频演示（已整合到 video-block 模块中） */
+.video-card .video-info h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.video-card .video-info p{font-size:12px;color:var(--text-2)}
+
+/* 选品报告摘要 */
+.report-summary{
+  background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:24px;margin-bottom:32px;
+}
+.report-summary h4{font-size:16px;font-weight:700;margin-bottom:12px}
+.report-summary .rs-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.report-summary .rs-tag{font-size:12px;padding:4px 12px;border-radius:12px;background:var(--accent-bg);color:var(--accent);font-weight:600}
+.report-summary .rs-body{font-size:13px;color:var(--text-2);line-height:1.7}
+.report-summary .rs-highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
+.report-summary .rs-hl{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:12px}
+.report-summary .rs-hl .hl-num{font-size:20px;font-weight:800;color:var(--accent)}
+.report-summary .rs-hl .hl-lbl{font-size:11px;color:var(--text-3);margin-top:2px}
+
+/* 发品内容包展示 */
+.listing-pack{margin-bottom:32px}
+.listing-pack-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.listing-pack-head h4{font-size:16px;font-weight:700}
+.listing-pack-head .lp-badge{font-size:11px;padding:3px 10px;border-radius:4px;background:var(--accent-bg);color:var(--accent);font-weight:600}
+.listing-pack-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.listing-pack-imgs img{width:100%;border-radius:8px;border:1px solid var(--border);display:block}
+.listing-pack-titles{font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px}
+.listing-pack-titles li{margin-bottom:3px}
+
+/* 数据复盘摘要 */
+.data-review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.data-review-item{
+  background:var(--bg-3);border:1px solid var(--border);border-radius:8px;padding:14px;
+}
+.data-review-item .dr-val{font-size:22px;font-weight:800;color:var(--accent)}
+.data-review-item .dr-lbl{font-size:12px;color:var(--text-3);margin-top:2px}
+.data-review-item .dr-change{font-size:11px;margin-top:4px;font-weight:600}
+.data-review-item .dr-change.up{color:var(--teal)}
+.data-review-item .dr-change.down{color:var(--rose)}
+
+/* 客户经营摘要 */
+.customer-priority{margin-bottom:20px}
+.customer-priority-item{
+  background:var(--bg-3);border:1px solid var(--border);border-radius:8px;padding:16px;
+  border-left:4px solid var(--accent);margin-bottom:10px;
+}
+.customer-priority-item.s{border-left-color:var(--rose)}
+.customer-priority-item.a{border-left-color:var(--amber)}
+.customer-priority-item.b{border-left-color:var(--accent)}
+.customer-priority-item h5{font-size:14px;font-weight:700;margin-bottom:4px}
+.customer-priority-item p{font-size:12px;color:var(--text-2);line-height:1.5}
+
+@media(max-width:900px){
+  .agent-intro-grid{grid-template-columns:repeat(2,1fr)}
+  .cap-flow-step{min-width:100px}
+}
+@media(max-width:640px){
+  .carousel-item{flex:0 0 340px}
+  .carousel-mini .carousel-item{flex:0 0 280px}
+  .platform-rules{grid-template-columns:1fr}
+}
+
+/* 演示查看器 — 点击标题切换 + 竖向滚动 */
+.demo-viewer{
+  border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;
+}
+.demo-tabs{
+  display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--border);
+  background:var(--bg-card);-webkit-overflow-scrolling:touch;
+}
+.demo-tabs::-webkit-scrollbar{height:4px}
+.demo-tabs::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:2px}
+.demo-tab{
+  flex:0 0 auto;padding:10px 18px;font-size:13px;font-weight:600;color:var(--text-2);
+  background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;
+  white-space:nowrap;transition:all .15s;
+}
+.demo-tab:hover{color:var(--text)}
+.demo-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.demo-pane{display:none}
+.demo-pane.active{display:block;animation:fadeIn .2s var(--ease)}
+.demo-scroll{
+  height:560px;overflow-y:auto;overflow-x:hidden;background:#f8f9fb;
+  -webkit-overflow-scrolling:touch;
+}
+.demo-scroll::-webkit-scrollbar{width:6px}
+.demo-scroll::-webkit-scrollbar-track{background:var(--bg-3)}
+.demo-scroll::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:3px}
+.demo-scroll::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.demo-scroll img{width:100%;display:block}
+.demo-info{padding:12px 16px;background:var(--bg-card);border-top:1px solid var(--border)}
+.demo-info h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.demo-info p{font-size:12px;color:var(--text-2);line-height:1.5}
+
+/* ============================================================
+   平台覆盖区
+   ============================================================ */
+.platform-cat{margin-bottom:28px}
+.platform-cat-head{
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.platform-cat-head .pf-cat-icon{
+  width:28px;height:28px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.platform-cat-head .pf-cat-name{
+  font-size:15px;font-weight:700;color:var(--text);
+}
+.platform-cat-head .pf-cat-count{
+  font-size:12px;color:var(--text-3);font-weight:500;
+}
+.platform-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;
+}
+.platform-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px 12px;text-align:center;transition:all .2s;
+}
+.platform-card:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.platform-card .pf-name{font-size:13px;font-weight:600}
+.platform-card .pf-cat{font-size:11px;color:var(--text-3);margin-top:3px;line-height:1.4}
+
+/* ============================================================
+   价值对比区
+   ============================================================ */
+.compare-section{background:var(--bg-hero);color:#fff;padding:80px 32px}
+.compare-section .section{max-width:1100px;margin:0 auto;padding:0}
+.compare-section h2{color:#fff}
+.compare-section .subtitle{color:rgba(255,255,255,.7)}
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+.compare-col{
+  border-radius:var(--radius-lg);padding:32px;
+}
+.compare-col.before{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.compare-col.after{background:rgba(37,99,235,.15);border:1px solid rgba(59,130,246,.3)}
+.compare-col h3{font-size:20px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.compare-col.before h3{color:rgba(255,255,255,.7)}
+.compare-col.after h3{color:#60A5FA}
+.compare-col ul{list-style:none}
+.compare-col ul li{
+  padding:12px 0;font-size:14px;color:rgba(255,255,255,.7);
+  display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.compare-col ul li:last-child{border-bottom:none}
+.compare-col.before li::before{content:'✕';color:rgba(255,255,255,.3);font-weight:700}
+.compare-col.after li::before{content:'✓';color:#10B981;font-weight:700}
+
+/* ============================================================
+   定价方案区
+   ============================================================ */
+.pricing-section{padding:80px 32px;background:var(--bg-2)}
+.pricing-section .section{max-width:1200px;margin:0 auto;padding:0}
+.pricing-grid-4{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch;
+}
+.plan-card-2{
+  background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:32px 24px;display:flex;flex-direction:column;position:relative;transition:all .3s var(--ease);
+}
+.plan-card-2:hover{border-color:var(--accent);box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.plan-card-2.featured{border-color:var(--teal);border-width:2px;box-shadow:0 0 30px rgba(13,148,136,.08)}
+.plan-card-2 .plan-badge{
+  position:absolute;top:-12px;right:20px;
+  font-size:11px;font-weight:700;padding:4px 14px;border-radius:12px;
+}
+.plan-badge.basic{background:var(--bg-3);color:var(--text-2)}
+.plan-badge.hot{background:var(--teal);color:#fff}
+.plan-badge.exclusive{background:var(--violet);color:#fff}
+.plan-badge.trial{background:var(--amber);color:#fff}
+.plan-card-2 .plan-name{font-size:20px;font-weight:700;margin-bottom:6px}
+.plan-card-2 .plan-desc{font-size:13px;color:var(--text-3);margin-bottom:20px;min-height:36px}
+.plan-card-2 .plan-price-box{margin-bottom:24px}
+.plan-card-2 .plan-price-box .price{
+  font-size:32px;font-weight:800;font-family:var(--mono);color:var(--text);line-height:1;
+}
+.plan-card-2 .plan-price-box .unit{font-size:13px;color:var(--text-3);margin-left:4px}
+.plan-card-2 .plan-price-box .price-note{font-size:12px;color:var(--text-3);margin-top:6px}
+.plan-card-2 .plan-config{
+  background:var(--bg-3);border-radius:10px;padding:16px;margin-bottom:20px;
+}
+.plan-card-2 .plan-config .cfg-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--border);
+}
+.plan-card-2 .plan-config .cfg-row:last-child{border-bottom:none}
+.plan-card-2 .plan-config .cfg-label{font-size:13px;color:var(--text-2)}
+.plan-card-2 .plan-config .cfg-value{font-size:14px;font-weight:700;font-family:var(--mono);color:var(--text)}
+.plan-card-2 .plan-feats{list-style:none;flex:1}
+.plan-card-2 .plan-feats li{
+  font-size:13px;color:var(--text-2);padding:7px 0;
+  display:flex;align-items:flex-start;gap:8px;line-height:1.5;
+}
+.plan-card-2 .plan-feats li .icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.plan-card-2 .plan-feats li .icon-check{color:var(--teal)}
+.plan-card-2 .plan-feats li .icon-diamond{color:var(--text-3)}
+@media(max-width:900px){
+  .pricing-grid-4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .pricing-grid-4{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   ROI 计算器区
+   ============================================================ */
+.roi-section{padding:80px 32px;background:var(--bg-3)}
+.roi-wrap{
+  max-width:900px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 1fr;gap:32px;align-items:start;
+}
+.roi-form-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;
+}
+.roi-form-card h3{font-size:18px;font-weight:700;margin-bottom:20px}
+.roi-field{margin-bottom:16px}
+.roi-field label{
+  font-size:13px;color:var(--text-2);font-weight:500;display:flex;justify-content:space-between;margin-bottom:6px;
+}
+.roi-field label .hint{color:var(--text-3);font-size:12px}
+.roi-field input{width:100%}
+.roi-result-card{
+  background:var(--grad-hero);color:#fff;border-radius:var(--radius-lg);padding:32px;
+  position:relative;overflow:hidden;
+}
+.roi-result-card::before{
+  content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;
+  border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.2),transparent 70%);
+}
+.roi-result-card h3{font-size:18px;font-weight:700;margin-bottom:24px;position:relative}
+.roi-result-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);position:relative;
+}
+.roi-result-row:last-of-type{border-bottom:none}
+.roi-result-row .lbl{font-size:14px;color:rgba(255,255,255,.7)}
+.roi-result-row .val{font-size:20px;font-weight:700;font-family:var(--mono)}
+.roi-result-row.highlight{
+  margin-top:8px;padding:20px;background:rgba(255,255,255,.06);border-radius:12px;border:none;
+}
+.roi-result-row.highlight .lbl{font-size:15px;color:#fff;font-weight:600}
+.roi-result-row.highlight .val{font-size:28px;color:#60A5FA}
+
+/* ============================================================
+   CTA 区
+   ============================================================ */
+.cta-section{padding:80px 32px;text-align:center}
+.cta-box{
+  max-width:680px;margin:0 auto;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:var(--radius-xl);padding:48px;
+  box-shadow:var(--shadow-lg);
+}
+.cta-box h2{font-size:28px;font-weight:800;margin-bottom:12px}
+.cta-box p{font-size:16px;color:var(--text-2);margin-bottom:32px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================
+   抽屉（销售工具）
+   ============================================================ */
+.drawer-toggle{
+  position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:95;
+  background:var(--text);color:#fff;
+  padding:16px 10px;border-radius:10px 0 0 10px;
+  font-size:12px;font-weight:600;writing-mode:vertical-rl;letter-spacing:3px;
+  box-shadow:var(--shadow-lg);
+}
+.drawer-toggle:hover{background:var(--accent)}
+.drawer-overlay{position:fixed;inset:0;background:rgba(15,23,42,.4);z-index:94;opacity:0;pointer-events:none;transition:opacity .3s}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;right:-460px;top:0;bottom:0;width:440px;z-index:96;
+  background:var(--bg-2);border-left:1px solid var(--border);
+  box-shadow:var(--shadow-xl);transition:right .3s var(--ease);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.drawer.open{right:0}
+.drawer-head{padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{font-size:16px;font-weight:700}
+.drawer-head .close{width:30px;height:30px;border-radius:6px;background:var(--bg-3);color:var(--text-2);font-size:18px}
+.drawer-tabs{display:flex;padding:0 24px;border-bottom:1px solid var(--border)}
+.drawer-tabs button{background:transparent;color:var(--text-3);font-size:13px;font-weight:500;padding:12px 16px;border-bottom:2px solid transparent}
+.drawer-tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.drawer-body{flex:1;overflow-y:auto;padding:24px}
+.drawer-pane{display:none}
+.drawer-pane.active{display:block}
+
+.faq-item{background:var(--bg-3);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.faq-item .faq-q{padding:14px 16px;font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-item .faq-q .arrow{transition:transform .2s;color:var(--text-3)}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-item .faq-a{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);font-size:13px;color:var(--text-2);line-height:1.7}
+.faq-item.open .faq-a{max-height:400px;padding:0 16px 14px}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media(max-width:900px){
+  .capability-grid{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  .roi-wrap{grid-template-columns:1fr}
+  .scene-detail .sd-triple{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+  .hero-stats{flex-wrap:wrap}
+  .hero-stat{flex:0 0 50%;border-bottom:1px solid rgba(255,255,255,.08)}
+}
+@media(max-width:640px){
+  .navbar{padding:0 16px;gap:12px}
+  .nav-links{display:none}
+  .section{padding:48px 20px}
+  .section h2{font-size:26px}
+  .hero{padding:100px 20px 60px}
+  .flow-chain{flex-direction:column}
+  .flow-step:not(:last-child)::after,.flow-step:not(:last-child)::before{display:none}
+  .drawer{width:100%;right:-100%}
+  .drawer.open{right:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     导航栏
+     ============================================================ -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="logo">A</div>
+    <span>AccioWork</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#capabilities">核心能力</a>
+    <a href="#flow">经营链路</a>
+    <a href="#dashboard">数据看板</a>
+    <a href="#agents">专家 Agent</a>
+    <a href="#platforms">平台覆盖</a>
+    <a href="#pricing">方案定价</a>
+    <a href="#compare">价值对比</a>
+    <a href="#roi">效率测算</a>
+  </div>
+  <div class="nav-cta">
+    <button class="btn btn-ghost btn-sm" onclick="scrollTo('#pricing')">查看定价</button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot-live"></span> AI 驱动的电商业务工作台 · 内外贸通用
+    </div>
+    <h1>用一句话指令，<br>让 <span class="hl">AI 接管你的电商重复工作</span></h1>
+    <p class="lead">
+      从选品调研、采购比价、Listing 内容制作，到订单单证、客户跟进、数据看板——<br>
+      AccioWork 以自然语言驱动多 Agent 协作，帮你把 10 小时的活压缩到 1 小时。<br>
+      不写代码、不装软件，打开浏览器就能用。
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="scrollTo('#flow')">看看能帮我做什么 →</button>
+      <button class="btn btn-ghost" onclick="scrollTo('#capabilities')">了解核心能力</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">8</div>
+        <div class="label">核心能力引擎</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">6</div>
+        <div class="label">经营环节覆盖</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">10×</div>
+        <div class="label">效率提升倍数</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">0</div>
+        <div class="label">代码使用门槛</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     核心能力
+     ============================================================ -->
+<section class="section" id="capabilities">
+  <div class="section-center">
+    <span class="eyebrow">CORE ENGINE</span>
+    <h2>八大核心能力引擎，<span class="hl">驱动你的业务全链路</span></h2>
+    <p class="subtitle">这不是一个聊天框，而是一个可执行、可自动化、可连接你现有工具的 AI 工作台。</p>
+  </div>
+  <div class="capability-grid" id="capGrid"></div>
+</section>
+
+<!-- ============================================================
+     经营链路 — 六大环节
+     ============================================================ -->
+<section class="flow-section" id="flow">
+  <div class="section">
+    <div class="section-center">
+      <span class="eyebrow">BUSINESS FLOW</span>
+      <h2>从选品到复盘，<span class="hl">每个环节都有 AI 替你干活</span></h2>
+      <p class="subtitle">不是零散的功能堆砌，而是沿着你的电商经营链路，逐环节给出"痛点 → AI 解决 → 实际收益"。</p>
+    </div>
+
+    <!-- 链路概览 -->
+    <div class="flow-chain" id="flowChain"></div>
+
+    <!-- 场景详情列表 -->
+    <div id="sceneList"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     电商管家 · 数据看板演示
+     ============================================================ -->
+<section class="dash-section" id="dashboard">
+  <div class="section">
+    <div class="section-center">
+      <span class="eyebrow">DASHBOARD DEMO</span>
+      <h2>电商管家数据看板：<span class="hl">你的经营数据，一目了然</span></h2>
+      <p class="subtitle">AccioWork 的电商管家 Agent 能将你分散在各平台的经营数据汇聚成一个可视化看板——销售趋势、订单状态、库存预警、渠道对比，全部实时呈现、可交互筛选。</p>
+    </div>
+
+    <!-- 看板标签切换 -->
+    <div class="dash-tabs" id="dashTabs">
+      <button class="active" data-dash-tab="overview">经营总览</button>
+      <button data-dash-tab="sales">销售分析</button>
+      <button data-dash-tab="orders">订单跟踪</button>
+      <button data-dash-tab="inventory">库存预警</button>
+      <button data-dash-tab="channels">渠道对比</button>
+    </div>
+
+    <!-- 模拟看板容器 -->
+    <div class="dash-board" id="dashBoard">
+
+      <!-- ════ 经营总览 ════ -->
+      <div class="dash-pane active" data-dash-pane="overview">
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">月度 GMV</div>
+            <div class="kpi-value">¥ 1,284,500</div>
+            <div class="kpi-trend up">↑ 12.3% 环比</div>
+            <div class="kpi-spark"><span style="height:40%"></span><span style="height:55%"></span><span style="height:45%"></span><span style="height:70%"></span><span style="height:65%"></span><span style="height:85%"></span><span style="height:100%"></span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">订单数</div>
+            <div class="kpi-value">3,842</div>
+            <div class="kpi-trend up">↑ 8.7% 环比</div>
+            <div class="kpi-spark"><span style="height:60%"></span><span style="height:50%"></span><span style="height:70%"></span><span style="height:55%"></span><span style="height:80%"></span><span style="height:75%"></span><span style="height:90%"></span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">客单价</div>
+            <div class="kpi-value">¥ 334</div>
+            <div class="kpi-trend up">↑ 3.3% 环比</div>
+            <div class="kpi-spark"><span style="height:50%"></span><span style="height:65%"></span><span style="height:60%"></span><span style="height:70%"></span><span style="height:68%"></span><span style="height:75%"></span><span style="height:78%"></span></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">退款率</div>
+            <div class="kpi-value">2.1%</div>
+            <div class="kpi-trend down">↓ 0.4pt 环比</div>
+            <div class="kpi-spark"><span style="height:80%"></span><span style="height:70%"></span><span style="height:65%"></span><span style="height:60%"></span><span style="height:55%"></span><span style="height:48%"></span><span style="height:42%"></span></div>
+          </div>
+        </div>
+        <div class="dash-split">
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>GMV 趋势（近 30 天）</h4><span class="dash-chart-tag">折线图</span></div>
+            <div class="dash-chart-area">
+              <div class="area-chart" id="gmvArea"></div>
+            </div>
+          </div>
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>销售渠道占比</h4><span class="dash-chart-tag">环形图</span></div>
+            <div class="donut-wrap">
+              <div class="donut" style="--seg1:35%;--seg2:22%;--seg3:18%;--seg4:15%;--seg5:10%">
+                <div class="donut-center"><span class="donut-num">100%</span><span class="donut-lbl">全渠道</span></div>
+              </div>
+              <div class="donut-legend">
+                <span><i style="background:var(--accent)"></i>Amazon 35%</span>
+                <span><i style="background:var(--violet)"></i>TikTok Shop 22%</span>
+                <span><i style="background:var(--teal)"></i>Shopify 18%</span>
+                <span><i style="background:var(--amber)"></i>eBay 15%</span>
+                <span><i style="background:var(--rose)"></i>Temu 10%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-note">
+          <span class="dash-note-icon">💡</span>
+          <span><b>怎么用：</b>总览页是每天的"经营仪表盘"。打开看板即看到 GMV、订单、客单价、退款率四个核心 KPI 的实时值与趋势，下方折线图追踪 GMV 近 30 天波动，环形图展示各渠道占比。你可以快速判断今天是否需要介入某个环节。</span>
+        </div>
+      </div>
+
+      <!-- ════ 销售分析 ════ -->
+      <div class="dash-pane" data-dash-pane="sales">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-label">今日销售额</div><div class="kpi-value">¥ 42,800</div><div class="kpi-trend up">↑ 5.2%</div></div>
+          <div class="kpi-card"><div class="kpi-label">本周销售额</div><div class="kpi-value">¥ 298,500</div><div class="kpi-trend up">↑ 11.8%</div></div>
+          <div class="kpi-card"><div class="kpi-label">热销品类 TOP1</div><div class="kpi-value">家居收纳</div><div class="kpi-trend">占比 28%</div></div>
+          <div class="kpi-card"><div class="kpi-label">转化率</div><div class="kpi-value">3.8%</div><div class="kpi-trend up">↑ 0.6pt</div></div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>各品类销售额对比（本月）</h4><span class="dash-chart-tag">柱状图</span></div>
+          <div class="bar-chart">
+            <div class="bar-col"><div class="bar-fill" style="height:85%"><span>¥358K</span></div><div class="bar-label">家居收纳</div></div>
+            <div class="bar-col"><div class="bar-fill" style="height:72%"><span>¥302K</span></div><div class="bar-label">厨房用品</div></div>
+            <div class="bar-col"><div class="bar-fill" style="height:60%"><span>¥251K</span></div><div class="bar-label">办公文具</div></div>
+            <div class="bar-col"><div class="bar-fill" style="height:48%"><span>¥201K</span></div><div class="bar-label">宠物用品</div></div>
+            <div class="bar-col"><div class="bar-fill" style="height:38%"><span>¥159K</span></div><div class="bar-label">户外运动</div></div>
+            <div class="bar-col"><div class="bar-fill" style="height:25%"><span>¥105K</span></div><div class="bar-label">美妆个护</div></div>
+          </div>
+        </div>
+        <div class="dash-split">
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>国内外市场分布</h4><span class="dash-chart-tag">横向条形图</span></div>
+            <div class="hbar-list">
+              <div class="hbar-item"><span class="hbar-label">北美</span><div class="hbar-track"><div class="hbar-fill" style="width:78%;background:var(--accent)"></div></div><span class="hbar-val">¥488K</span></div>
+              <div class="hbar-item"><span class="hbar-label">东南亚</span><div class="hbar-track"><div class="hbar-fill" style="width:52%;background:var(--teal)"></div></div><span class="hbar-val">¥325K</span></div>
+              <div class="hbar-item"><span class="hbar-label">欧洲</span><div class="hbar-track"><div class="hbar-fill" style="width:40%;background:var(--violet)"></div></div><span class="hbar-val">¥250K</span></div>
+              <div class="hbar-item"><span class="hbar-label">国内</span><div class="hbar-track"><div class="hbar-fill" style="width:30%;background:var(--amber)"></div></div><span class="hbar-val">¥188K</span></div>
+              <div class="hbar-item"><span class="hbar-label">拉美</span><div class="hbar-track"><div class="hbar-fill" style="width:18%;background:var(--rose)"></div></div><span class="hbar-val">¥113K</span></div>
+            </div>
+          </div>
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>销售额热力日历</h4><span class="dash-chart-tag">热力图</span></div>
+            <div class="heatmap">
+              <div class="hm-row"><span class="hm-label">周一</span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l2"></span><span class="hm-cell l4"></span><span class="hm-cell l3"></span></div>
+              <div class="hm-row"><span class="hm-label">周二</span><span class="hm-cell l3"></span><span class="hm-cell l4"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span><span class="hm-cell l4"></span></div>
+              <div class="hm-row"><span class="hm-label">周三</span><span class="hm-cell l2"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span></div>
+              <div class="hm-row"><span class="hm-label">周四</span><span class="hm-cell l4"></span><span class="hm-cell l4"></span><span class="hm-cell l5"></span><span class="hm-cell l4"></span><span class="hm-cell l5"></span></div>
+              <div class="hm-row"><span class="hm-label">周五</span><span class="hm-cell l5"></span><span class="hm-cell l5"></span><span class="hm-cell l4"></span><span class="hm-cell l5"></span><span class="hm-cell l5"></span></div>
+              <div class="hm-row"><span class="hm-label">周六</span><span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l2"></span></div>
+              <div class="hm-row"><span class="hm-label">周日</span><span class="hm-cell l1"></span><span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l1"></span><span class="hm-cell l1"></span></div>
+            </div>
+            <div class="hm-legend"><span>低</span><span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span><span class="hm-cell l5"></span><span>高</span></div>
+          </div>
+        </div>
+        <div class="dash-note">
+          <span class="dash-note-icon">💡</span>
+          <span><b>怎么用：</b>销售分析看板帮你回答"什么好卖、卖去哪了、什么时候卖得好"。品类柱状图找到热销方向，市场条形图看清国内外区域分布，热力日历发现销售周期规律——周五是高峰、周末回落，据此调整广告投放节奏。</span>
+        </div>
+      </div>
+
+      <!-- ════ 订单跟踪 ════ -->
+      <div class="dash-pane" data-dash-pane="orders">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-label">待发货</div><div class="kpi-value">127</div><div class="kpi-trend warn">需 24h 内处理</div></div>
+          <div class="kpi-card"><div class="kpi-label">已发货</div><div class="kpi-value">2,105</div><div class="kpi-trend up">正常流转</div></div>
+          <div class="kpi-card"><div class="kpi-label">已妥投</div><div class="kpi-value">1,583</div><div class="kpi-trend up">↑ 6.2%</div></div>
+          <div class="kpi-card"><div class="kpi-label">异常件</div><div class="kpi-value">27</div><div class="kpi-trend down">需关注</div></div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>订单状态分布</h4><span class="dash-chart-tag">漏斗图</span></div>
+          <div class="funnel">
+            <div class="funnel-stage" style="width:100%;background:var(--accent)"><span>下单 3,842</span></div>
+            <div class="funnel-stage" style="width:88%;background:var(--violet)"><span>已付款 3,381</span></div>
+            <div class="funnel-stage" style="width:75%;background:var(--teal)"><span>已发货 2,875</span></div>
+            <div class="funnel-stage" style="width:55%;background:var(--amber)"><span>已妥投 2,105</span></div>
+            <div class="funnel-stage" style="width:48%;background:var(--rose)"><span>已完成 1,838</span></div>
+          </div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>异常订单明细</h4><span class="dash-chart-tag">数据表格</span></div>
+          <table class="dash-table">
+            <thead><tr><th>订单号</th><th>渠道</th><th>状态</th><th>异常原因</th><th>金额</th></tr></thead>
+            <tbody>
+              <tr><td>AMZ-2024-8842</td><td>Amazon</td><td class="st-warn">物流延误</td><td>海关清关中</td><td>¥ 1,280</td></tr>
+              <tr><td>TK-2024-5531</td><td>TikTok Shop</td><td class="st-warn">地址异常</td><td>收件地址不完整</td><td>¥ 320</td></tr>
+              <tr><td>EB-2024-3327</td><td>eBay</td><td class="st-danger">退款申请</td><td>商品与描述不符</td><td>¥ 85</td></tr>
+              <tr><td>SP-2024-7718</td><td>Shopify</td><td class="st-warn">库存不足</td><td>供应商断货</td><td>¥ 460</td></tr>
+              <tr><td>AMZ-2024-8843</td><td>Amazon</td><td class="st-danger">买家投诉</td><td>包装破损</td><td>¥ 210</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dash-note">
+          <span class="dash-note-icon">💡</span>
+          <span><b>怎么用：</b>订单看板是日常运营的中枢。漏斗图一眼看到从下单到完成的转化瓶颈——哪个环节掉件最多。异常订单表格列出需要人工介入的订单，按渠道和异常类型分类，直接定位问题并处理，不用去各平台后台逐个翻找。</span>
+        </div>
+      </div>
+
+      <!-- ════ 库存预警 ════ -->
+      <div class="dash-pane" data-dash-pane="inventory">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-label">在售 SKU</div><div class="kpi-value">486</div></div>
+          <div class="kpi-card"><div class="kpi-label">库存健康率</div><div class="kpi-value">82%</div><div class="kpi-trend up">↑ 4pt</div></div>
+          <div class="kpi-card"><div class="kpi-label">预警 SKU</div><div class="kpi-value warn">38</div><div class="kpi-trend warn">需补货</div></div>
+          <div class="kpi-card"><div class="kpi-label">滞销 SKU</div><div class="kpi-value danger">12</div><div class="kpi-trend down">需清仓</div></div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>库存预警分布</h4><span class="dash-chart-tag">气泡图（示意）</span></div>
+          <div class="bubble-area">
+            <div class="bubble b-ok" style="left:20%;top:30%;width:60px;height:60px"><span>SKU-A</span><span class="b-sub">充足</span></div>
+            <div class="bubble b-ok" style="left:45%;top:25%;width:45px;height:45px"><span>SKU-B</span></div>
+            <div class="bubble b-warn" style="left:35%;top:55%;width:50px;height:50px"><span>SKU-C</span><span class="b-sub">偏低</span></div>
+            <div class="bubble b-warn" style="left:65%;top:45%;width:55px;height:55px"><span>SKU-D</span></div>
+            <div class="bubble b-danger" style="left:75%;top:65%;width:40px;height:40px"><span>SKU-E</span><span class="b-sub">缺货</span></div>
+            <div class="bubble b-danger" style="left:55%;top:70%;width:48px;height:48px"><span>SKU-F</span></div>
+            <div class="bubble b-stale" style="left:15%;top:70%;width:52px;height:52px"><span>SKU-G</span><span class="b-sub">滞销</span></div>
+            <div class="bubble b-ok" style="left:80%;top:30%;width:50px;height:50px"><span>SKU-H</span></div>
+            <div class="bubble b-warn" style="left:50%;top:60%;width:42px;height:42px"><span>SKU-I</span></div>
+          </div>
+          <div class="bubble-legend">
+            <span><i style="background:var(--teal)"></i>库存充足</span>
+            <span><i style="background:var(--amber)"></i>库存偏低</span>
+            <span><i style="background:var(--rose)"></i>即将缺货</span>
+            <span><i style="background:var(--text-3)"></i>滞销清仓</span>
+          </div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>补货建议清单</h4><span class="dash-chart-tag">数据表格</span></div>
+          <table class="dash-table">
+            <thead><tr><th>SKU</th><th>品类</th><th>当前库存</th><th>日均销量</th><th>预计售罄</th><th>建议补货</th></tr></thead>
+            <tbody>
+              <tr><td>SKU-C 家居收纳盒</td><td>家居收纳</td><td class="num-warn">42</td><td>18</td><td class="num-danger">2 天</td><td>200</td></tr>
+              <tr><td>SKU-D 硅胶厨房垫</td><td>厨房用品</td><td class="num-warn">35</td><td>12</td><td class="num-danger">3 天</td><td>150</td></tr>
+              <tr><td>SKU-I 便携收纳袋</td><td>家居收纳</td><td class="num-warn">28</td><td>8</td><td>4 天</td><td>100</td></tr>
+              <tr><td>SKU-E 宠物梳</td><td>宠物用品</td><td class="num-danger">0</td><td>6</td><td class="num-danger">已缺货</td><td>紧急</td></tr>
+              <tr><td>SKU-F 手机支架</td><td>办公文具</td><td class="num-danger">3</td><td>15</td><td class="num-danger">今日</td><td>紧急</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dash-note">
+          <span class="dash-note-icon">💡</span>
+          <span><b>怎么用：</b>库存看板帮你避免"卖断货"和"压库存"两个极端。气泡图按库存状态可视化所有 SKU，一眼定位红色（缺货）和灰色（滞销）。补货建议表根据日均销量自动计算预计售罄时间和建议补货量——不需要手动算，直接按表执行采购。</span>
+        </div>
+      </div>
+
+      <!-- ════ 渠道对比 ════ -->
+      <div class="dash-pane" data-dash-pane="channels">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="kpi-label">活跃渠道</div><div class="kpi-value">5</div></div>
+          <div class="kpi-card"><div class="kpi-label">最佳渠道</div><div class="kpi-value">Amazon</div><div class="kpi-trend">占比 35%</div></div>
+          <div class="kpi-card"><div class="kpi-label">增速最快</div><div class="kpi-value">TikTok Shop</div><div class="kpi-trend up">↑ 45%</div></div>
+          <div class="kpi-card"><div class="kpi-label">需关注</div><div class="kpi-value warn">eBay</div><div class="kpi-trend down">↓ 8%</div></div>
+        </div>
+        <div class="dash-chart-card">
+          <div class="dash-chart-head"><h4>各渠道核心指标对比</h4><span class="dash-chart-tag">分组柱状图</span></div>
+          <table class="dash-table channel-table">
+            <thead><tr><th>渠道</th><th>GMV</th><th>订单数</th><th>客单价</th><th>转化率</th><th>退款率</th><th>趋势</th></tr></thead>
+            <tbody>
+              <tr><td class="ch-name"><i style="background:var(--accent)"></i>Amazon</td><td>¥449K</td><td>1,344</td><td>¥334</td><td>4.2%</td><td>1.8%</td><td class="num-up">↑ 12%</td></tr>
+              <tr><td class="ch-name"><i style="background:var(--violet)"></i>TikTok Shop</td><td>¥282K</td><td>920</td><td>¥307</td><td>3.5%</td><td>2.4%</td><td class="num-up">↑ 45%</td></tr>
+              <tr><td class="ch-name"><i style="background:var(--teal)"></i>Shopify</td><td>¥231K</td><td>580</td><td>¥398</td><td>3.1%</td><td>1.5%</td><td class="num-up">↑ 8%</td></tr>
+              <tr><td class="ch-name"><i style="background:var(--amber)"></i>eBay</td><td>¥192K</td><td>720</td><td>¥267</td><td>2.8%</td><td>3.2%</td><td class="num-down">↓ 8%</td></tr>
+              <tr><td class="ch-name"><i style="background:var(--rose)"></i>Temu</td><td>¥128K</td><td>278</td><td>¥460</td><td>5.1%</td><td>2.0%</td><td class="num-up">↑ 22%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dash-split">
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>渠道增速对比</h4><span class="dash-chart-tag">雷达图（示意）</span></div>
+            <div class="radar-wrap">
+              <svg viewBox="0 0 200 200" class="radar-svg">
+                <polygon points="100,20 175,65 165,150 35,150 25,65" fill="rgba(37,99,235,.08)" stroke="var(--border-2)" stroke-width="1"></polygon>
+                <polygon points="100,40 155,70 148,135 52,135 45,70" fill="rgba(37,99,235,.12)" stroke="var(--border-2)" stroke-width="1"></polygon>
+                <polygon points="100,55 138,78 133,125 67,125 62,78" fill="rgba(124,58,237,.15)" stroke="var(--violet)" stroke-width="1.5"></polygon>
+                <circle cx="100" cy="100" r="2" fill="var(--text)"></circle>
+                <text x="100" y="15" text-anchor="middle" font-size="8" fill="var(--text-2)">GMV</text>
+                <text x="178" y="68" font-size="8" fill="var(--text-2)">订单</text>
+                <text x="168" y="155" font-size="8" fill="var(--text-2)">转化</text>
+                <text x="22" y="155" font-size="8" fill="var(--text-2)">客单价</text>
+                <text x="12" y="68" font-size="8" fill="var(--text-2)">复购</text>
+              </svg>
+            </div>
+          </div>
+          <div class="dash-chart-card">
+            <div class="dash-chart-head"><h4>各渠道趋势走势</h4><span class="dash-chart-tag">多折线图</span></div>
+            <div class="multi-line-chart">
+              <svg viewBox="0 0 300 120" preserveAspectRatio="none" class="ml-svg">
+                <polyline points="0,80 50,75 100,65 150,55 200,45 250,35 300,30" fill="none" stroke="var(--accent)" stroke-width="2"></polyline>
+                <polyline points="0,95 50,88 100,75 150,60 200,50 250,42 300,35" fill="none" stroke="var(--violet)" stroke-width="2"></polyline>
+                <polyline points="0,85 50,82 100,78 150,72 200,68 250,65 300,62" fill="none" stroke="var(--teal)" stroke-width="2"></polyline>
+                <polyline points="0,70 50,72 100,75 150,78 200,80 250,82 300,85" fill="none" stroke="var(--amber)" stroke-width="2"></polyline>
+                <polyline points="0,98 50,92 100,85 150,78 200,70 250,60 300,50" fill="none" stroke="var(--rose)" stroke-width="2"></polyline>
+              </svg>
+              <div class="ml-legend">
+                <span><i style="background:var(--accent)"></i>Amazon</span>
+                <span><i style="background:var(--violet)"></i>TikTok</span>
+                <span><i style="background:var(--teal)"></i>Shopify</span>
+                <span><i style="background:var(--amber)"></i>eBay</span>
+                <span><i style="background:var(--rose)"></i>Temu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dash-note">
+          <span class="dash-note-icon">💡</span>
+          <span><b>怎么用：</b>渠道对比看板帮你做"资源分配决策"。对比表展示各渠道 GMV、转化率、退款率等核心指标，雷达图多维度评估渠道综合表现，多折线图看各渠道的趋势走向——TikTok Shop 增速最快可以加投入，eBay 持续下滑需要诊断原因。</span>
+        </div>
+      </div>
+
+    </div><!-- /dashBoard -->
+
+    <!-- 看板形式总结 -->
+    <div class="dash-formats">
+      <div class="dash-format-card">
+        <div class="df-icon">📊</div>
+        <h4>图表类型</h4>
+        <p>折线图（趋势）· 柱状图（对比）· 环形图（占比）· 漏斗图（转化）· 气泡图（分布）· 雷达图（多维评估）· 热力图（周期规律）· 横向条形图（排名）</p>
+      </div>
+      <div class="dash-format-card">
+        <div class="df-icon">📈</div>
+        <h4>KPI 卡片</h4>
+        <p>核心指标实时数值 + 环比趋势 + 迷你趋势线，一眼判断涨跌方向。支持自定义关注指标。</p>
+      </div>
+      <div class="dash-format-card">
+        <div class="df-icon">📋</div>
+        <h4>数据表格</h4>
+        <p>异常订单、补货建议、渠道明细——结构化数据可排序、可筛选，直接定位需要处理的条目。</p>
+      </div>
+      <div class="dash-format-card">
+        <div class="df-icon">🔄</div>
+        <h4>交互筛选</h4>
+        <p>按时间范围、渠道、品类、市场区域筛选，所有图表联动刷新。可保存常用筛选视图。</p>
+      </div>
+    </div>
+
+    <!-- 适用场景说明 -->
+    <div class="dash-scenarios">
+      <div class="ds-item">
+        <span class="ds-tag">外贸</span>
+        <p>跨境多平台（Amazon / TikTok Shop / eBay / Temu / Shopify）数据汇聚，多币种 GMV 统一折算，海关清关状态跟踪，海外仓库存联动。</p>
+      </div>
+      <div class="ds-item">
+        <span class="ds-tag ds-tag-2">内贸</span>
+        <p>淘宝 / 天猫 / 1688 店铺数据汇总，国内仓储物流状态监控，大促活动期间实时销量追踪，区域市场分布分析。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     专家 Agent 能力演示
+     ============================================================ -->
+<section class="agent-section" id="agents">
+  <div class="section">
+    <div class="section-center">
+      <span class="eyebrow">EXPERT AGENTS</span>
+      <h2>三大专家 Agent：<span class="hl">专业角色，替你执行</span></h2>
+      <p class="subtitle">AccioWork 内置三大专家级智能体，分别专注采购、设计与电商经营。它们不是聊天框，而是有专业能力、能自主执行多步骤任务的 AI 角色。</p>
+    </div>
+
+    <!-- Agent 卡片 -->
+    <div class="agent-intro-grid" id="agentIntroGrid">
+      <div class="agent-intro-card active" data-agent-card="procurement">
+        <div class="agent-avatar procurement">🛒</div>
+        <h3>Accio 采购专家</h3>
+        <div class="agent-id">MID-48075472U1792630</div>
+        <p>从选品调研到下单售后的全链路采购助手。覆盖 1688、阿里国际站双渠道货源搜索、多产品对比、AI 谈判、物流关税查询。</p>
+        <div class="agent-stats">
+          <div class="agent-stat"><div class="num">7</div><div class="lbl">采购环节</div></div>
+          <div class="agent-stat"><div class="num">6</div><div class="lbl">功能演示</div></div>
+          <div class="agent-stat"><div class="num">2</div><div class="lbl">货源渠道</div></div>
+        </div>
+      </div>
+      <div class="agent-intro-card" data-agent-card="design">
+        <div class="agent-avatar design">🎨</div>
+        <h3>设计专家</h3>
+        <div class="agent-id">DID-E0111C-51E0111C</div>
+        <p>视频生成、设计画布、Listing 图文制作、多平台 A+ Content 详情图生成、一键发品内容包——从白底图到完整发品物料一站产出。</p>
+        <div class="agent-stats">
+          <div class="agent-stat"><div class="num">5</div><div class="lbl">设计能力</div></div>
+          <div class="agent-stat"><div class="num">11</div><div class="lbl">主图+详情</div></div>
+          <div class="agent-stat"><div class="num">5</div><div class="lbl">平台规则</div></div>
+        </div>
+      </div>
+      <div class="agent-intro-card" data-agent-card="ecommerce">
+        <div class="agent-avatar ecommerce">📊</div>
+        <h3>电商管家</h3>
+        <div class="agent-id">MID-20075472U1787012</div>
+        <p>多平台经营数据分析、店铺诊断、直通车策略、客户优先级管理、全维度经营复盘——把分散在各平台的数据汇聚成决策依据。</p>
+        <div class="agent-stats">
+          <div class="agent-stat"><div class="num">4</div><div class="lbl">分析报告</div></div>
+          <div class="agent-stat"><div class="num">3</div><div class="lbl">平台覆盖</div></div>
+          <div class="agent-stat"><div class="num">12</div><div class="lbl">复盘维度</div></div>
+        </div>
+      </div>
+      <div class="agent-intro-card" data-agent-card="assistant1688">
+        <div class="agent-avatar" style="background:linear-gradient(135deg,#FF6A00,#FF4500)">🏪</div>
+        <h3>1688 生意助手</h3>
+        <div class="agent-id">MID-27075472U1790666</div>
+        <p>专为 1688 店铺打造的智能经营助手，覆盖客户运营、店铺生意、智能客服、业务质检，支持自动运营方案配置与 AI 全自动接待。</p>
+        <div class="agent-stats">
+          <div class="agent-stat"><div class="num">4</div><div class="lbl">能力模块</div></div>
+          <div class="agent-stat"><div class="num">2</div><div class="lbl">演示视频</div></div>
+          <div class="agent-stat"><div class="num">AI</div><div class="lbl">全自动接待</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent 标签切换 -->
+    <div class="agent-tabs" id="agentTabs">
+      <button class="active" data-agent-tab="procurement">采购专家</button>
+      <button data-agent-tab="design">设计专家</button>
+      <button data-agent-tab="ecommerce">电商管家</button>
+      <button data-agent-tab="assistant1688">1688 生意助手</button>
+    </div>
+
+    <!-- ════ 采购专家 Pane ════ -->
+    <div class="agent-pane active" data-agent-pane="procurement">
+      <div class="section-center" style="text-align:left;margin-bottom:24px">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">采购专家能力全景</h3>
+        <p style="font-size:14px;color:var(--text-2)">覆盖从需求选品到交易售后的 7 个采购环节，每个环节都有明确的交付成果。</p>
+      </div>
+
+      <!-- 7 环节流程 -->
+      <div class="cap-flow">
+        <div class="cap-flow-step">
+          <div class="cap-num">1</div>
+          <div class="cap-title">需求 &amp; 选品</div>
+          <div class="cap-desc">结合市场趋势与利润测算，判断卖什么、哪个赛道值得进</div>
+          <div class="cap-output">结构化需求单 / 选品报告</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">2</div>
+          <div class="cap-title">找货 &amp; 找厂</div>
+          <div class="cap-desc">阿里国际站 + 1688 双渠道货源搜索；支持以图搜同款、多源比价</div>
+          <div class="cap-output">带价格/MOQ/属性的候选清单</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">3</div>
+          <div class="cap-title">对比 &amp; 决策</div>
+          <div class="cap-desc">多产品/多供应商横向对比；单品深度可行性分析；利润测算</div>
+          <div class="cap-output">Excel 对比表 / HTML 报告 / 利润计算器</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">4</div>
+          <div class="cap-title">供应商验证</div>
+          <div class="cap-desc">平台资质信息 + 公开信息交叉核验</div>
+          <div class="cap-output">供应商尽调报告</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">5</div>
+          <div class="cap-title">询盘 &amp; 谈判</div>
+          <div class="cap-desc">批量发起询盘、AI 自动多轮跟卖家聊、议价话术、报价单解读</div>
+          <div class="cap-output">报价汇总 / 可直接发送的谈判消息</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">6</div>
+          <div class="cap-title">物流 &amp; 关税</div>
+          <div class="cap-desc">运费时效、运输方式、HS 编码、关税与到岸成本</div>
+          <div class="cap-output">到岸成本表 / 物流方案</div>
+        </div>
+        <div class="cap-flow-step">
+          <div class="cap-num">7</div>
+          <div class="cap-title">交易 &amp; 售后</div>
+          <div class="cap-desc">下单、地址、订单查询、合同草稿、支付状态、退款纠纷、催发货</div>
+          <div class="cap-output">订单/支付/退款进度与处理入口</div>
+        </div>
+      </div>
+
+      <!-- 功能演示 — 点击标题切换 + 竖向滚动查看 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>功能演示</h4>
+          <span class="mod-count">点击标题切换 · 竖向滚动查看</span>
+        </div>
+        <div class="demo-viewer">
+          <div class="demo-tabs">
+            <button class="demo-tab active" data-demo-tab="p1">商品搜索</button>
+            <button class="demo-tab" data-demo-tab="p2">供应商查找</button>
+            <button class="demo-tab" data-demo-tab="p3">多产品对比</button>
+            <button class="demo-tab" data-demo-tab="p4">AI 谈判</button>
+            <button class="demo-tab" data-demo-tab="p5">物流追踪</button>
+            <button class="demo-tab" data-demo-tab="p6">HS 编码关税</button>
+          </div>
+          <div class="demo-pane active" data-demo-pane="p1"><div class="demo-scroll"><img src="assets/采购专家：找品.png" loading="lazy"></div><div class="demo-info"><h4>商品搜索 · 找品</h4><p>输入关键词或上传图片，在 1688 和阿里国际站同时检索商品与工厂</p></div></div>
+          <div class="demo-pane" data-demo-pane="p2"><div class="demo-scroll"><img src="assets/采购专家：供应商货源查找.png" loading="lazy"></div><div class="demo-info"><h4>供应商货源查找</h4><p>按品类、地区、认证条件筛选供应商，双渠道并行搜索</p></div></div>
+          <div class="demo-pane" data-demo-pane="p3"><div class="demo-scroll"><img src="assets/采购专家：多产品对比.png" loading="lazy"></div><div class="demo-info"><h4>多产品横向对比</h4><p>多款产品价格、参数、利润并行对比，自动生成 Excel 对比表</p></div></div>
+          <div class="demo-pane" data-demo-pane="p4"><div class="demo-scroll"><img src="assets/采购专家：AI谈单.png" loading="lazy"></div><div class="demo-info"><h4>AI 自动谈判</h4><p>批量发起询盘，AI 自动与卖家多轮沟通，议价并解读报价单</p></div></div>
+          <div class="demo-pane" data-demo-pane="p5"><div class="demo-scroll"><img src="assets/采购专家：物流轨迹追踪.png" loading="lazy"></div><div class="demo-info"><h4>物流轨迹追踪</h4><p>实时追踪货物运输状态，覆盖海运/空运/快递</p></div></div>
+          <div class="demo-pane" data-demo-pane="p6"><div class="demo-scroll"><img src="assets/采购专家：HS 编码&amp;关税信息查询.png" loading="lazy"></div><div class="demo-info"><h4>HS 编码 &amp; 关税查询</h4><p>查询 HS 编码、各国关税税率，自动计算到岸成本</p></div></div>
+        </div>
+      </div>
+
+      <!-- 平台专属规则 -->
+      <div class="section-center" style="text-align:left;margin-bottom:16px">
+        <h3 style="font-size:18px;font-weight:700">平台专属优化规则</h3>
+        <p style="font-size:13px;color:var(--text-2)">电商管家为每个平台建立了底层规则优化模型，采购专家据此生成符合平台要求的内容。</p>
+      </div>
+      <div class="platform-rules">
+        <div class="pr-card">
+          <h4>Amazon</h4>
+          <div class="pr-sub">搜得到、看得懂</div>
+          <ul>
+            <li>核心产品词前置，拒绝堆词</li>
+            <li>五点描述按「卖点/材质/规格/场景/售后」分工</li>
+            <li>严禁未经证实的极限词</li>
+          </ul>
+        </div>
+        <div class="pr-card temu">
+          <h4>Temu</h4>
+          <div class="pr-sub">过得审、保真实</div>
+          <ul>
+            <li>精准匹配叶子类目，防止驳回</li>
+            <li>严禁违规挂低价无关 SKU 蹭流量</li>
+            <li>包装尺寸与重量必须如实申报</li>
+          </ul>
+        </div>
+        <div class="pr-card tiktok">
+          <h4>TikTok Shop</h4>
+          <div class="pr-sub">抓眼球、适推荐</div>
+          <ul>
+            <li>标题 40–150 字符，描述 ≥500 字符</li>
+            <li>图片 5–9 张，需真人使用场景</li>
+            <li>严禁同模板仅换色</li>
+          </ul>
+        </div>
+        <div class="pr-card ebay">
+          <h4>eBay</h4>
+          <div class="pr-sub">属性全、重实拍</div>
+          <ul>
+            <li>标题严格控制 80 字符以内</li>
+            <li>Required 属性 100% 填满</li>
+            <li>主图主体占画面 60%–90%</li>
+          </ul>
+        </div>
+        <div class="pr-card shopify">
+          <h4>Shopify</h4>
+          <div class="pr-sub">抓收录、促信任</div>
+          <ul>
+            <li>检查 Google 收录与 Product Schema</li>
+            <li>优化首屏 3 秒说服力</li>
+            <li>运费/退换货信任标识紧邻购买按钮</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 选品报告实例 — 产品图轮播 + 数据 -->
+      
+    </div>
+
+    <!-- ════ 设计专家 Pane ════ -->
+    <div class="agent-pane" data-agent-pane="design">
+      <div class="section-center" style="text-align:left;margin-bottom:24px">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">设计专家核心能力</h3>
+        <p style="font-size:14px;color:var(--text-2)">从白底原图到完整发品内容包，设计专家能生成多平台所需的全套视觉与文案素材。</p>
+      </div>
+
+      <!-- 核心能力演示 — 点击切换 + 竖向滚动 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>核心能力演示</h4>
+          <span class="mod-count">点击标题切换 · 竖向滚动查看</span>
+        </div>
+        <div class="demo-viewer">
+          <div class="demo-tabs">
+            <button class="demo-tab active" data-demo-tab="d1">Listing 优化</button>
+            <button class="demo-tab" data-demo-tab="d2">A+ Content 生成</button>
+            <button class="demo-tab" data-demo-tab="d3">一键发品</button>
+          </div>
+          <div class="demo-pane active" data-demo-pane="d1"><div class="demo-scroll"><img src="assets/多平台Listing优化效果报告（图片版）.png" loading="lazy"></div><div class="demo-info"><h4>多平台 Listing 优化效果报告</h4><p>针对 Amazon、Temu、TikTok Shop、eBay、Shopify 五平台各自规则生成优化方案</p></div></div>
+          <div class="demo-pane" data-demo-pane="d2"><div class="demo-scroll"><img src="assets/1张白底原图 +  生Amazon US A+ Content 商品详情套图6张.png" loading="lazy"></div><div class="demo-info"><h4>Amazon A+ Content 详情图生成</h4><p>1 张白底原图 → 6 张 A+ Content 详情套图</p></div></div>
+          <div class="demo-pane" data-demo-pane="d3"><div class="demo-scroll"><img src="assets/多平台一键发品.png" loading="lazy"></div><div class="demo-info"><h4>多平台一键发品</h4><p>内容包直接推送各平台完成发品</p></div></div>
+        </div>
+      </div>
+
+      <!-- 发品内容包 — 主图 6 张 -->
+      
+
+      <!-- 详情页 5 张 -->
+      
+
+      <!-- 标题与卖点摘要 -->
+      
+
+      <!-- 视频生成能力 + 演示 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>视频生成能力</h4>
+          <span class="mod-badge">5 项能力</span>
+          <span class="mod-count">含演示视频</span>
+        </div>
+        <div class="report-summary">
+          <div class="rs-body" style="line-height:2">
+            <p>• <strong>产品展示视频：</strong>白底图 → 多角度旋转展示视频，适配 Amazon 主图视频位</p>
+            <p>• <strong>营销短视频：</strong>适配 TikTok Shop / Instagram Reels 竖屏格式，含字幕与转场</p>
+            <p>• <strong>图文转视频：</strong>将 Listing 图文自动编排为带字幕的展示视频</p>
+            <p>• <strong>AI 配音：</strong>支持多语言旁白，覆盖英语、法语、葡语等主要市场语言</p>
+            <p>• <strong>设计画布：</strong>可视化编辑界面，支持图层、文字、贴图、裁切的精细设计操作</p>
+          </div>
+        </div>
+        <div class="video-block" style="margin-top:16px">
+          <h4>视频生成演示</h4>
+          <video class="video-player" controls preload="metadata">
+            <source src="assets/视频生成素材.mp4" type="video/mp4">
+          </video>
+          <p class="video-desc">设计专家生成的视频内容演示</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ 1688生意助手 Pane ════ -->
+    <div class="agent-pane" data-agent-pane="assistant1688">
+      <div class="section-center" style="text-align:left;margin-bottom:24px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+          <div class="agent-avatar" style="background:linear-gradient(135deg,#FF6A00,#FF4500);width:48px;height:48px;font-size:20px">🏪</div>
+          <div>
+            <h3 style="font-size:20px;font-weight:700;margin:0">1688 生意助手</h3>
+            <div class="agent-id">ID: MID-27075472U1790666-FC4C27-2088-925E12</div>
+          </div>
+        </div>
+        <p style="font-size:14px;color:var(--text-2)">专为 1688 店铺打造的智能经营助手，覆盖客户运营、店铺生意、业务质检、设计等场景，支持自动运营方案配置与 AI 全自动客服接待。</p>
+      </div>
+
+      <!-- 能力总结 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>核心能力</h4>
+          <span class="mod-badge">4 大模块</span>
+        </div>
+        <div class="cap-flow">
+          <div class="cap-flow-step">
+            <div class="cap-num" style="background:#FF6A00">1</div>
+            <div class="cap-title">客户运营</div>
+            <div class="cap-desc">高活跃客户触达、流失客户挽回、优惠券发放、自动运营方案配置</div>
+            <div class="cap-output" style="background:#FFF3E8;color:#FF6A00">自动运营方案 / 客户触达清单</div>
+          </div>
+          <div class="cap-flow-step">
+            <div class="cap-num" style="background:#FF6A00">2</div>
+            <div class="cap-title">店铺生意</div>
+            <div class="cap-desc">店铺经营数据分析、商品管理、订单跟踪、生意参谋数据整合</div>
+            <div class="cap-output" style="background:#FFF3E8;color:#FF6A00">经营报告 / 商品分析</div>
+          </div>
+          <div class="cap-flow-step">
+            <div class="cap-num" style="background:#FF6A00">3</div>
+            <div class="cap-title">智能客服</div>
+            <div class="cap-desc">AI 全自动接待买家询盘、话术管理、欢迎语配置、接待复盘与满意度追踪</div>
+            <div class="cap-output" style="background:#FFF3E8;color:#FF6A00">自动接待 / 转化率追踪</div>
+          </div>
+          <div class="cap-flow-step">
+            <div class="cap-num" style="background:#FF6A00">4</div>
+            <div class="cap-title">业务质检</div>
+            <div class="cap-desc">接待质量检查、回复速度监控、话术合规校验、通知渠道管理</div>
+            <div class="cap-output" style="background:#FFF3E8;color:#FF6A00">质检报告 / 合规校验</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 演示视频 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>智能体演示视频</h4>
+          <span class="mod-badge">2 段视频</span>
+          <span class="mod-count">点击播放查看</span>
+        </div>
+        <div class="video-block">
+          <h4>1688 生意助手 · 创建运营计划</h4>
+          <video class="video-player" controls preload="metadata">
+            <source src="assets/【智能体】1688生意助手_创建运营计划.mp4" type="video/mp4">
+          </video>
+          <p class="video-desc">演示智能体如何为 1688 店铺自动创建运营计划：配置高潜触达渠道（短信/话术/个性话术）、配置优惠券（全店/不发）、自动运营挖掘客户</p>
+        </div>
+        <div class="video-block">
+          <h4>1688 生意助手 · 智能客服</h4>
+          <video class="video-player" controls preload="metadata">
+            <source src="assets/【智能体】1688生意助手.智能客服.mp4" type="video/mp4">
+          </video>
+          <p class="video-desc">演示智能体作为 AI 业务员自动接待买家询盘：接待会话数据、转化效果（独立接待转化率/平均响应时长）、AI 会话满意度、通用接待设置（欢迎语/话术管理/通知渠道）</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ 电商管家 Pane ════ -->
+    <div class="agent-pane" data-agent-pane="ecommerce">
+      <div class="section-center" style="text-align:left;margin-bottom:24px">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">电商管家分析报告</h3>
+        <p style="font-size:14px;color:var(--text-2)">将分散在 Amazon、阿里国际站、1688 等平台的经营数据汇聚分析，生成多维度报告。</p>
+      </div>
+
+      <!-- 分析报告 — 点击切换 + 竖向滚动 -->
+      <div class="module-block">
+        <div class="module-head">
+          <h4>分析报告演示</h4>
+          <span class="mod-count">点击标题切换 · 竖向滚动查看</span>
+        </div>
+        <div class="demo-viewer">
+          <div class="demo-tabs">
+            <button class="demo-tab active" data-demo-tab="r1">单品深度分析</button>
+            <button class="demo-tab" data-demo-tab="r2">广告投放分析</button>
+            <button class="demo-tab" data-demo-tab="r3">店铺经营分析</button>
+            <button class="demo-tab" data-demo-tab="r4">商品明细分析</button>
+            <button class="demo-tab" data-demo-tab="r5">多平台经营分析</button>
+          </div>
+          <div class="demo-pane active" data-demo-pane="r1"><div class="demo-scroll"><img src="assets/Amazon单店单品深度分析报告.png" loading="lazy"></div><div class="demo-info"><h4>Amazon 单店单品深度分析</h4><p>单品销量、BSR 排名、关键词排名、评论分析、竞品对比</p></div></div>
+          <div class="demo-pane" data-demo-pane="r2"><div class="demo-scroll"><img src="assets/Amazon单店广告投放分析报告.png" loading="lazy"></div><div class="demo-info"><h4>Amazon 广告投放分析</h4><p>PPC 广告花费、ACOS、关键词表现、投放策略建议</p></div></div>
+          <div class="demo-pane" data-demo-pane="r3"><div class="demo-scroll"><img src="assets/Amazon单店铺经营分析报告.png" loading="lazy"></div><div class="demo-info"><h4>Amazon 店铺经营分析</h4><p>店铺整体 GMV、订单趋势、品类占比、转化漏斗</p></div></div>
+          <div class="demo-pane" data-demo-pane="r4"><div class="demo-scroll"><img src="assets/Amazon单店所有商品明细分析.png" loading="lazy"></div><div class="demo-info"><h4>Amazon 商品明细分析</h4><p>全 SKU 销量、库存、价格、ASIN 状态明细表</p></div></div>
+          <div class="demo-pane" data-demo-pane="r5"><div class="demo-scroll"><img src="assets/多平台店铺经营分析报告.png" loading="lazy"></div><div class="demo-info"><h4>多平台经营分析</h4><p>跨平台 GMV、订单、流量对比，渠道表现一览</p></div></div>
+        </div>
+      </div>
+
+      <!-- 数据复盘实例 -->
+      
+
+      <!-- 客户优先级报告 -->
+      
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     平台覆盖
+     ============================================================ -->
+<section class="section" id="platforms">
+  <div class="section-center">
+    <span class="eyebrow">PLATFORM COVERAGE</span>
+    <h2>连接你已在用的<span class="hl">电商平台与工具</span></h2>
+    <p class="subtitle">AccioWork 不是又一个孤岛——它覆盖跨境主流销售渠道、国内采购平台、社媒内容分发与协作工具，让数据流通、操作自动化。</p>
+  </div>
+  <div id="platformContainer"></div>
+</section>
+
+<!-- ============================================================
+     方案定价
+     ============================================================ -->
+<section class="pricing-section" id="pricing">
+  <div class="section">
+    <div class="section-center">
+      <span class="eyebrow">PRICING</span>
+      <h2>四个版本，<span class="hl">总有一款适合你的团队</span></h2>
+      <p class="subtitle">从个人体验起步到企业定制部署，按需选择、平滑升级。所有企业版本共享积分池与插件。</p>
+    </div>
+    <div class="pricing-grid-4" id="pricingGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     价值对比
+     ============================================================ -->
+<section class="compare-section" id="compare">
+  <div class="section">
+    <div class="section-center">
+      <span class="eyebrow" style="color:#60A5FA">BEFORE &amp; AFTER</span>
+      <h2>使用 AccioWork 前后，<span style="color:#60A5FA">你的工作方式变了什么</span></h2>
+      <p class="subtitle">不是"多了一个工具"，而是"换了一种工作方式"。</p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col before">
+        <h3> before · 人手操作</h3>
+        <ul>
+          <li>选品报告需要跨 3-5 个平台手动收集数据，耗时一整天</li>
+          <li>一张产品图全网找同款，要在 1688 / 国际站反复搜索</li>
+          <li>每张订单的发票箱单报关单手工填写，一单 40 分钟</li>
+          <li>Listing 文案、主图、详情页依赖外包，交期一周起步</li>
+          <li>询盘邮件散落在邮箱/平台后台/社媒，跟进记录靠记忆</li>
+          <li>店铺数据每周手动导 Excel 做图表，看到时已过时</li>
+          <li>同样的事每天重复做，团队忙但产出不增长</li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h3> after · AccioWork 驱动</h3>
+        <ul>
+          <li>一句话指令，Agent 自动调研并产出带数据源的选品报告</li>
+          <li>上传图片自动以图搜款，3 分钟返回 10 个候选货源</li>
+          <li>订单数据自动填充标准单证模板，一单 3 分钟出 PDF</li>
+          <li>上传产品信息，AI 生成主图/详情/多语言文案，当天交付</li>
+          <li>邮件/消息统一进入工作台，AI 摘要 + 自动跟进提醒</li>
+          <li>定时 Agent 每日自动抓取数据并生成可视化看板</li>
+          <li>重复工作交给 AI，团队聚焦选品策略和客户关系</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ROI 计算器
+     ============================================================ -->
+<section class="roi-section" id="roi">
+  <div class="section-center" style="margin-bottom:32px">
+    <span class="eyebrow">ROI CALCULATOR</span>
+    <h2>算一算，<span class="hl">AccioWork 能为你省多少</span></h2>
+    <p class="subtitle">输入你的团队情况，立刻看到效率提升与回本周期。</p>
+  </div>
+  <div class="roi-wrap">
+    <div class="roi-form-card">
+      <h3>你的团队情况</h3>
+      <div class="roi-field">
+        <label>团队人数 <span class="hint">参与电商运营的人员</span></label>
+        <input type="number" id="roiHeadcount" value="5" min="1">
+      </div>
+      <div class="roi-field">
+        <label>人均月用工成本（元） <span class="hint">含社保综合成本</span></label>
+        <input type="number" id="roiSalary" value="8000" min="0" step="500">
+      </div>
+      <div class="roi-field">
+        <label>每周选品调研耗时（小时）</label>
+        <input type="number" id="roiTask1" value="20" min="0">
+      </div>
+      <div class="roi-field">
+        <label>每周单证/订单处理耗时（小时）</label>
+        <input type="number" id="roiTask2" value="15" min="0">
+      </div>
+      <div class="roi-field">
+        <label>每周客户跟进耗时（小时）</label>
+        <input type="number" id="roiTask3" value="25" min="0">
+      </div>
+      <div class="roi-field">
+        <label>每周内容/视觉制作耗时（小时）</label>
+        <input type="number" id="roiTask4" value="10" min="0">
+      </div>
+      <div class="roi-field">
+        <label>AccioWork 预估月费（元）</label>
+        <input type="number" id="roiCost" value="3333" min="0" step="100">
+      </div>
+    </div>
+    <div class="roi-result-card">
+      <h3>你的效率收益</h3>
+      <div class="roi-result-row">
+        <span class="lbl">每周重复工时</span>
+        <span class="val" id="roiWeeklyHours">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="lbl">月度人力成本</span>
+        <span class="val" id="roiMonthlyCost">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="lbl">AI 可替代比例</span>
+        <span class="val" id="roiSavings">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="lbl">月度节省金额</span>
+        <span class="val" id="roiMonthlySavings">—</span>
+      </div>
+      <div class="roi-result-row highlight">
+        <span class="lbl">预计回本周期</span>
+        <span class="val" id="roiPayback">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     收尾总结
+     ============================================================ -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>以上就是 AccioWork 的全貌</h2>
+    <p>八大能力引擎、六大经营环节覆盖、四档版本可选。<br>这不是一个聊天框，而是一个能替你执行、能自动化运转、能连接你现有工具的 AI 工作台。</p>
+    <div class="cta-actions">
+      <button class="btn btn-ghost" onclick="scrollTo('#capabilities')">回顾核心能力</button>
+      <button class="btn btn-ghost" onclick="scrollTo('#pricing')">查看版本对比</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     工具抽屉（仅保留 FAQ 浏览）
+     ============================================================ -->
+<button class="drawer-toggle" onclick="openDrawer()">常见疑问</button>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>常见疑问与版本速查</h3>
+    <button class="close" onclick="closeDrawer()">×</button>
+  </div>
+  <div class="drawer-tabs">
+    <button class="active" data-drawer-tab="faq">常见疑问</button>
+    <button data-drawer-tab="quote">版本速查</button>
+  </div>
+  <div class="drawer-body">
+
+    <!-- FAQ -->
+    <div class="drawer-pane active" id="pane-faq">
+      <div id="faqList"></div>
+    </div>
+
+    <!-- 版本速查 -->
+    <div class="drawer-pane" id="pane-quote">
+      <div class="roi-form-card" style="border:none;padding:0">
+        <div class="roi-field">
+          <label>选择版本查看配置</label>
+          <select id="quotePlan">
+            <option value="trial">体验版 — ¥2,000/年</option>
+            <option value="starter">入门版 — ¥20,000/年</option>
+            <option value="standard" selected="">标准版 — ¥40,000/年</option>
+            <option value="enterprise">按需定制 — 面议</option>
+          </select>
+        </div>
+        <div class="roi-result-card" style="margin-top:20px;padding:24px">
+          <div class="roi-result-row" style="border:none">
+            <span class="lbl" style="font-size:14px">版本价格</span>
+            <span class="val" id="quoteTotal" style="font-size:28px;color:#60A5FA">—</span>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;margin-top:12px" id="quoteBreakdown"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</aside>
+
+<script>
+/* ============================================================
+   数据
+   ============================================================ */
+
+/* 八大核心能力 */
+const CAPABILITIES = [
+  {icon:'💬', bg:'var(--accent-bg)', color:'var(--accent)',
+   title:'自然语言驱动', desc:'用大白话下指令，不用学命令、不用写代码。说"帮我查下这个产品在 Amazon 的销量趋势"，Agent 就去执行。',
+   tags:['对话式交互','零学习门槛','意图识别']},
+  {icon:'🤖', bg:'var(--violet-bg)', color:'var(--violet)',
+   title:'多 Agent 协作', desc:'复杂任务自动拆解给不同专业 Agent 并行处理。选品调研时，一个 Agent 搜数据、一个做分析、一个写报告，同步完成。',
+   tags:['任务拆解','并行执行','智能调度']},
+  {icon:'📄', bg:'var(--amber-bg)', color:'var(--amber)',
+   title:'文档处理引擎', desc:'上传 Excel/Word/PDF，AI 自动解析、提取、转换、生成。从订单数据到报关单证，从供应商报价表到选品报告，全格式处理。',
+   tags:['Excel 解析','PDF 生成','格式转换','数据提取']},
+  {icon:'🌐', bg:'var(--teal-bg)', color:'var(--teal)',
+   title:'浏览器自动化', desc:'Agent 可以像人一样操作网页——登录平台、翻页抓取、点击提交。电商后台的数据导出、批量操作不再需要人手。',
+   tags:['网页操作','批量抓取','自动填表','截图取证']},
+  {icon:'⏰', bg:'var(--rose-bg)', color:'var(--rose)',
+   title:'定时与自动化任务', desc:'设定触发条件，Agent 定时执行。每天早上自动拉取店铺数据生成看板、每周自动产出选品报告、询盘超时自动提醒。',
+   tags:['定时报告','事件触发','监控预警','无人值守']},
+  {icon:'🔌', bg:'var(--accent-bg)', color:'var(--accent)',
+   title:'平台与工具对接', desc:'内置 1688、Amazon、Gmail、飞书、GitHub 等连接器。你的经营工具链不再各自为政，数据互通、操作联动。',
+   tags:['1688 选品','Gmail 邮件','飞书协作','可扩展插件']},
+  {icon:'🎨', bg:'var(--violet-bg)', color:'var(--violet)',
+   title:'AI 内容生成', desc:'产品主图、详情长图、多语言 Listing 文案、营销海报——输入产品信息，AI 直接产出可用素材，不再等外包。',
+   tags:['主图生成','详情长图','多语言文案','营销视觉']},
+  {icon:'📊', bg:'var(--teal-bg)', color:'var(--teal)',
+   title:'数据分析与看板', desc:'上传业务数据自动生成可视化工作台。KPI 卡片、趋势图表、排序筛选——你看到的是结论，不是原始数字。',
+   tags:['可视化看板','KPI 监控','趋势分析','交互筛选']}
+];
+
+/* 六大经营环节 */
+const FLOW_STEPS = [
+  {icon:'🔍', bg:'var(--accent-bg)', color:'var(--accent)', name:'选品调研', desc:'找到下一个爆品'},
+  {icon:'📦', bg:'var(--violet-bg)', color:'var(--violet)', name:'采购找货', desc:'锁定最优货源'},
+  {icon:'🎨', bg:'var(--amber-bg)', color:'var(--amber)', name:'内容制作', desc:'Listing + 视觉'},
+  {icon:'📋', bg:'var(--teal-bg)', color:'var(--teal)', name:'订单单证', desc:'高效准确交付'},
+  {icon:'💬', bg:'var(--rose-bg)', color:'var(--rose)', name:'客户经营', desc:'询盘到复购'},
+  {icon:'📈', bg:'var(--accent-bg)', color:'var(--accent)', name:'数据复盘', desc:'用数据做决策'}
+];
+
+/* 六大场景详情 — 痛点→AI解决→客户收益 */
+const SCENES = [
+  {
+    icon:'🔍', bg:'var(--accent-bg)', color:'var(--accent)',
+    title:'选品调研', tagline:'让数据替你做选品决策',
+    pain:[
+      '市场数据散在 Amazon、1688、抖音、小红书，手动整理一份报告要一整天',
+      '热销榜单、搜索趋势、竞品定价看得眼花，还是拿不准该选什么',
+      '选品靠经验拍脑袋，数据支撑不足，试错成本高'
+    ],
+    painMetric:'传统方式：1-2 天 / 份报告',
+    solution:[
+      '一句话指令"调研 XX 品类的市场机会"，Agent 自动跨平台采集数据',
+      '自动整合搜索量、销量趋势、价格分布、竞争强度等维度',
+      '产出带数据源的选品报告，含利润测算和风险评估'
+    ],
+    solutionMetric:'AccioWork：1 小时 / 份报告',
+    gain:[
+      '选品决策从"凭感觉"变成"看数据"',
+      '调研效率提升 10 倍以上，一天能看 5-8 个品类机会',
+      '数据源可追溯，团队选品有共同依据，减少内耗'
+    ],
+    gainMetric:'效率提升 10× · 试错成本降低 60%',
+    screenshot:'选品调研报告界面截图',
+    previewTitle:'选品调研素材 · 卫浴五金55款精选报告',
+    previewFile:'选品调研素材.html'
+  },
+  {
+    icon:'📦', bg:'var(--violet-bg)', color:'var(--violet)',
+    title:'采购找货', tagline:'一张图找到全网最优货源',
+    pain:[
+      '一张产品图要在 1688、阿里国际站反复搜索，找到合适货源要半天',
+      '多个供应商报价靠手工记录，比价混乱，容易遗漏',
+      '供应商资质无法快速核实，踩坑成本高'
+    ],
+    painMetric:'传统方式：半天 / 款 · 比价靠 Excel',
+    solution:[
+      '上传产品图片或粘贴链接，Agent 自动以图搜款、找同款、找相似款',
+      '批量返回候选货源，按价格/销量/材质/属性筛选排序',
+      '供应商信息聚合展示，支持批量比价和跨境找货'
+    ],
+    solutionMetric:'AccioWork：3 分钟 / 10 个候选货源',
+    gain:[
+      '找货效率提升 20 倍，一天能调研上百个产品',
+      '比价数据结构化，不会遗漏更优货源',
+      '新品上架速度大幅加快，抢占市场先机'
+    ],
+    gainMetric:'效率提升 20× · 采购成本降低 10-15%',
+    screenshot:'1688 找货比价界面截图',
+    previewTitle:'采购找货素材 · 采购专家功能演示',
+    previewFile:'采购找货素材.html'
+  },
+  {
+    icon:'🎨', bg:'var(--amber-bg)', color:'var(--amber)',
+    title:'内容制作', tagline:'Listing 文案和产品图当天出',
+    pain:[
+      '产品主图、详情页、A+ 页面依赖外包设计师，交期一周起步',
+      '多语言 Listing 文案要找翻译，成本高、周期长、质量不稳定',
+      '营销海报、社媒素材需求频繁，设计排期永远跟不上'
+    ],
+    painMetric:'传统方式：7 天 + 外包费 500-2000 元 / SKU',
+    solution:[
+      '上传产品信息和基础图，AI 自动生成主图、详情长图、场景图',
+      '一键产出多语言 Listing 文案（英/日/韩/德/法等）',
+      '营销海报、社媒素材按需生成，模板可复用'
+    ],
+    solutionMetric:'AccioWork：当天交付 · 边际成本趋零',
+    gain:[
+      '内容交付周期从"周"到"天"，新品上架速度翻倍',
+      '多语言市场拓展成本大幅降低',
+      '不再依赖外包排期，随时产出素材'
+    ],
+    gainMetric:'交付提速 7× · 内容成本降低 80%',
+    screenshot:'AI 内容生成界面截图',
+    previewTitle:'内容制作素材 · 浴室五金6件套发品内容包',
+    previewFile:'内容制作素材.html'
+  },
+  {
+    icon:'📋', bg:'var(--teal-bg)', color:'var(--teal)',
+    title:'订单单证', tagline:'一单报关资料 3 分钟搞定',
+    pain:[
+      '每张订单的发票、装箱单、报关单都要手工填写，一单 40 分钟',
+      '单证格式稍有不对就被退回，反复修改',
+      '订单多了容易出错，漏发错发风险高'
+    ],
+    painMetric:'传统方式：40 分钟 / 单 · 差错率 5-8%',
+    solution:[
+      '订单数据导入后，AI 自动填充标准单证模板',
+      '商业发票、装箱单、报关单一键批量生成 PDF',
+      '格式自动校验，关键字段核对，降低差错'
+    ],
+    solutionMetric:'AccioWork：3 分钟 / 单 · 差错率趋零',
+    gain:[
+      '单证制作效率提升 10 倍以上',
+      '差错率大幅降低，避免退单和延误',
+      '团队从填表劳动中解放，专注订单管理'
+    ],
+    gainMetric:'效率提升 10× · 差错率降低 90%',
+    screenshot:'单证自动生成界面截图'
+  },
+  {
+    icon:'💬', bg:'var(--rose-bg)', color:'var(--rose)',
+    title:'客户经营', tagline:'询盘不漏、跟进有痕、复购增长',
+    pain:[
+      '询盘散落在邮箱、平台后台、社媒私信，容易漏看漏回',
+      '客户跟进没有系统记录，老销售离职客户就断了',
+      '回复模板靠复制粘贴，效率低且不够专业'
+    ],
+    painMetric:'传统方式：30% 询盘未跟进 · 客户流失率高',
+    solution:[
+      '邮件/消息统一进入工作台，AI 自动摘要并标注优先级',
+      '每个客户有完整跟进时间线，历史记录可追溯',
+      'AI 辅助生成专业回复，多语言沟通无障碍'
+    ],
+    solutionMetric:'AccioWork：0 漏跟 · 回复效率提升 5×',
+    gain:[
+      '询盘响应速度从"小时级"到"分钟级"',
+      '客户资产沉淀在系统而非个人脑子里',
+      '多语言客户沟通不再有障碍'
+    ],
+    gainMetric:'响应提速 5× · 客户流失降低 40%',
+    screenshot:'客户跟进工作台界面截图',
+    previewTitle:'客户经营素材 · 高潜力客户优先级报告',
+    previewFile:'客户经营素材.html'
+  },
+  {
+    icon:'📈', bg:'var(--accent-bg)', color:'var(--accent)',
+    title:'数据复盘', tagline:'每天早上报表自动到手',
+    pain:[
+      '店铺运营数据每周手动导出 Excel，做图表已经是下周的事',
+      '数据散在多平台，看不到全局，决策靠直觉',
+      '异常指标发现晚，错过最佳处理窗口'
+    ],
+    painMetric:'传统方式：数据延迟 1 周 · 决策凭直觉',
+    solution:[
+      '定时 Agent 每日自动拉取多平台数据，生成可视化看板',
+      'KPI 卡片 + 趋势图表 + 异常预警，一眼看到关键变化',
+      '支持多条件筛选、排序和下钻分析'
+    ],
+    solutionMetric:'AccioWork：每日自动 · 数据实时',
+    gain:[
+      '从"周报决策"升级为"日报决策"',
+      '异常指标当天发现当天处理',
+      '团队数据共识，减少争吵'
+    ],
+    gainMetric:'决策提速 7× · 异常响应从天级到小时级',
+    screenshot:'数据看板界面截图',
+    previewTitle:'数据复盘素材 · 全维度经营复盘报告',
+    previewFile:'数据复盘素材.html'
+  }
+];
+
+/* 平台覆盖 — 分类结构 */
+const PLATFORM_CATEGORIES = [
+  {
+    cat:'跨境电商销售渠道', icon:'🛒', bg:'var(--accent-bg)', color:'var(--accent)',
+    platforms:[
+      {name:'Amazon', desc:'市场调研 / 店铺运营'},
+      {name:'TikTok Shop', desc:'内容电商运营'},
+      {name:'Temu', desc:'全托管模式对接'},
+      {name:'Shopify', desc:'独立站建站运营'},
+      {name:'eBay', desc:'跨境拍卖 / 店铺'},
+      {name:'AliExpress', desc:'速卖通运营'},
+      {name:'WooCommerce', desc:'WordPress 独立站'},
+      {name:'ShopLazza', desc:'店匠独立站'},
+      {name:'AllValue', desc:'全价值独立站'},
+      {name:'Lazada', desc:'东南亚电商'},
+      {name:'Shopee', desc:'东南亚电商'},
+      {name:'Nuvemshop', desc:'拉美电商建站'},
+      {name:'MercadoLibre', desc:'拉美最大电商'},
+      {name:'WED2C', desc:'直连消费者渠道'},
+    ]
+  },
+  {
+    cat:'一件代发供应链', icon:'📦', bg:'var(--violet-bg)', color:'var(--violet)',
+    platforms:[
+      {name:'CJ Dropshipping', desc:'统一供应链入口，13 渠道一键代发'},
+      {name:'1688', desc:'采购找货 / 以图搜款'},
+      {name:'阿里巴巴国际站', desc:'B2B 采购 / 询盘'},
+      {name:'淘宝', desc:'国内货源参考'},
+      {name:'天猫', desc:'品牌商品参考'},
+    ]
+  },
+  {
+    cat:'社交媒体与内容', icon:'📱', bg:'var(--teal-bg)', color:'var(--teal)',
+    platforms:[
+      {name:'Twitter / X', desc:'品牌提及监控 / 搜索 / 发布'},
+      {name:'Instagram', desc:'社交内容浏览与管理'},
+      {name:'LinkedIn', desc:'职业网络信息 / 内容发布'},
+      {name:'Facebook', desc:'内容自动发布'},
+      {name:'SHOPLINE 智能体', desc:'生成社媒推广内容与内容日历'},
+      {name:'OKKI 插件', desc:'多平台内容自动发布'},
+    ]
+  },
+  {
+    cat:'协作与工具', icon:'🔧', bg:'var(--amber-bg)', color:'var(--amber)',
+    platforms:[
+      {name:'Gmail', desc:'邮件助手 / 询盘管理'},
+      {name:'飞书', desc:'团队协作 / 消息互通'},
+      {name:'GitHub', desc:'代码管理 / 技术开发'},
+      {name:'Excel / CSV', desc:'数据解析与处理'},
+      {name:'PDF / Word', desc:'文档生成与转换'},
+      {name:'高德地图', desc:'客户地理定位'},
+    ]
+  }
+];
+
+/* FAQ */
+const FAQS = [
+  {q:'AccioWork 和 ChatGPT / 文心一言等有什么本质区别？',
+   a:'ChatGPT 等是对话工具，一问一答，只能帮你"想"。AccioWork 是工作台——能操作文档（生成/解析/转换）、调度浏览器执行自动化、运行定时任务、多 Agent 协作处理复杂流程、对接你的电商平台。简单说：聊天工具帮你想，AccioWork 帮你做。'},
+  {q:'我不懂技术，能用起来吗？',
+   a:'AccioWork 的交互方式是自然语言——你说"帮我查下这个产品在 Amazon 的销量"，它就去执行。不需要写代码、不需要 Prompt 工程。预置的电商场景技能（选品、单证、客户跟进等）开箱即用，新用户通常 30 分钟内上手。'},
+  {q:'内外贸都支持吗？具体能做什么？',
+   a:'是的。外贸场景：1688 采购找货、阿里国际站运营、多语言 Listing、报关单证、跨境客户跟进。内贸场景：抖音/小红书选品、国内供应商比价、中文内容制作、订单管理。核心能力引擎通用，场景技能按需启用。'},
+  {q:'我的业务数据安全吗？',
+   a:'工作台支持本地运行模式，数据存储在浏览器端不上传后端。云端模式的数据传输走加密通道。企业版支持私有化部署。我们不接触你的客户数据，版本控制严格隔离。'},
+  {q:'AI 生成的内容准确吗？出错怎么办？',
+   a:'设计原则是"AI 执行、人工确认"——所有 AI 生成的内容都呈现给你审核后再使用。数据类任务有逐格自检和保真校验机制，不会静默出错。关键业务流程保留人工复核环节，你始终有最终决定权。'},
+  {q:'能对接我们现有的 ERP / CRM 吗？',
+   a:'已内置 1688、Amazon、Gmail、飞书等连接器。如果你的业务依赖特定系统，企业版可定制开发对接插件。AccioWork 的插件架构是可扩展的，不局限于预置的平台。'},
+  {q:'价格贵不贵？ROI 怎么算？',
+   a:'用页面中的 ROI 计算器算一下：一个 5 人团队每周在选品、单证、跟进、内容上花 70 小时，月人力成本约 4 万元。AccioWork 可覆盖其中 60-70% 的重复工作（此为经验估算，实际因业务而异），费用通常不到一个人力的 1/3。'},
+  {q:'如果想进一步了解，怎么获取更多信息？',
+   a:'页面中的版本速查可以查看四档方案的价格与配置对照。定价页面完整展示了体验版到按需定制的积分与账号差异。也可以向介绍你 AccioWork 的人咨询具体场景的适用性。'}
+];
+
+/* 四版定价数据 */
+const PLANS = [
+  {
+    key:'trial', name:'体验版', badge:'trial', badgeText:'入门',
+    desc:'适合个人起步体验',
+    price:'¥2,000', unit:'/ 年', priceNote:'约 ¥167/月',
+    credits:'4,000 / 月', seats:'2', modelQuota:'共享',
+    features:[
+      {type:'check', text:'企业积分池 4,000/月'},
+      {type:'check', text:'子账号上限 2'},
+      {type:'diamond', text:'高质量模型配额'},
+      {type:'check', text:'全员共享插件'},
+    ]
+  },
+  {
+    key:'starter', name:'入门版', badge:'basic', badgeText:'基础',
+    desc:'适合快速起步的小团队',
+    price:'¥20,000', unit:'/ 年', priceNote:'约 ¥1,667/月',
+    credits:'35,000 / 月', seats:'5', modelQuota:'100次/3小时',
+    features:[
+      {type:'diamond', text:'企业积分池 35,000/月'},
+      {type:'diamond', text:'子账号上限 5'},
+      {type:'diamond', text:'高质量模型配额 100次/3小时'},
+      {type:'check', text:'所有子账号共享企业积分池'},
+      {type:'check', text:'全员共享插件'},
+      {type:'check', text:'企业发票（增值税普票）'},
+      {type:'check', text:'用量报告与成员消耗排行'},
+    ]
+  },
+  {
+    key:'standard', name:'标准版', badge:'hot', badgeText:'热门',
+    desc:'适合日常协作提效',
+    price:'¥40,000', unit:'/ 年', priceNote:'约 ¥3,333/月',
+    credits:'80,000 / 月', seats:'15', modelQuota:'100次/3小时',
+    featured:true,
+    features:[
+      {type:'diamond', text:'企业积分池 80,000/月'},
+      {type:'diamond', text:'子账号上限 15'},
+      {type:'diamond', text:'高质量模型配额 100次/3小时'},
+      {type:'check', text:'所有子账号共享企业积分池'},
+      {type:'check', text:'全员共享插件'},
+      {type:'check', text:'企业发票（增值税普票）'},
+      {type:'check', text:'用量报告与成员消耗排行'},
+      {type:'check', text:'成员角色管理'},
+    ]
+  },
+  {
+    key:'enterprise', name:'按需定制', badge:'exclusive', badgeText:'专享',
+    desc:'适合大型团队 / 行业方案',
+    price:'面议', unit:'', priceNote:'按需定制方案',
+    credits:'面议', seats:'面议', modelQuota:'面议',
+    features:[
+      {type:'diamond', text:'企业积分池 面议'},
+      {type:'diamond', text:'子账号上限 面议'},
+      {type:'diamond', text:'高质量模型配额 面议'},
+      {type:'check', text:'独立部署 / 专属网络环境'},
+      {type:'check', text:'统一登录 / 操作记录可追溯'},
+      {type:'check', text:'行业专属插件与技能'},
+      {type:'check', text:'服务保障与 7×24 专属支持'},
+      {type:'check', text:'专属折扣'},
+    ]
+  }
+];
+
+/* 抽屉报价器 — 简化为按版本直接展示 */
+const PLAN_INFO = {
+  trial:{name:'体验版', price:'¥2,000/年', credits:'4,000/月', seats:'2'},
+  starter:{name:'入门版', price:'¥20,000/年', credits:'35,000/月', seats:'5'},
+  standard:{name:'标准版', price:'¥40,000/年', credits:'80,000/月', seats:'15'},
+  enterprise:{name:'按需定制', price:'面议', credits:'面议', seats:'面议'}
+};
+
+/* ============================================================
+   渲染
+   ============================================================ */
+
+function renderCapabilities(){
+  document.getElementById('capGrid').innerHTML = CAPABILITIES.map(c=>`
+    <div class="cap-card">
+      <div class="cap-icon" style="background:${c.bg};color:${c.color}">${c.icon}</div>
+      <h3>${c.title}</h3>
+      <p>${c.desc}</p>
+      <div class="cap-examples">
+        ${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFlow(){
+  document.getElementById('flowChain').innerHTML = FLOW_STEPS.map(s=>`
+    <div class="flow-step">
+      <div class="step-icon" style="background:${s.bg};color:${s.color}">${s.icon}</div>
+      <div class="step-name">${s.name}</div>
+      <div class="step-desc">${s.desc}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('sceneList').innerHTML = SCENES.map(s=>`
+    <div class="scene-detail">
+      <div class="sd-head">
+        <div class="sd-icon" style="background:${s.bg};color:${s.color}">${s.icon}</div>
+        <div class="sd-title">
+          <h3>${s.title}</h3>
+          <div class="sd-tagline">${s.tagline}</div>
+        </div>
+      </div>
+      <div class="sd-body">
+        <div class="sd-triple">
+          <div class="triple-col triple-pain">
+            <h4><span class="triple-icon">⚠</span> 你的痛点</h4>
+            <ul>${s.pain.map(p=>`<li>${p}</li>`).join('')}</ul>
+            <div class="metric">${s.painMetric}</div>
+          </div>
+          <div class="triple-col triple-do">
+            <h4><span class="triple-icon">⚡</span> AccioWork 怎么做</h4>
+            <ul>${s.solution.map(d=>`<li>${d}</li>`).join('')}</ul>
+            <div class="metric">${s.solutionMetric}</div>
+          </div>
+          <div class="triple-col triple-gain">
+            <h4><span class="triple-icon">📈</span> 你获得什么</h4>
+            <ul>${s.gain.map(g=>`<li>${g}</li>`).join('')}</ul>
+            <div class="metric">${s.gainMetric}</div>
+          </div>
+        </div>
+        ${s.previewFile ? `
+        <div class="scene-preview">
+          <div class="scene-preview-head">
+            <span class="sp-badge">素材预览</span>
+            <span class="sp-title">${s.previewTitle}</span>
+            <span class="sp-hint">↓ 竖向滚动查看完整内容 ↓</span>
+          </div>
+          <div class="scene-iframe-wrap" data-file="${s.previewFile}">
+            <iframe class="scene-iframe" src="assets/${s.previewFile}" loading="lazy" scrolling="auto"></iframe>
+            <div class="scene-iframe-fallback">
+              <p>本地直接打开时浏览器可能阻止 iframe 加载子文件。</p>
+              <p>请通过本地服务器预览，或部署到 Cloudflare Pages 后正常显示。</p>
+              <p style="margin-top:8px;font-size:11px">命令：<code>npx serve "D:/桌面/智能体存储位置/代码编程"</code></p>
+            </div>
+          </div>
+        </div>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPlatforms(){
+  document.getElementById('platformContainer').innerHTML = PLATFORM_CATEGORIES.map(cat=>`
+    <div class="platform-cat">
+      <div class="platform-cat-head">
+        <div class="pf-cat-icon" style="background:${cat.bg};color:${cat.color}">${cat.icon}</div>
+        <span class="pf-cat-name">${cat.cat}</span>
+        <span class="pf-cat-count">${cat.platforms.length} 个平台</span>
+      </div>
+      <div class="platform-grid">
+        ${cat.platforms.map(p=>`
+          <div class="platform-card">
+            <div class="pf-name">${p.name}</div>
+            <div class="pf-cat">${p.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPricing(){
+  document.getElementById('pricingGrid').innerHTML = PLANS.map(p=>`
+    <div class="plan-card-2 ${p.featured?'featured':''}">
+      <div class="plan-badge ${p.badge}">${p.badgeText}</div>
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-desc">${p.desc}</div>
+      <div class="plan-price-box">
+        <span class="price">${p.price}</span><span class="unit">${p.unit}</span>
+        <div class="price-note">${p.priceNote}</div>
+      </div>
+      <div class="plan-config">
+        <div class="cfg-row"><span class="cfg-label">企业积分池</span><span class="cfg-value">${p.credits}</span></div>
+        <div class="cfg-row"><span class="cfg-label">子账号上限</span><span class="cfg-value">${p.seats}</span></div>
+        <div class="cfg-row"><span class="cfg-label">高质量模型</span><span class="cfg-value">${p.modelQuota}</span></div>
+      </div>
+      <ul class="plan-feats">
+        ${p.features.map(f=>`
+          <li><span class="icon ${f.type==='check'?'icon-check':'icon-diamond'}">${f.type==='check'?'✓':'◇'}</span>${f.text}</li>
+        `).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+function renderFAQ(){
+  document.getElementById('faqList').innerHTML = FAQS.map((f,i)=>`
+    <div class="faq-item" data-faq="${i}">
+      <div class="faq-q" onclick="toggleFAQ(${i})">
+        <span>${f.q}</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">${f.a}</div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   交互
+   ============================================================ */
+
+function scrollTo(sel){
+  document.querySelector(sel).scrollIntoView({behavior:'smooth',block:'start'});
+}
+window.scrollTo = scrollTo;
+
+// 导航高亮
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = ['capabilities','flow','dashboard','agents','platforms','pricing','compare','roi'].map(id=>document.getElementById(id));
+window.addEventListener('scroll',()=>{
+  let cur = -1;
+  const y = window.scrollY + 100;
+  sections.forEach((s,i)=>{ if(s && s.offsetTop<=y) cur=i; });
+  navLinks.forEach((a,i)=>a.classList.toggle('active',i===cur));
+});
+
+// 抽屉
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+window.openDrawer = openDrawer;
+window.closeDrawer = closeDrawer;
+
+document.querySelectorAll('[data-drawer-tab]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab = btn.dataset.drawerTab;
+    document.querySelectorAll('[data-drawer-tab]').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('.drawer-pane').forEach(p=>p.classList.toggle('active',p.id==='pane-'+tab));
+  });
+});
+
+// 轮播滚动控制
+function scrollCarousel(id,dir){
+  const track=document.getElementById(id);
+  if(!track)return;
+  const itemW=track.querySelector('.carousel-item')?.offsetWidth||720;
+  track.scrollBy({left:dir*(itemW+16),behavior:'smooth'});
+}
+window.scrollCarousel=scrollCarousel;
+
+// iframe 加载失败检测 — file:// 协议下浏览器阻止子框架加载
+document.querySelectorAll('.scene-iframe').forEach(iframe=>{
+  const wrap=iframe.closest('.scene-iframe-wrap');
+  const fallback=wrap?.querySelector('.scene-iframe-fallback');
+  let loaded=false;
+  iframe.addEventListener('load',()=>{
+    loaded=true;
+    try{
+      // 如果能访问 contentDocument 且为空，说明被拦截
+      const doc=iframe.contentDocument||iframe.contentWindow?.document;
+      if(!doc || doc.body===null || (doc.body && doc.body.children.length===0)){
+        throw new Error('empty');
+      }
+    }catch(e){
+      // 跨源或被拦截 — 内容可能已加载（HTTP 部署时正常），不显示 fallback
+      // 仅在 file:// 协议下显示 fallback
+      if(location.protocol==='file:' && fallback){
+        setTimeout(()=>{
+          try{
+            const doc2=iframe.contentDocument;
+            if(!doc2 || doc2.URL==='about:blank' || (doc2.body && doc2.body.children.length===0)){
+              fallback.style.display='block';
+              iframe.style.display='none';
+            }
+          }catch(e2){
+            fallback.style.display='block';
+            iframe.style.display='none';
+          }
+        },500);
+      }
+    }
+  });
+  // 超时检测：3 秒后如果仍未触发 load，在 file:// 下显示 fallback
+  setTimeout(()=>{
+    if(!loaded && location.protocol==='file:' && fallback){
+      fallback.style.display='block';
+      iframe.style.display='none';
+    }
+  },3000);
+});
+
+// 数据看板标签切换
+document.querySelectorAll('[data-dash-tab]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab = btn.dataset.dashTab;
+    document.querySelectorAll('[data-dash-tab]').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('[data-dash-pane]').forEach(p=>p.classList.toggle('active',p.dataset.dashPane===tab));
+  });
+});
+
+// 专家 Agent 标签切换
+document.querySelectorAll('[data-agent-tab]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab = btn.dataset.agentTab;
+    document.querySelectorAll('[data-agent-tab]').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('[data-agent-pane]').forEach(p=>p.classList.toggle('active',p.dataset.agentPane===tab));
+    document.querySelectorAll('[data-agent-card]').forEach(c=>c.classList.toggle('active',c.dataset.agentCard===tab));
+  });
+});
+// Agent 卡片点击切换
+document.querySelectorAll('[data-agent-card]').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const tab = card.dataset.agentCard;
+    document.querySelectorAll('[data-agent-tab]').forEach(b=>b.classList.toggle('active',b.dataset.agentTab===tab));
+    document.querySelectorAll('[data-agent-pane]').forEach(p=>p.classList.toggle('active',p.dataset.agentPane===tab));
+    document.querySelectorAll('[data-agent-card]').forEach(c=>c.classList.toggle('active',c===card));
+  });
+});
+
+// 演示查看器 — 点击标题切换 + 竖向滚动
+document.querySelectorAll('.demo-viewer').forEach(viewer=>{
+  const tabs=viewer.querySelectorAll('.demo-tab');
+  const panes=viewer.querySelectorAll('.demo-pane');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      const key=tab.dataset.demoTab;
+      tabs.forEach(t=>t.classList.toggle('active',t===tab));
+      panes.forEach(p=>p.classList.toggle('active',p.dataset.demoPane===key));
+      // 重置滚动位置
+      const scroller=viewer.querySelector('.demo-pane.active .demo-scroll');
+      if(scroller) scroller.scrollTop=0;
+    });
+  });
+});
+
+function toggleFAQ(i){
+  document.querySelector(`[data-faq="${i}"]`).classList.toggle('open');
+}
+window.toggleFAQ = toggleFAQ;
+
+/* ROI 计算器 */
+function calcROI(){
+  const hc=+document.getElementById('roiHeadcount').value||0;
+  const sal=+document.getElementById('roiSalary').value||0;
+  const t1=+document.getElementById('roiTask1').value||0;
+  const t2=+document.getElementById('roiTask2').value||0;
+  const t3=+document.getElementById('roiTask3').value||0;
+  const t4=+document.getElementById('roiTask4').value||0;
+  const cost=+document.getElementById('roiCost').value||0;
+  const weeklyHours=t1+t2+t3+t4;
+  const hourlyRate=sal/(22*8);
+  const monthlyCost=weeklyHours*hourlyRate*4.33;
+  const savingsRate=weeklyHours>0?Math.min(70,40+weeklyHours*0.5):0;
+  const monthlySavings=monthlyCost*savingsRate/100;
+  const netMonthly=monthlySavings-cost;
+  const payback=netMonthly>0?Math.ceil(cost/netMonthly*30):'—';
+  document.getElementById('roiWeeklyHours').textContent=weeklyHours+' h';
+  document.getElementById('roiMonthlyCost').textContent='¥ '+Math.round(monthlyCost).toLocaleString();
+  document.getElementById('roiSavings').textContent=Math.round(savingsRate)+'%';
+  document.getElementById('roiMonthlySavings').textContent='¥ '+Math.round(monthlySavings).toLocaleString();
+  document.getElementById('roiPayback').textContent=payback==='—'?'—':payback+' 天';
+}
+document.querySelectorAll('#roi input').forEach(inp=>inp.addEventListener('input',calcROI));
+
+/* 报价器 — 直接展示选中版本信息 */
+function calcQuote(){
+  const planKey=document.getElementById('quotePlan').value;
+  const info=PLAN_INFO[planKey];
+  if(!info){return}
+  if(info.price==='面议'){
+    document.getElementById('quoteTotal').textContent='面议';
+    document.getElementById('quoteBreakdown').innerHTML=`
+      ${info.name}方案根据需求定制<br>
+      积分：${info.credits}　账号：${info.seats}<br><br>
+      <em style="color:rgba(255,255,255,.4)">按需定制，配置根据需求确定</em>
+    `;
+    return;
+  }
+  document.getElementById('quoteTotal').textContent=info.price;
+  document.getElementById('quoteBreakdown').innerHTML=`
+    方案：${info.name}<br>
+    企业积分池：${info.credits}<br>
+    子账号上限：${info.seats}<br><br>
+    <em style="color:rgba(255,255,255,.4)">※ 以上为官方定价</em>
+  `;
+}
+document.querySelectorAll('#pane-quote select').forEach(el=>{
+  el.addEventListener('input',calcQuote);
+  el.addEventListener('change',calcQuote);
+});
+
+/* 初始化 */
+renderCapabilities();
+renderFlow();
+renderPlatforms();
+renderPricing();
+renderFAQ();
+calcROI();
+calcQuote();
+
+/* ============================================================
+   数据呈现动效
+   ============================================================ */
+
+// KPI 数字滚动动画
+function animateNumber(el,target,duration){
+  const num=parseFloat(String(target).replace(/[^0-9.]/g,''));
+  if(!num)return;
+  const startTime=performance.now();
+  function update(now){
+    const progress=Math.min((now-startTime)/duration,1);
+    const eased=1-Math.pow(1-progress,3);
+    const current=num*eased;
+    let prefix='',suffix='';
+    if(String(target).includes('¥'))prefix='¥ ';
+    if(String(target).includes('$'))prefix='$';
+    if(String(target).includes('%'))suffix='%';
+    el.textContent=prefix+Math.round(current).toLocaleString()+suffix;
+    if(progress<1)requestAnimationFrame(update);
+    else el.textContent=target;
+  }
+  requestAnimationFrame(update);
+}
+
+// 观察数字元素并触发动画
+const numObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el=entry.target;
+      const text=el.textContent.trim();
+      if(text && !el.dataset.animated){
+        el.dataset.animated='1';
+        if(/^[\¥\$]?[\d,.]+%?$/.test(text.replace(/\s/g,''))){
+          animateNumber(el,text,1200);
+        }
+      }
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.kpi-value,.dc-val,.rs-hl .hl-num,.data-review-item .dr-val').forEach(el=>{
+  numObserver.observe(el);
+});
+
+// 柱状图高度变量注入（用于 growBar 动画）
+document.querySelectorAll('.bar-fill').forEach(bar=>{
+  const h=bar.style.height;
+  if(h)bar.style.setProperty('--bar-h',h);
+});
+</script>
+
+
+</body></html>

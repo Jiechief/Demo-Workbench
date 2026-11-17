@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高潜力客户优先级报告 | Wenzhou Longyang Electrical | 2026-08-19</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #f4f6f8;
+    color: #1f2933;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 24px 16px 60px;
+  }
+  .page { max-width: 1180px; margin: 0 auto; }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, #1f4e79 0%, #2d6da3 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  header h1 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+  header .meta { font-size: 13px; opacity: .9; line-height: 1.8; }
+  header .meta b { font-weight: 600; }
+
+  /* ── Stats ── */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .stat { background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; padding: 16px 18px; }
+  .stat .v { font-size: 26px; font-weight: 600; line-height: 1.2; color: #1f4e79; }
+  .stat .l { font-size: 12px; color: #6b7785; margin-top: 4px; }
+  .stat.s .v { color: #c0312f; }
+  .stat.a .v { color: #a05800; }
+  .stat.b .v { color: #2a608a; }
+
+  /* ── Nav ── */
+  nav { background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; padding: 12px 18px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+  nav a { font-size: 13px; color: #2d6da3; text-decoration: none; padding: 4px 12px; border-radius: 16px; background: #eef4fa; }
+  nav a:hover { background: #d9e8f5; }
+
+  /* ── Section ── */
+  section { margin-bottom: 32px; }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .sec-badge { font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 20px; }
+  .sec-badge.s { background: #fdecec; border: 1px solid #f5c0bf; color: #c0312f; }
+  .sec-badge.a { background: #fff6e5; border: 1px solid #f5d98b; color: #a05800; }
+  .sec-badge.b { background: #eff5fb; border: 1px solid #b3cde0; color: #2a608a; }
+  .sec-desc { font-size: 13px; color: #6b7785; }
+
+  /* ── Cards ── */
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+  .card { background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; padding: 16px 18px 14px; border-left-width: 4px; }
+  .card.s { border-left-color: #c0312f; }
+  .card.a { border-left-color: #d99a2b; }
+  .card.b { border-left-color: #4a90c2; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+  .rank { display: inline-block; font-size: 11px; font-weight: 600; color: #fff; background: #97a3b0; border-radius: 4px; padding: 1px 7px; margin-right: 6px; vertical-align: 2px; }
+  .card.s .rank { background: #c0312f; }
+  .card.a .rank { background: #d99a2b; }
+  .card.b .rank { background: #4a90c2; }
+  .cname { font-size: 15px; font-weight: 600; color: #1f2933; }
+  .ccountry { font-size: 12px; color: #6b7785; margin-top: 2px; }
+  .tags { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+  .tag { font-size: 11px; padding: 2px 9px; border-radius: 12px; white-space: nowrap; }
+  .t-hi { background: #eefaf3; border: 1px solid #87d4a9; color: #1e7a47; }
+  .t-mid { background: #f5f7fa; border: 1px solid #d3dae2; color: #55606d; }
+  .t-now { background: #fdecec; border: 1px solid #f5c0bf; color: #c0312f; font-weight: 600; }
+  .t-48 { background: #fff6e5; border: 1px solid #f5d98b; color: #a05800; font-weight: 600; }
+  .t-week { background: #eff5fb; border: 1px solid #b3cde0; color: #2a608a; }
+  .scale { font-size: 13px; font-weight: 600; color: #1f4e79; background: #f2f7fb; border-radius: 6px; padding: 6px 10px; margin-bottom: 8px; }
+  .scale span { font-weight: 400; color: #55606d; }
+  .lbl { font-size: 11px; color: #97a3b0; letter-spacing: .04em; margin-bottom: 2px; }
+  .txt { font-size: 13px; color: #38434f; line-height: 1.55; }
+  .act { font-size: 13px; color: #1f2933; line-height: 1.55; margin-top: 9px; padding-top: 9px; border-top: 1px dashed #e3e8ee; }
+  .act::before { content: "▶ 下一步："; font-size: 11px; color: #2d6da3; font-weight: 600; }
+  .flag { display: inline-block; font-size: 11px; background: #fff6e5; border: 1px solid #f5d98b; color: #a05800; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+
+  /* ── Risk ── */
+  .risk { background: #fffaf0; border: 1px solid #f5d98b; border-radius: 10px; padding: 18px 22px; }
+  .risk h3 { font-size: 15px; color: #a05800; margin-bottom: 10px; }
+  .risk-item { font-size: 13px; padding: 8px 0; border-bottom: 1px solid #f0e0bb; line-height: 1.6; }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-item b { color: #8a4b00; }
+
+  /* ── Checklist ── */
+  .todo { background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; overflow: hidden; }
+  .todo-head { background: #f4f7fa; padding: 12px 20px; font-size: 15px; font-weight: 600; border-bottom: 1px solid #e3e8ee; }
+  .todo-body { padding: 14px 20px 18px; }
+  .todo-group { margin-bottom: 16px; }
+  .todo-group:last-child { margin-bottom: 0; }
+  .todo-title { font-size: 12px; font-weight: 600; color: #6b7785; letter-spacing: .05em; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #eef1f4; }
+  .todo-item { display: flex; gap: 10px; padding: 6px 0; font-size: 13px; line-height: 1.5; }
+  .todo-item .n { min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+  .n-s { background: #fdecec; color: #c0312f; border: 1px solid #f5c0bf; }
+  .n-a { background: #fff6e5; color: #a05800; border: 1px solid #f5d98b; }
+  .n-b { background: #eff5fb; color: #2a608a; border: 1px solid #b3cde0; }
+  .todo-item b { font-weight: 600; color: #1f4e79; }
+  .chk { margin-right: 4px; }
+
+  /* ── Appendix table ── */
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12.5px; }
+  thead th { background: #1f4e79; color: #fff; font-weight: 600; padding: 10px 8px; text-align: left; position: sticky; top: 0; font-size: 12px; }
+  tbody td { padding: 9px 8px; border-bottom: 1px solid #eef1f4; vertical-align: top; line-height: 1.5; }
+  tbody tr:nth-child(even) { background: #fafbfc; }
+  tbody tr:hover { background: #f2f7fb; }
+  td.no { text-align: center; color: #97a3b0; font-size: 11px; }
+  td.date { white-space: nowrap; color: #6b7785; font-size: 11.5px; }
+  td.name { font-weight: 600; color: #1f2933; min-width: 110px; }
+  td.country { white-space: nowrap; font-size: 11.5px; }
+  td.script { color: #38434f; min-width: 300px; }
+  .tbl-wrap { border: 1px solid #e3e8ee; border-radius: 10px; overflow: auto; max-height: 720px; }
+  .tbl-tip { font-size: 12px; color: #6b7785; margin-bottom: 10px; }
+
+  footer { margin-top: 30px; padding: 16px 20px; background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; font-size: 12px; color: #6b7785; line-height: 1.7; }
+  @media print { body { background: #fff; } nav { display: none; } .tbl-wrap { max-height: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>高潜力客户优先级报告</h1>
+  <div class="meta">
+    店铺：<b>（已脱敏）</b> · Alibaba.com 国际站<br>
+    数据周期：<b>2026-08-06 ~ 2026-08-19（最近14天）</b> · 全店 5 个账号（已脱敏）<br>
+    数据基础：<b>125 条询盘</b>（352会话/3891消息，provenance verified）× <b>OSINT 背景调查</b>（约 90 次公网检索）<br>
+    生成日期：2026-08-19
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="v">125</div><div class="l">询盘总数（14天）</div></div>
+  <div class="stat"><div class="v">31</div><div class="l">筛出高潜力客户</div></div>
+  <div class="stat s"><div class="v">4</div><div class="l">S级 · 已成交/收款在途</div></div>
+  <div class="stat a"><div class="v">11</div><div class="l">A级 · 重点跟进</div></div>
+  <div class="stat b"><div class="v">16</div><div class="l">B级 · 培育跟进</div></div>
+  <div class="stat"><div class="v">4</div><div class="l">风险关注客户</div></div>
+</div>
+
+<nav>
+  <a href="#s">S级 立即行动</a>
+  <a href="#a">A级 重点跟进</a>
+  <a href="#b">B级 培育跟进</a>
+  <a href="#risk">风险关注</a>
+  <a href="#todo">行动清单</a>
+  <a href="#appendix">附录：125条询盘全表</a>
+</nav>
+
+<section id="s">
+  <div class="sec-head">
+    <span class="sec-badge s">S 级 · 立即行动</span>
+    <span class="sec-desc">已付款 / 付款链接已发 / 总价已谈定 —— 今日内完成收款或发货动作</span>
+  </div>
+  <div class="grid grid-2">
+
+    <div class="card s">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">1</span>客户52</div>
+        <div class="ccountry">法国 → 塞内加尔 · L2 · 询盘日 2026-08-11</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="scale">已成交 <span>USD 410.56（PayPal 已付款）</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">本周期唯一已收款订单。16A 插座已确认，货先到巴黎(75018)再转塞内加尔，付款方向正常无风险，属旅法塞内加尔转售商，具备复购基础。</div>
+      <div class="act">今日确认发货并推送物流追踪单号；到货后主动回访收货情况，顺势推荐第二批备货清单，把一次性买家转为长期渠道。</div>
+    </div>
+
+    <div class="card s">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">2</span>客户97</div>
+        <div class="ccountry">德国 · L2 · 询盘日 2026-08-16</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="scale">临近成交 <span>Trade Assurance 付款链接已发 · MOQ 100pcs/款</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">选型已完成（浅灰同色系列含门铃同色），MOQ 已协商（100pcs/款，或 2 色各 50），报价与运费唛头均已确认，仅差付款动作，转化概率极高。</div>
+      <div class="act">24 小时内确认付款状态；若未付款发一次友好提醒并复述交期（付款后 3-5 天出货）；同步锁定库存避免断货。</div>
+    </div>
+
+    <div class="card s">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">3</span>客户125</div>
+        <div class="ccountry">塞内加尔 · L1 · 询盘日 2026-08-19</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="scale">价格已谈定 <span>USD 155 · 约 205 件 · 约 28kg</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">清单极具体（50 接地插座+10 防水+10 TV+50 单开+30 双开+15 双控+10 按钮+30 双联板），总价已谈至 $155 双方认可，走中国货代收货，处于临门一脚。</div>
+      <div class="flag">⚠ 买家名称为占位符，付款前须核实真实联系人/公司</div>
+      <div class="act">立即发 PI 与 Trade Assurance 付款链接；同时索取真实姓名与联系方式；确认防水位改用 PC 面板的最终配置。</div>
+    </div>
+
+    <div class="card s">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">4</span>客户83</div>
+        <div class="ccountry">多米尼加 · L1 · 询盘日 2026-08-14</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-48">24h</span></div>
+      </div>
+      <div class="scale">样品推进中 <span>样品 USD 33 + 运费 USD 60 · 后续约 300 件</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">118 美标铝制系列，样品型号已锁定（C1-002/006/041 深金色，含 1USB + 1USB-C 款），样品费用已谈妥，样品通过后即进入约 300 件批量阶段。</div>
+      <div class="act">发送样品付款链接（合计 USD 93）并确认收件地址；样品寄出同时预发 300 件阶梯报价，缩短二次决策周期。</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="a">
+  <div class="sec-head">
+    <span class="sec-badge a">A 级 · 重点跟进</span>
+    <span class="sec-desc">强购买意向 / 大单 / 即将决策 —— 24~48 小时内出报价或推进付款</span>
+  </div>
+  <div class="grid grid-2">
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">5</span>客户123</div>
+        <div class="ccountry">越南 · L3 · 询盘日 2026-08-19</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="scale">万件级工程大单 <span>暗装盒 12128 · 单控 5319 · 双控 2128 · 3插面板 2426 · 配电箱 42 · 线管 2277 卷</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">本周期规模最大的潜在订单。越南建筑项目采购方（工程承包商特征），清单极详实并含 Panasonic MCB、插拔断路器等品牌件，明确要求图纸、规格、EXW 价、包装与 MOQ，属真实工程立项而非泛询价。</div>
+      <div class="act">48 小时内出具分阶段 EXW 报价单（含图纸/规格/包装/MOQ）；对无法供应品类（不兼容开关、品牌 MCB）明确标注替代方案；主动约视频会议敲定分批交付节奏，控制大单履约风险。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">6</span>客户16</div>
+        <div class="ccountry">利比里亚 · L2 · 询盘日 2026-08-08</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="scale">约 1000 件 <span>开关 500pcs + 插座 500pcs · 黑/金/白三色 · 1-4 位混合</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">数量与配色均已明确，且主动提出 12 月来中国温州考察工厂——线下到访是外贸中最强的成交信号之一，属于可提前锁定的确定性机会。</div>
+      <div class="act">发送含数量阶梯单价的正式报价单；同步提供工厂接待方案（行程/接送/样品展示）；争取在到访前先走一笔试单或收取定金，避免 4 个月空窗期流失。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">7</span>客户120</div>
+        <div class="ccountry">荷兰（发往非洲）· L2 · 询盘日 2026-08-19</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="scale">1000 件 <span>16A 欧标法德插座 · 白色 · 4 款各 250 件</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">数量、颜色、款式分配全部明确（4 款各 250 件），旅欧非洲商人批发转售模式成熟，目前正等价格表，属于报价即可推动决策的高转化线索。</div>
+      <div class="act">24 小时内发 4 款价格对比表（含 CBM 与整箱重量）；附葡萄牙语版本摘要降低沟通成本；给出海运至非洲的时效与费用方案。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">8</span>客户118</div>
+        <div class="ccountry">阿尔及利亚 · L2 · 询盘日 2026-08-18</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="scale">1000 件 <span>插座 · 已确认 100 件/箱包装</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">直接询问 1000 件的价格与箱规，采购量级明确、问题聚焦在成交细节（每箱数量），说明已过选型期进入议价期，决策链短。</div>
+      <div class="act">24 小时内发含型号、单价、箱规（100 件/箱，约 13kg）的 PI 草稿；推荐 Trade Assurance 支付以降低首单信任成本。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">9</span>客户53</div>
+        <div class="ccountry">法国（发往几内亚科纳克里）· L2 · 询盘日 2026-08-11</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="scale">试单 100 件 + 远期 3 万件线索 <span>备货 3-5 天 · 100 件/箱约 13kg</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">试单意向明确并主动询问 Trade Assurance 与科纳克里发货，沟通中另提及 3 万件的远期需求（尚未证实，但值得作为渠道客户培育）。价格阶梯与包装规格均已问到，接近下单。</div>
+      <div class="act">发 100 / 500 / 30000 件三档阶梯价格表与 PI 草稿；提供科纳克里运费估算；把远期大单转化为书面框架意向，绑定长期合作。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">10</span>客户108</div>
+        <div class="ccountry">贝宁 · L2 · 询盘日 2026-08-17</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="scale">多品类组合单（箱级）<span>运费 USD 6 · CBM 0.046/箱 · 走广州 SEA 仓</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">两段会话深度推进，门铃/TV插座/单插座/断路器/双控等系列均已选型，单价、运费、备货期、CBM、库存全部确认过。唯一卡点是买家认为报价高于店铺标价，并嫌交期偏慢——属可解释的异议，不是风险。</div>
+      <div class="act">发送逐行"报价 vs 店铺标价"拆解说明（含运费与包装口径）消除误解；承诺备货缩短至 2 天并走加急 SEA；同步锁定所选型号库存，24 小时内推动确认。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">11</span>客户112</div>
+        <div class="ccountry">土库曼斯坦 · L1 · 询盘日 2026-08-17</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="scale">270 件 <span>LY4 PC 系列 · 三色各 90 件 · 需带 LED 指示灯</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">需求结构清晰（20 单开+20 双开+20 单插座+10 双插座，黑/白/灰三色共 270 件），并按"先 EXW 后 FOB"的专业节奏推进谈判，属懂行的进口买家，成交路径明确。</div>
+      <div class="act">48 小时内发 EXW 单价表并标明 LED 指示灯版本价差；确认三色数量分配；主动附 FOB 报价供其内部比价，减少往返轮次。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">12</span>客户56</div>
+        <div class="ccountry">贝宁 · L2 · 询盘日 2026-08-12</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="scale">60 件 <span>20 插座 + 20 单开 + 20 双开 · 白色 · 约 9kg</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">数量、颜色已定，重量（约 9kg）与包装尺寸（48.5×36×26cm）均已核对，走广州仓 AIR/SEA-BENIN 转运，且已主动索要付款链接——处于决策临界点。</div>
+      <div class="act">今日内发出 Trade Assurance 付款链接并复核广州收货仓地址；付款确认后立即备货，用快速履约争取其后续批量单。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">13</span>客户45</div>
+        <div class="ccountry">乌克兰 · L2 · 询盘日 2026-08-11</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="scale">住宅装修整套 <span>接地插座 37 · USB A+C 8 · RJ45 2 · 调光器 4 · 开关/按钮 17+ · 深灰/炭灰同系列</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">询盘专业度在本周期名列前茅：逐项列明数量与颜色，明确要求 CE/RoHS/TUV/CB 认证、USB-C PD 规格、Ø68mm 欧标底盒适配、尺寸图、报价单、付款方式与交期——典型的已立项装修工程采购。</div>
+      <div class="act">48 小时内交付"证书包 + 尺寸图 + 逐项报价单"三件套；确认 Ø68mm 底盒与 USB-C PD 功率参数；给出明确交期与付款方式，一次性回应所有问题避免流失。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">14</span>客户72</div>
+        <div class="ccountry">委内瑞拉 · L2 · 询盘日 2026-08-13</div></div>
+        <div class="tags"><span class="tag t-hi">🟢 置信度高</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="scale">认证齐全即下单 <span>欧标插座开关 · 专业进口商/工程商</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">下单前要求全套合规文件：CE DoC（LVD+RoHS）、IEC/EN 60884-1 Type F 安全门测试报告、EN 60669-1 开关报告、RoHS 2.0、USB/RED/EMC 及 VDE/KEMA/NF 认证。这种合规导向的买家一旦文件通过，成交与复购稳定性极高。</div>
+      <div class="act">48 小时内编制完整合规文件包发送；明确列出可提供 VDE/KEMA/NF 证书的具体型号范围；文件确认后立刻附上型号报价，把合规优势直接转化为订单。</div>
+    </div>
+
+    <div class="card a">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">15</span>客户94</div>
+        <div class="ccountry">加纳 · L3 · 询盘日 2026-08-16</div></div>
+        <div class="tags"><span class="tag t-mid">🟡 置信度中</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="scale">试单 20 件 <span>灰色为主 · 接受仿古铜色 · 卖家已发报价并准备 PI</span></div>
+      <div class="lbl">跟进理由</div>
+      <div class="txt">L3 等级买家，已推进至 PI 阶段，颜色接受度高（灰色/仿古铜色/黑色均可），试单金额虽小但决策链最短，可快速转化为首单并建立复购关系。</div>
+      <div class="act">今日确认 PI 是否收到并发付款方式；随货附赠其他系列小样，成交后立即推荐批量采购阶梯价，把 20 件试单做成长期账户。</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="b">
+  <div class="sec-head">
+    <span class="sec-badge b">B 级 · 培育跟进</span>
+    <span class="sec-desc">需求具体、正在决策 —— 本周内完成报价或推进沟通</span>
+  </div>
+  <div class="grid grid-3">
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">16</span>客户19</div>
+        <div class="ccountry">埃塞俄比亚 · L4 · 08-08</div></div>
+        <div class="tags"><span class="tag t-hi">🟢</span><span class="tag t-week">本周</span></div>
+      </div>
+      <div class="txt">全店最高等级（L4）买家，已主动询问工厂位置并加了联系方式，计划来中国广州后到温州厂参观。采购规模未明确，但到厂意愿是极强的意向信号。</div>
+      <div class="act">发工厂接待方案（路线/交通/接待安排）；索要到访日期；提前备好样品展示区与报价，把参观直接变成谈单场景。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">17</span>客户46</div>
+        <div class="ccountry">波兰 · L2 · 08-11</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="txt">采购复古拨杆开关核心模块（螺纹拨杆+锁紧螺母，Chrome/Gold/Matte Black/Raw Brass），指定 CE/RoHS 250V/10A 与欧标 60mm 底盒适配，疑为灯具厂商或专业配件贸易商，复购潜力大。</div>
+      <div class="act">发技术规格书、材质说明、认证证书与样品价；确认 MOQ；询问年度用量与复购频率，按 OEM 配件供应商模式对接。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">18</span>客户116</div>
+        <div class="ccountry">马来西亚 · L2 · 08-18</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="txt">玻璃系列灰色约 60 件（1/2/3/4 位各 10 + 开关 20，13A 插座），并直接询问"是否可以下单"——已处于下单动作前一刻。</div>
+      <div class="act">立即回复确认可下单，同步发 PI 与 Trade Assurance 付款链接，避免因回复延迟丢单。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">19</span>客户90</div>
+        <div class="ccountry">西班牙 · L2 · 08-15</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="txt">家装全套白色约 275 件：30 双控开关、25 单开关、40 按钮、55 插座、100 边框、25 电动窗帘按钮，清单完整且发货地明确。</div>
+      <div class="act">48 小时内出全套配套报价（含边框与窗帘按钮）；确认系列（PC 或不锈钢）；给出西班牙物流方案与交期。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">20</span>客户98</div>
+        <div class="ccountry">罗马尼亚 · L3 · 08-16</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="txt">L3 等级，明确表示要下单不锈钢系列，空运至布加勒斯特并提供了邮编 011748，同时关注 EU 标准合规性。</div>
+      <div class="act">24 小时内发含空运运费的 PI 草稿；提供 EU 合规声明；就其想要的双 USB 插座给出单 USB-A/C 替代方案。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">21</span>客户18</div>
+        <div class="ccountry">贝宁 · L3 · 08-08</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="txt">L3 等级，已明确 MOQ 100pcs/款、不锈钢黑/银色、法标 A+C 插座，并已收到 USD 4.39/pcs 报价，处于比价决策阶段。</div>
+      <div class="act">跟进报价是否有疑问；提供 100/500/1000 件阶梯价创造上量动机；附样品选项降低首单顾虑。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">22</span>客户77</div>
+        <div class="ccountry">法国 · L1 · 08-14</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="txt">清单具体约 112 件（500W 调光器×5、法式双插座×4、TV 插座×3、法式插座×100，白色磨砂触摸），询问中国代理与含运费报价。</div>
+      <div class="act">发 DDP 到法国的全包报价（含运费清关）；说明可直接 Trade Assurance 下单省去代理环节，缩短链路。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">23</span>客户31</div>
+        <div class="ccountry">法国 → 科特迪瓦 · L2 · 08-09</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-week">本周</span></div>
+      </div>
+      <div class="txt">明确 200 件小单试卖并表达后续长期合作意愿，确认可发科特迪瓦、可拆款混装，属典型西非渠道培育对象。</div>
+      <div class="act">发 200 件含运费报价（逐款分拆单价）；主动给出长期合作阶梯折扣政策，用首单锁定后续复购。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">24</span>客户95</div>
+        <div class="ccountry">几内亚 · L3 · 08-16</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="txt">L3 等级，采购 100 件（1 箱，10 小盒×10 装），要求中性包装（不带品牌），包装与数量口径清晰。</div>
+      <div class="act">确认最终型号，发含中性包装说明的 PI；附实物图打消品质疑虑；推进 Trade Assurance 付款。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">25</span>客户57</div>
+        <div class="ccountry">格鲁吉亚 · L3 · 08-12</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-48">48h</span></div>
+      </div>
+      <div class="txt">L3 等级，订单清单精确到型号（LY3-015/007 不锈钢黑/白/灰），含 3 位开关、嵌入式桌面插座、组合开关插座等十余件组合。</div>
+      <div class="act">48 小时内发逐项报价单并确认颜色；提示同系列配套件避免漏配；推荐 Trade Assurance 完成首单。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">26</span>客户26</div>
+        <div class="ccountry">法国 · — · 08-08</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-week">本周</span></div>
+      </div>
+      <div class="txt">询问 100 件欧标彩绘插座价格，需定制产品并主动询问 DDP 服务，属有进口经验的专业买家。</div>
+      <div class="act">发 DDP 到法国报价（含关税与清关估算）；说明定制的 MOQ 与打样周期，把定制需求转成高毛利订单。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">27</span>客户30</div>
+        <div class="ccountry">乍得 · L2 · 08-09</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="txt">从 10 件 RJ45 询价追加到开关 30 + 插座 30 + RJ45 10 共 70 件，并确认总重量约 11kg——数量在沟通中持续上升，是真实采购推进特征。</div>
+      <div class="act">发含重量与箱规的 PI 草稿；提供完整价目表激发继续加购；推荐 Trade Assurance 支付。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">28</span>客户25</div>
+        <div class="ccountry">喀麦隆 · L2 · 08-08</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">24h</span></div>
+      </div>
+      <div class="txt">明确表示要下单 100 件并已确认重量约 13kg，只差型号清单确认即可开 PI。</div>
+      <div class="act">发目录清单协助选型，同步出 PI 草稿；确认喀麦隆物流方案与到货时效。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">29</span>客户40</div>
+        <div class="ccountry">泰国 · L2 · 08-10</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-week">本周</span></div>
+      </div>
+      <div class="txt">计划进口分销泰国市场，主动提出开视频会议并建微信群沟通，属渠道级合作意向而非单次采购。</div>
+      <div class="act">尽快约定会议时间；准备泰国市场选品册与经销商合作提案（区域/阶梯价/MOQ）；注意 TISI 认证限制需提前说明。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">30</span>客户47</div>
+        <div class="ccountry">墨西哥 · L2 · 08-11</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-week">本周</span></div>
+      </div>
+      <div class="txt">提出建立"合作联盟"（分销合作）意向，需要墨西哥规格灰色大面板彩绘系列，并询问价格与 MOQ。</div>
+      <div class="act">发经销商合作提案（专属区域、阶梯价、MOQ）；确认墨西哥市场认证与 127V 规格要求，评估适配可行性。</div>
+    </div>
+
+    <div class="card b">
+      <div class="card-top">
+        <div><div class="cname"><span class="rank">31</span>客户12</div>
+        <div class="ccountry">波兰 · L1 · 08-07</div></div>
+        <div class="tags"><span class="tag t-mid">🟡</span><span class="tag t-now">今日</span></div>
+      </div>
+      <div class="txt">先订 1 件深灰欧标彩绘插座验证颜色与质量，支付链接已发；明确表示后续项目会有大订单，属"样品验证型"项目客户。</div>
+      <div class="act">确认样品付款并优先寄出；样品到货后主动索取反馈，同时预发项目批量报价方案承接后续订单。</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="risk">
+  <div class="sec-head">
+    <span class="sec-badge a">⚠ 风险关注</span>
+    <span class="sec-desc">身份或合规存疑 —— 报价可发，但付款/备货前须完成核实</span>
+  </div>
+  <div class="risk">
+    <h3>4 位需核实客户（不影响沟通，但影响放款与备货决策）</h3>
+    <div class="risk-item"><b>客户59（台湾地区 · 08-12）</b>：以公司采购流程问询材质、MOQ、样品成本与批量价，自称 Jumeirah company，但要求发件至免费域名邮箱（gmail / zohomail），与其声称主体的官方域名不符。<b>建议</b>：发正式报价前索要公司官网或注册证明，防冒充。</div>
+    <div class="risk-item"><b>客户60（伊拉克 · 08-12）</b>：自称伊朗 300 间客房酒店工程项目，但账号国家显示伊拉克，主体与项目地不一致；伊朗属受制裁关注地区。<b>建议</b>：核实项目真实性与主体合规后再推进，酒店目录可先发，涉款与备货须谨慎。</div>
+    <div class="risk-item"><b>客户39（中国 · 08-10）</b>：英标数千件大单（20A/32A/45A DP 开关 800、13A 双插座 3000、RJ45 2000 等，合计约 9600 件+），量级为万美元级，但买家名称为系统占位符，无法核实主体。<b>建议</b>：报价可发，但签约与备货前必须取得公司名称与注册信息，并使用 Trade Assurance。</div>
+    <div class="risk-item"><b>客户125（塞内加尔 · 08-19）</b>：已在 S 级推进（总价 $155 已谈定），但名称同为占位符，公网无法核实主体。<b>建议</b>：发 PI 时一并索取真实姓名与联系方式，小额订单风险可控但需留痕。</div>
+  </div>
+</section>
+
+<section id="todo">
+  <div class="todo">
+    <div class="todo-head">快速行动清单（按时限排布）</div>
+    <div class="todo-body">
+
+      <div class="todo-group">
+        <div class="todo-title">今日内完成 · 7 项（收款与临门一脚）</div>
+        <div class="todo-item"><span class="n n-s">1</span><span><span class="chk">☐</span> 确认 <b>客户52</b> 发货状态并推送物流单号</span></div>
+        <div class="todo-item"><span class="n n-s">2</span><span><span class="chk">☐</span> 跟进 <b>客户97</b> 付款进度，未付则友好催付一次</span></div>
+        <div class="todo-item"><span class="n n-s">3</span><span><span class="chk">☐</span> 发 <b>客户125</b> PI + TA 付款链接（同时索取真实联系人）</span></div>
+        <div class="todo-item"><span class="n n-a">4</span><span><span class="chk">☐</span> 发 <b>客户56</b> TA 付款链接并复核广州收货仓</span></div>
+        <div class="todo-item"><span class="n n-a">5</span><span><span class="chk">☐</span> 确认 <b>客户94</b> PI 已收到并发付款方式</span></div>
+        <div class="todo-item"><span class="n n-b">6</span><span><span class="chk">☐</span> 回复 <b>客户116</b> 确认可下单，发 PI + TA 链接</span></div>
+        <div class="todo-item"><span class="n n-b">7</span><span><span class="chk">☐</span> 确认 <b>客户12</b> 样品付款并优先寄出</span></div>
+      </div>
+
+      <div class="todo-group">
+        <div class="todo-title">24~48 小时内 · 8 项（大单报价与文件交付）</div>
+        <div class="todo-item"><span class="n n-s">8</span><span><span class="chk">☐</span> 发 <b>客户83</b> 样品付款链接（USD 93）并确认地址</span></div>
+        <div class="todo-item"><span class="n n-a">9</span><span><span class="chk">☐</span> 出 <b>客户123</b> 分阶段 EXW 报价单并约视频会议</span></div>
+        <div class="todo-item"><span class="n n-a">10</span><span><span class="chk">☐</span> 发 <b>客户120</b> 4 款价格对比表 + 非洲海运方案</span></div>
+        <div class="todo-item"><span class="n n-a">11</span><span><span class="chk">☐</span> 发 <b>客户118</b> PI 草稿（含箱规 100 件/箱）</span></div>
+        <div class="todo-item"><span class="n n-a">12</span><span><span class="chk">☐</span> 发 <b>客户53</b> 三档阶梯价 + 科纳克里运费估算</span></div>
+        <div class="todo-item"><span class="n n-a">13</span><span><span class="chk">☐</span> 发 <b>客户108</b> 报价 vs 店价逐行拆解说明</span></div>
+        <div class="todo-item"><span class="n n-a">14</span><span><span class="chk">☐</span> 整理 <b>客户72</b> 合规文件包（CE DoC + EN 报告 + RoHS 2.0）</span></div>
+        <div class="todo-item"><span class="n n-a">15</span><span><span class="chk">☐</span> 发 <b>客户45</b> 证书包 + 尺寸图 + 逐项报价</span></div>
+      </div>
+
+      <div class="todo-group">
+        <div class="todo-title">本周内 · 培育与渠道建设</div>
+        <div class="todo-item"><span class="n n-a">16</span><span><span class="chk">☐</span> 发 <b>客户112</b> EXW 价表（含 LED 差价）+ FOB 报价</span></div>
+        <div class="todo-item"><span class="n n-a">17</span><span><span class="chk">☐</span> 发 <b>客户16</b> 正式报价 + 12 月工厂接待方案</span></div>
+        <div class="todo-item"><span class="n n-b">18</span><span><span class="chk">☐</span> 发 <b>客户19</b> 工厂接待方案并锁定到访日期</span></div>
+        <div class="todo-item"><span class="n n-b">19</span><span><span class="chk">☐</span> 发 <b>客户46</b> 技术规格书 + 认证证书 + 样品价</span></div>
+        <div class="todo-item"><span class="n n-b">20</span><span><span class="chk">☐</span> 发 <b>客户90 / 客户77 / 客户26</b> 家装与 DDP 报价</span></div>
+        <div class="todo-item"><span class="n n-b">21</span><span><span class="chk">☐</span> 发 <b>客户98 / 客户57 / 客户95 / 客户30 / 客户25</b> PI 草稿</span></div>
+        <div class="todo-item"><span class="n n-b">22</span><span><span class="chk">☐</span> 发 <b>客户40 / 客户47 / 客户31</b> 经销商合作提案</span></div>
+        <div class="todo-item"><span class="n n-b">23</span><span><span class="chk">☐</span> 对 <b>客户59 / 客户60 / 客户39</b> 启动身份核实流程</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="appendix">
+  <div class="sec-head">
+    <span class="sec-badge b">附录</span>
+    <span class="sec-desc">最近 14 天全部 125 条询盘 · 背景摘要 · 询盘摘要 · 推荐英文回复话术（按询盘时间升序）</span>
+  </div>
+  <div class="tbl-tip">提示：表格可上下滚动；如需筛选与批量复制话术，请使用同目录下的 Excel 版本。</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr>
+      <th style="width:38px">#</th><th style="width:82px">询盘日期</th><th style="width:120px">客户名称</th>
+      <th style="width:92px">国家</th><th style="width:200px">背景摘要</th>
+      <th style="width:210px">询盘摘要</th><th>推荐回复话术（英文）</th>
+    </tr></thead>
+    <tbody>
+<tr><td class="no">1</td><td class="date">2026-08-06</td><td class="name">客户1</td><td class="country">BG 保加利亚</td><td>住宅翻新采购，需求明确（翻新整套），无公开主体信息，L2 🟡</td><td>住宅翻新整套电源插座（含Type-C/USB）、开关1/2/3位；要欧标目录选色选型</td><td class="script">Dear 客户1, thank you for your inquiry. As a manufacturer in Wenzhou, China, we supply a full European-standard range including USB-A/C and Type-C PD sockets plus 1/2/3-gang switches in multiple finishes and colors. I have attached our catalog — please let me know your preferred color and estimated quantities, and I will prepare a tailored quotation with CE/RoHS certificates and lead time. We support small renovation orders with fast delivery. Looking forward to your reply.</td></tr>
+<tr><td class="no">2</td><td class="date">2026-08-06</td><td class="name">客户2</td><td class="country">CG 刚果(布)</td><td>电气安装/工程特征（要求底盒整套供应），询盘具体，无公开主体信息 🟡</td><td>问插座+暗装底盒（圆/方），要照片选择后给数量做报价，要求连同底盒整套供应</td><td class="script">Dear 客户2, thanks for reaching out. We can supply sockets together with matching flush-mounting boxes (round or square, Ø68mm standard) as a complete set, which simplifies installation. I will send you photos of both box types plus our socket range — once you select the styles and quantities, we can issue a quotation within 24 hours. We are a factory-direct supplier with CE/RoHS compliance. Best regards.</td></tr>
+<tr><td class="no">3</td><td class="date">2026-08-06</td><td class="name">客户3</td><td class="country">SN 塞内加尔</td><td>电气批发特征（法德标准），索要目录并转WhatsApp，无公开主体信息 🟡</td><td>欧标法德插座开关；要目录，请求转WhatsApp +221775394939</td><td class="script">Dear 客户3, thank you for your inquiry. We specialize in French/German standard switches and sockets with CE/RoHS certifications, and our full catalog is attached for your review. I have noted your WhatsApp number and will share the latest price list there as well. Please tell us your target models and quantities, and we will send a detailed quotation promptly. We look forward to a long-term partnership.</td></tr>
+<tr><td class="no">4</td><td class="date">2026-08-06</td><td class="name">客户4</td><td class="country">BY 白俄罗斯</td><td>俄语询盘，关注不锈钢面板系列，无公开主体信息 🟡</td><td>欧标不锈钢面板开关插座，想了解更多（俄语沟通）</td><td class="script">Dear 客户4, thank you for your interest. Our stainless-steel panel switches and sockets (European standard) are among our best sellers, available in brushed steel, matte black, gold and silver with CE/RoHS certification. I can send you our catalog, technical data and a price list in Russian if needed. Please advise your target quantities so we can prepare a competitive quotation. Looking forward to cooperating with you.</td></tr>
+<tr><td class="no">5</td><td class="date">2026-08-06</td><td class="name">客户5</td><td class="country">GH 加纳</td><td>L3等级，收到价目表待跟进，无公开主体信息 🟡</td><td>对产品感兴趣，卖家已发价目表</td><td class="script">Dear 客户5, glad to hear you are interested in our products. Following up on the price list I sent — we also offer free samples for quality evaluation and flexible MOQs for trial orders. Which models caught your eye? If you share your target quantities and destination, I will prepare a formal quotation including shipping options to Ghana. We look forward to working with you.</td></tr>
+<tr><td class="no">6</td><td class="date">2026-08-06</td><td class="name">客户6</td><td class="country">US 美国</td><td>批发贸易特征（西语沟通），无公开主体信息 🟡</td><td>西语：要更新目录+价目表+批发采购条件+支付和运输方式</td><td class="script">Dear 客户6, thank you for your message. Our latest catalog and wholesale price list are attached. We offer tiered wholesale pricing, flexible MOQs, and multiple payment options (T/T, PayPal, Alibaba Trade Assurance); shipping can be arranged by sea or air to your destination. Please let us know your target market and estimated monthly volume, and we will prepare a tailored wholesale proposal. Saludos cordiales.</td></tr>
+<tr><td class="no">7</td><td class="date">2026-08-06</td><td class="name">客户7</td><td class="country">US 美国</td><td>L3等级，认证合规导向，因无UL认证放弃（已关闭） 🟡</td><td>想订一批开关，但需要UL认证（无，放弃）</td><td class="script">Dear 客户7, thank you for considering us. Unfortunately our current European-standard series do not carry UL certification, so they are not suitable for the US market at this stage. We will notify you as soon as we develop UL-certified products. If you have projects in other markets (EU, Middle East, Africa), our CE/RoHS-certified range may still be a fit — happy to share the catalog. Thank you for your understanding.</td></tr>
+<tr><td class="no">8</td><td class="date">2026-08-06</td><td class="name">客户8</td><td class="country">BE 比利时</td><td>电气贸易特征，明确出口比利时，无公开主体信息 🟡</td><td>问法标插座+窗帘开关系列，要目录；要青铜色不锈钢开关插座图片；出口比利时</td><td class="script">Dear 客户8, thank you for your inquiry. We supply French-standard sockets and a curtain-switch series, both with CE/RoHS certification, and we have attached our catalog. Regarding the bronze-colored stainless-steel switches — I will send you close-up photos and finish samples so you can verify the color quality before ordering. Please let us know your target quantities and we will quote with shipping to Belgium. Best regards.</td></tr>
+<tr><td class="no">9</td><td class="date">2026-08-06</td><td class="name">客户9</td><td class="country">CD 刚果(金)</td><td>电气安装特征（底盒适配咨询），无公开主体信息 🟡</td><td>对产品感兴趣，问底盒类型（圆/方）</td><td class="script">Dear 客户9, thank you for your interest. Our sockets are compatible with both round and square flush-mounting boxes (Ø68mm / 60×60mm standard), and we can supply boxes together with the sockets as a complete set. Please let me know which type your market commonly uses and the styles you need, and I will send matching photos and a quotation. We are a factory-direct manufacturer with competitive prices and CE/RoHS compliance.</td></tr>
+<tr><td class="no">10</td><td class="date">2026-08-07</td><td class="name">客户10</td><td class="country">US 美国(哈萨克)</td><td>L4高等级，自称哈萨克斯坦买家（国家显示美国，主体所在地需确认，非风险） 🟡</td><td>要目录；来自哈萨克斯坦，看不锈钢系列和新品系列</td><td class="script">Dear 客户10, thank you for your inquiry. It is a pleasure to hear from a buyer in Kazakhstan. Our stainless-steel series and latest new collections are highlighted in the attached catalog — both feature scratch-resistant finishes and CE/RoHS certification. If you let me know your target styles, colors and quantities, I will prepare a quotation with favorable terms for your market. We also welcome factory visits when you are in China. Best regards.</td></tr>
+<tr><td class="no">11</td><td class="date">2026-08-07</td><td class="name">客户11</td><td class="country">NL 荷兰</td><td>L3等级，专业安装技术问题（石膏板底盒深度），无公开主体信息 🟡</td><td>要宣传册；问底盒深度适配（4cm石膏板）、不锈钢系列、RJ45/USB-C版本</td><td class="script">Dear 客户11, thank you for your detailed inquiry. Our flush-mounting boxes fit standard 4cm plasterboard depths, and I can confirm compatibility with our stainless-steel series on request. We also offer RJ45 and USB-C versions within the same design family for a uniform look. The brochure and technical drawings are attached. Please let me know the exact models you plan to install, and I will confirm specifications and provide a quotation.</td></tr>
+<tr><td class="no">12</td><td class="date">2026-08-07</td><td class="name">客户12</td><td class="country">PL 波兰</td><td>样品1件→项目级后续大订单意向，已发支付链接，L1 🟡</td><td>欧标彩绘插座；先订1件深灰看颜色质量，后续项目大订单</td><td class="script">Dear 客户12, thank you for your trust. Your sample order (1 pc, dark grey, painted European-standard socket) has been prepared and the payment link is on its way. We will ship the sample within 24 hours of payment confirmation so you can evaluate the color and surface quality. Once you are satisfied, we will be glad to support your project with volume pricing and short lead times. Looking forward to a great cooperation.</td></tr>
+<tr><td class="no">13</td><td class="date">2026-08-07</td><td class="name">客户13</td><td class="country">UK 英国</td><td>英标/SASO市场贸易特征，单价敏感，无公开主体信息 🟡</td><td>英标开关，SASO/CB认证、PC材质、黑/金/灰，10件以上单价$0.67；问电流规格（10A/16A）和位数</td><td class="script">Dear 客户13, thank you for your inquiry. Our British-standard switches are available in PC material in black, gold and grey, with SASO/CB certification on request; current ratings of 10A and 16A are both available. The unit price of $0.67 applies for quantities above 10 pcs, and further tiered discounts apply for larger volumes. Please advise the gang configurations (1/2/3-gang) you need, and I will send a formal quotation with specifications. Best regards.</td></tr>
+<tr><td class="no">14</td><td class="date">2026-08-07</td><td class="name">客户14</td><td class="country">TZ 坦桑尼亚</td><td>信息量极低（仅卡片+hello），无公开主体信息 🔴</td><td>仅发卡片+hello（无明确文字询盘）</td><td class="script">Dear 客户14, thank you for your message. We are a professional switch and socket manufacturer in China, supplying British and European standard products for the Tanzanian market with competitive pricing. Our latest catalog and price list are attached — please let us know which products or models interest you, and we will be happy to send a detailed quotation. Looking forward to your reply.</td></tr>
+<tr><td class="no">15</td><td class="date">2026-08-07</td><td class="name">客户15</td><td class="country">CN 中国</td><td>外贸特征（泰国市场），因无TISI认证未成（已关闭） 🟡</td><td>问开关插座能否提供泰国TISI认证（无）</td><td class="script">Dear 客户15, thank you for checking. Unfortunately we do not currently hold TISI certification for the Thai market, so our products are not yet suitable for formal import to Thailand. We will keep you informed if we obtain TISI in the future. In the meantime, if your clients have needs for other markets (EU, Middle East, Africa), our CE/RoHS-certified range may be a good alternative. Thank you for your understanding.</td></tr>
+<tr><td class="no">16</td><td class="date">2026-08-08</td><td class="name">客户16</td><td class="country">LR 利比里亚</td><td>批发转售特征，数量明确（约1000件）+计划12月赴温州考察工厂（强采购意向） 🟡</td><td>开关+插座各约500pcs，黑/金/白三色，1-4位混合；询价，12月来中国考察工厂（温州）</td><td class="script">Dear 客户16, thank you for your inquiry — we are glad to know you plan to visit our factory in Wenzhou this December, and you are most welcome. For your requirement of approx. 500 pcs switches and 500 pcs sockets (black/gold/white, 1-4 gang), I will prepare a factory-direct quotation with tiered pricing and lead time. We can also arrange a full factory tour and product demo during your visit. Please confirm the exact gang mix, and the quotation will follow within 24 hours.</td></tr>
+<tr><td class="no">17</td><td class="date">2026-08-08</td><td class="name">客户17</td><td class="country">TG 多哥</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户17, thank you for your interest. We are a professional switch and socket manufacturer supplying African markets with French-standard (Type E) products and competitive wholesale pricing. I have attached our catalog and price list — please let us know which models you are interested in and the quantities, and we will send a detailed quotation. Looking forward to cooperating with you.</td></tr>
+<tr><td class="no">18</td><td class="date">2026-08-08</td><td class="name">客户18</td><td class="country">BJ 贝宁</td><td>L3等级，MOQ询价具体（法标A+C插座），批发特征 🟡</td><td>要目录，选不锈钢（黑/银色），MOQ 100pcs/款，法标A+C插座，问单价（4.39USD/pcs报价）</td><td class="script">Dear 客户18, thank you for your inquiry. Our stainless-steel range (black and silver) is available in French-standard A+C socket configurations, and we accept a flexible MOQ of 100 pcs per model. Regarding the unit price of USD 4.39/pcs — this applies to the standard configuration; volume orders above 500 pcs per model qualify for better tiered pricing. The catalog is attached. Please confirm the models and quantities, and I will send a formal quotation with delivery options to Benin.</td></tr>
+<tr><td class="no">19</td><td class="date">2026-08-08</td><td class="name">客户19</td><td class="country">ET 埃塞俄比亚</td><td>L4高等级+计划到厂参观（高意向强信号） 🟢</td><td>问工厂位置（温州），计划来中国广州并到厂参观；已加联系方式</td><td class="script">Dear 客户19, it is a pleasure to hear from you. Our factory is located in Wenzhou, Zhejiang — about 3-4 hours from Shanghai by high-speed rail, and we can arrange pickup or detailed directions from Guangzhou when you visit. We would be honored to host you for a factory tour, product display and face-to-face negotiation. Please share your travel dates, and we will arrange everything, including samples and a quotation prepared in advance. Looking forward to meeting you in China.</td></tr>
+<tr><td class="no">20</td><td class="date">2026-08-08</td><td class="name">客户20</td><td class="country">VE 委内瑞拉</td><td>电气分销特征，OEM/品牌定制需求（激光雕刻+包装定制） 🟡</td><td>要目录和每款价格；品牌定制：激光雕刻MOQ 500件、包装定制MOQ 30000件；要Excel/PDF价目表</td><td class="script">Dear 客户20, thank you for your inquiry. Our complete catalog with per-model prices is attached (Excel and PDF formats). For branding, we support laser-engraved logos with an MOQ of 500 pcs and custom packaging from 30,000 pcs — we can also discuss flexible packaging terms for first orders. Please let us know which series you plan to brand, and we will prepare a customized quotation for the Venezuelan market (110V compatible options available on request).</td></tr>
+<tr><td class="no">21</td><td class="date">2026-08-08</td><td class="name">客户21</td><td class="country">BD 孟加拉国</td><td>电气贸易特征，目标品类明确（拨杆开关2/4位），无公开主体信息 🟡</td><td>找拨杆开关2位和4位，要目录</td><td class="script">Dear 客户21, thank you for your inquiry. We manufacture toggle switches in 2-gang and 4-gang configurations, available in antique brass, chrome, matte black and other finishes with CE/RoHS certification. The relevant catalog pages are attached. Please let me know the finish you prefer and the quantities, and I will send a quotation with shipping options to Bangladesh. We also offer samples for quality evaluation.</td></tr>
+<tr><td class="no">22</td><td class="date">2026-08-08</td><td class="name">客户22</td><td class="country">CN 中国</td><td>外贸代理特征（代理引荐客户，留微信），无公开主体信息 🟡</td><td>有客户要找公司产品，留微信18248587564（MARK）</td><td class="script">Dear 客户22, thank you for the introduction. We would be happy to work with your client — our factory-direct switches and sockets cover European, British and US standards with OEM support and competitive pricing. I have added your WeChat (18248587564) and will reach out there. Please share your client&#x27;s target market and product requirements, and we will prepare materials and a quotation accordingly. Looking forward to a mutually beneficial cooperation.</td></tr>
+<tr><td class="no">23</td><td class="date">2026-08-08</td><td class="name">客户23</td><td class="country">BR 巴西</td><td>电气进口特征（巴西标准适配咨询），无公开主体信息 🟡</td><td>对产品感兴趣，问能否做巴西标准插座适配</td><td class="script">Dear 客户23, thank you for your inquiry. Regarding Brazilian-standard socket adaptation — we can customize NBR-compliant sockets for the Brazilian market, subject to tooling and MOQ. Our standard European and US ranges may also serve as alternatives for pilot orders. Please let me know the specific product types and estimated quantities, and I will confirm technical feasibility and provide a quotation. We are a factory-direct manufacturer and can support your import program.</td></tr>
+<tr><td class="no">24</td><td class="date">2026-08-08</td><td class="name">客户24</td><td class="country">BF 布基纳法索</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户24, thank you for your interest in our products. We are a factory-direct manufacturer of switches and sockets for the West African market, offering French-standard products, CE/RoHS certification and wholesale pricing. I have attached our latest catalog — please let us know which models you like and the quantities, and we will send a detailed quotation with shipping options to Burkina Faso. Looking forward to your reply.</td></tr>
+<tr><td class="no">25</td><td class="date">2026-08-08</td><td class="name">客户25</td><td class="country">CM 喀麦隆</td><td>批发特征，下单意向+物流重量确认（100件），无公开主体信息 🟡</td><td>对产品感兴趣要下单：100件，问重量（13kg），要目录清单</td><td class="script">Dear 客户25, thank you for your order intention. For your 100-pc order, the estimated gross weight is approx. 13kg per carton (100 pcs), and the full catalog with model list is attached for your selection. Once you confirm the models and colors, we will issue a PI with exact weight, dimensions and shipping options to Cameroon within 24 hours. We support Trade Assurance for secure payment. Looking forward to confirming your order.</td></tr>
+<tr><td class="no">26</td><td class="date">2026-08-08</td><td class="name">客户26</td><td class="country">FR 法国</td><td>进口分销特征（DDP咨询，专业进口问法），无公开主体信息 🟡</td><td>欧标彩绘插座100件价格；需定制产品，发法国，问DDP服务</td><td class="script">Dear 客户26, thank you for your inquiry. For 100 pcs of our painted European-standard sockets, I will send a quotation with tiered pricing shortly. We do offer DDP delivery to France, including customs clearance and door delivery — the total landed cost can be provided once the models are confirmed. We also support custom designs with flexible MOQ. Please share your target models, and we will prepare a complete DDP quotation. Best regards.</td></tr>
+<tr><td class="no">27</td><td class="date">2026-08-09</td><td class="name">客户27</td><td class="country">SN 塞内加尔</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户27, thank you for your interest. We manufacture French-standard switches and sockets with CE/RoHS certification, well suited for the Senegalese market, and we offer wholesale pricing for resellers. The latest catalog and price list are attached — please let us know which products interest you and the quantities, and we will send a quotation promptly. We also accept small trial orders. Looking forward to your reply.</td></tr>
+<tr><td class="no">28</td><td class="date">2026-08-09</td><td class="name">客户28</td><td class="country">US 美国</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户28, thank you for your interest. We are a factory-direct manufacturer of switches and sockets, and our catalog covers European, British and US standards with multiple finish series (stainless steel, aluminum, PC, vintage brass). Please let us know which products you are interested in and the quantities, and we will prepare a competitive quotation. We look forward to hearing from you.</td></tr>
+<tr><td class="no">29</td><td class="date">2026-08-09</td><td class="name">客户29</td><td class="country">US 美国</td><td>转售贸易特征（刚果市场，旅美），收货走广州仓（货代特征，正常贸易模式） 🟡</td><td>找可调光开关（灯变光），10件，收货地址为广州新细亚仓库（刚果仓普货）</td><td class="script">Dear 客户29, thank you for your inquiry. We offer dimmer switches for LED and incandescent lighting (including touch and rotary types) in multiple series and colors. For 10 pcs, we can arrange delivery to your designated warehouse in Guangzhou (Xinxya), and the trial order can be shipped together with other items. Please confirm the series and color you prefer, and I will send a quotation with weight and packaging details. Best regards.</td></tr>
+<tr><td class="no">30</td><td class="date">2026-08-09</td><td class="name">客户30</td><td class="country">TD 乍得</td><td>批发/工程特征，数量追加+物流重量确认（真实采购推进特征） 🟡</td><td>问RJ45插座价格（10件，1USD/pcs）；追加：开关30件+插座30件+RJ45 10件，问重量（11kg），要价目表</td><td class="script">Dear 客户30, thank you for your order details. For 30 switches + 30 sockets + 10 RJ45 sockets, the estimated total weight is approx. 11kg, and the unit price for RJ45 sockets is USD 1.00/pcs at your quantity. The complete price list is attached. Once you confirm the final mix and colors, we will issue a PI with exact weight, dimensions and shipping options to Chad. We support Trade Assurance for your security.</td></tr>
+<tr><td class="no">31</td><td class="date">2026-08-09</td><td class="name">客户31</td><td class="country">FR 法国</td><td>批发转售特征（科特迪瓦/西非，旅法），试单200件+长期合作意向 🟡</td><td>要详细信息；问单价、是否发科特迪瓦、可拆售，先小单200件试卖，后续长期合作</td><td class="script">Dear 客户31, thank you for your message. Yes, we ship to Côte d&#x27;&#x27;Ivoire via sea or air, and we allow mixed-model orders — 200 pcs as a trial order works well and can include several models. The price list is attached with per-model unit prices and volume tiers. We are glad to support your long-term cooperation with stable quality, MOQ flexibility and factory-direct pricing. Please send us your model selection, and we will prepare a quotation and delivery plan.</td></tr>
+<tr><td class="no">32</td><td class="date">2026-08-09</td><td class="name">客户32</td><td class="country">NG 尼日利亚</td><td>批发转售特征，留WhatsApp推进，无公开主体信息 🟡</td><td>问1/2/3位单双开关价格，转售，留WhatsApp 0916 3203 305</td><td class="script">Dear 客户32, thank you for your inquiry. Our 1/2/3-gang switches (single and double pole) are available in PC, stainless-steel and aluminum finishes with competitive wholesale pricing for resellers in Nigeria. The price list is attached, and I will also send it to your WhatsApp (0916 3203 305). Please let us know the models, colors and quantities, and we will confirm prices with shipping options. We look forward to a long-term partnership.</td></tr>
+<tr><td class="no">33</td><td class="date">2026-08-09</td><td class="name">客户33</td><td class="country">DE 德国</td><td>家装特征（德国地址明确，德标），无公开主体信息 🟡</td><td>可能下单；15开关+20插座，德国Sinn 35764，家庭全套（德标）</td><td class="script">Dear 客户33, thank you for your inquiry. For your home package of 15 switches + 20 sockets (German standard), we will prepare a complete quotation with the matching series, colors and required accessories. All our products carry CE/RoHS certification and German-market packaging is available. Please confirm the color and series you prefer (PC or stainless steel), and I will send the PI with shipping to Sinn 35764 within 24 hours.</td></tr>
+<tr><td class="no">34</td><td class="date">2026-08-09</td><td class="name">客户34</td><td class="country">CM 喀麦隆</td><td>批发特征（寻找可靠供应商，供应商评估阶段），无公开主体信息 🟡</td><td>欧标法德插座开关，找可靠供应商</td><td class="script">Dear 客户34, thank you for considering us as your supplier. We are a factory-direct manufacturer with 20+ years of experience in switches and sockets, holding CE/RoHS certifications and supporting Alibaba Trade Assurance. Our French/German-standard range is well proven in the Central African market. I have attached our company profile and catalog — please share your target products and volumes, and we will provide a quotation plus references. We aim to build a reliable long-term partnership.</td></tr>
+<tr><td class="no">35</td><td class="date">2026-08-10</td><td class="name">客户35</td><td class="country">ES 西班牙</td><td>L3等级，目标单品明确（已答复无此产品，已关闭） 🟡</td><td>找shaver socket（剃须刀插座），卖家答复无此产品</td><td class="script">Dear 客户35, thank you for your inquiry. Unfortunately we do not currently manufacture a dedicated shaver socket in our standard range. However, we do offer UK/EU sockets with integrated USB-A/C charging ports, which can be a practical alternative for bathroom use, and we can explore tooling for a shaver socket if your demand justifies the MOQ. Please let us know your estimated volume, and we will evaluate a custom solution for you.</td></tr>
+<tr><td class="no">36</td><td class="date">2026-08-10</td><td class="name">客户36</td><td class="country">SN 塞内加尔</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户36, thank you for your interest. We are a factory-direct manufacturer of French-standard switches and sockets for the Senegalese market, with CE/RoHS certification and wholesale pricing. Our catalog and price list are attached — please let us know which models you like and the quantities, and we will send a detailed quotation. We also welcome small trial orders to test quality first. Looking forward to your reply.</td></tr>
+<tr><td class="no">37</td><td class="date">2026-08-10</td><td class="name">客户37</td><td class="country">CA 加拿大</td><td>家装/工程特征，认证合规导向（因无认证不适用，已关闭） 🟡</td><td>问产品是否适用加拿大（无认证，不适用）</td><td class="script">Dear 客户37, thank you for checking with us. Our current products do not carry CSA/UL certification, so they are not suitable for formal installation in the Canadian market at this stage. We will be happy to revisit this once we have certified products available. If you have any needs for other regions (EU, Middle East, Africa), our CE/RoHS-certified range may be relevant. Thank you for your understanding.</td></tr>
+<tr><td class="no">38</td><td class="date">2026-08-10</td><td class="name">客户38</td><td class="country">TG 多哥</td><td>批发转售特征，试单50件，无公开主体信息 🟡</td><td>欧标法德插座；批发转售，先50件试单，问单价，选黑色</td><td class="script">Dear 客户38, thank you for your inquiry. For a 50-pc trial order of French/German-standard sockets in black, we can offer a favorable sample-order price, and I will send the unit price together with the full wholesale price list. We support mixed models within the trial order and provide Trade Assurance payment. Please confirm the models you need, and we will issue a quotation with weight and shipping options to Togo within 24 hours.</td></tr>
+<tr><td class="no">39</td><td class="date">2026-08-10</td><td class="name">客户39</td><td class="country">CN 中国</td><td>中国外贸代理，英标大单（约9600件+，万美元级估），名称占位无法核实主体，大额订单付款前务必核验公司 🟡</td><td>中文/英文大单：800×20A/32A/45A DP开关、300×1开、600×2开、800×3开、400×4开、1200×13A单插座、3000×13A双插座、2000×RJ45、300×卫星电视、200×45A灶具插座；黑灰色外贸版</td><td class="script">Dear friend, thank you for your substantial inquiry. As a factory-direct manufacturer in Wenzhou, we can supply your complete UK-standard program (800 DP switches 20A/32A/45A, 1/2/3/4-gang switches, 1200 13A single sockets, 3000 13A double sockets, 2000 RJ45 sockets, 300 satellite-TV sockets, 200 45A cooker outlets) in the black/grey export version. Given the scale of this order, we will prepare a detailed quotation with tiered pricing, carton CBM and a production schedule. As part of our compliance process for large orders, could you kindly provide your company name and registration details so we can prepare the formal contract and Trade Assurance terms? We will respond within 24 hours.</td></tr>
+<tr><td class="no">40</td><td class="date">2026-08-10</td><td class="name">客户40</td><td class="country">TH 泰国</td><td>进口分销特征（分销意向+约会议建群推进沟通），无公开主体信息 🟡</td><td>要开关插座目录和价格；想进口分销泰国，约会议（WeChat），建群沟通</td><td class="script">Dear 客户40, thank you for your interest in distributing our products in Thailand. Our catalog and wholesale price list are attached, covering modern switch/socket series suitable for the Thai market (we can also discuss customization). I am happy to arrange a video meeting and set up a WeChat group for direct communication — please share your preferred time. We will also prepare a distributor proposal with MOQ and pricing terms for your review.</td></tr>
+<tr><td class="no">41</td><td class="date">2026-08-10</td><td class="name">客户41</td><td class="country">SN 塞内加尔</td><td>信息量极低（仅打招呼），无公开主体信息 🔴</td><td>仅打招呼（无明确文字询盘）</td><td class="script">Dear 客户41, thank you for your message. We are a professional switch and socket manufacturer serving the Senegalese market with French-standard products, CE/RoHS certification and competitive wholesale pricing. Our catalog is attached for your reference — please let us know which products interest you and the quantities, and we will send a quotation promptly. Looking forward to working with you.</td></tr>
+<tr><td class="no">42</td><td class="date">2026-08-10</td><td class="name">客户42</td><td class="country">FR 法国</td><td>L3等级，留WhatsApp继续沟通，无公开主体信息 🟡</td><td>找插座和开关，要目录，看不锈钢面板，留WhatsApp 0033663447347</td><td class="script">Dear 客户42, thank you for your inquiry. Our stainless-steel panel range is one of our most popular series, available in multiple colors and configurations (switches, sockets, TV/RJ45, dimmers) with CE/RoHS certification. The catalog is attached, and I will also share it via WhatsApp (0033663447347) for your convenience. Please let me know the models and quantities you are considering, and I will prepare a tailored quotation.</td></tr>
+<tr><td class="no">43</td><td class="date">2026-08-10</td><td class="name">客户43</td><td class="country">CN 中国</td><td>外贸公司特征（专业外贸问法：RMB报价/CBM），无公开主体信息 🟡</td><td>要Gang Switch（英标），图片设计确认，问价格（RMB）和CBM、数量</td><td class="script">Dear 客户43, thank you for your inquiry. For your British-standard gang switches, we can provide product images and design confirmation, RMB pricing, and CBM data per carton for freight calculation. Please confirm the gang configurations (1/2/3/4-gang), color and estimated quantity, and we will prepare a quotation with exact carton dimensions and CBM. We are factory-direct and support OEM branding as well. Looking forward to your details.</td></tr>
+<tr><td class="no">44</td><td class="date">2026-08-10</td><td class="name">客户44</td><td class="country">LR 利比里亚</td><td>采购特征（看PC系列），无公开主体信息 🟡</td><td>发产品卡片，看PC系列</td><td class="script">Dear 客户44, thank you for your interest. Our PC series offers a wide choice of modern designs in multiple colors (white, grey, black, gold) with flame-retardant material and CE/RoHS certification. The catalog pages for the PC series are attached. Please let us know which models and colors you prefer and the quantities, and we will send a quotation with shipping options to Liberia. We look forward to cooperating with you.</td></tr>
+<tr><td class="no">45</td><td class="date">2026-08-11</td><td class="name">客户45</td><td class="country">UA 乌克兰</td><td>住宅装修工程采购特征，需求专业（认证/底盒规格），数百件住宅整套 🟡</td><td>住宅装修整套：欧标插座37、翻盖2、USB A+C 8、RJ45 2、调光器4、开关/按钮若干；要认证、USB-C PD、尺寸图、目录+报价、付款方式和交期</td><td class="script">Dear 客户45, thank you for your very detailed inquiry. We can supply the complete renovation package in the dark grey/charcoal series you requested, including grounded sockets, USB-A+C (PD) sockets, RJ45, dimmers, rocker switches and frames, all compatible with Ø68mm European mounting boxes. CE/RoHS certificates (TUV/CB available on request), dimensional drawings and our catalog are attached. Please confirm the quantities per model, and we will send a full quotation with payment terms and lead time within 24 hours.</td></tr>
+<tr><td class="no">46</td><td class="date">2026-08-11</td><td class="name">客户46</td><td class="country">PL 波兰</td><td>专业选型（复古灯饰/电气配件贸易），技术需求极专业，疑为灯具厂商或专业贸易商 🟡</td><td>采购复古拨杆开关核心模块（螺口/螺纹拨杆+锁紧螺母，Chrome/Gold/Matte Black/Raw Brass），CE/RoHS 250V/10A，适配欧标60mm底盒；要技术规格、认证证书、MOQ与样品价</td><td class="script">Dear 客户46, thank you for your professional inquiry. We manufacture vintage toggle-switch core modules with screw-in/threaded levers and lock nuts in Chrome, Gold, Matte Black and Raw Brass, rated 250V/10A with CE/RoHS compliance, fitting Ø60mm European boxes. Technical specifications, material details and certification documents are attached. Our MOQ for these modules is flexible, and we can offer sample pricing for your evaluation. Please advise the finish mix and quantities, and I will send a formal quotation.</td></tr>
+<tr><td class="no">47</td><td class="date">2026-08-11</td><td class="name">客户47</td><td class="country">MX 墨西哥</td><td>电气分销意向（合作联盟+MOQ询价），需墨西哥规格，无公开主体信息 🟡</td><td>大面板彩绘开关插座，想建立合作联盟；需要墨西哥规格、灰色、整体产品，问价格和MOQ</td><td class="script">Dear 客户47, thank you for your interest in building a partnership. We can supply large-panel painted switches and sockets in grey, and we are able to adapt products to Mexican-standard specifications (including 127V configurations) — let us confirm the exact certifications your market requires. For distributors we offer exclusive-area cooperation, flexible MOQs and tiered pricing. Please share your target product mix and estimated volumes, and we will prepare a distributor proposal with price and MOQ terms.</td></tr>
+<tr><td class="no">48</td><td class="date">2026-08-11</td><td class="name">客户48</td><td class="country">SN 塞内加尔</td><td>电气批发/工程特征（扩展断路器类需求），无公开主体信息 🟡</td><td>16A欧标法德插座；要短路/断路器类产品，确认开关功能</td><td class="script">Dear 客户48, thank you for your inquiry. Our 16A French/German-standard sockets are CE/RoHS certified, and the switch function can be confirmed per model (with/without switch). Regarding circuit breakers and short-circuit protection devices — we can source complementary breaker products; please tell us the ratings you need (e.g. 16A/20A/32A) and quantities, and we will provide specifications and pricing together with the sockets. Looking forward to your details.</td></tr>
+<tr><td class="no">49</td><td class="date">2026-08-11</td><td class="name">客户49</td><td class="country">BY 白俄罗斯</td><td>L3等级，技术选型（干接点需求，已答复无，已关闭） 🟡</td><td>问产品是否有干接点（dry contact）版本（无）</td><td class="script">Dear 客户49, thank you for your technical inquiry. Unfortunately our current switch and socket series do not offer dry-contact versions, as our products are designed for standard lighting and socket applications. If you share more details about the control system you are integrating (e.g. voltage, load type), we may be able to recommend a compatible alternative or explore a custom solution. Thank you for your understanding.</td></tr>
+<tr><td class="no">50</td><td class="date">2026-08-11</td><td class="name">客户50</td><td class="country">AU 澳大利亚</td><td>已对澳标适配性评估（不适用，已关闭），无公开主体信息 🟡</td><td>看aged brass铝制拨杆开关产品列表；最终认为澳标不适用（双插座无开关、无6钮开关）</td><td class="script">Dear 客户50, thank you for your careful evaluation. We understand the Australian-standard configuration does not currently match our range (dual sockets without switch, 6-button switches). If you have other projects using US or European standards, our aged-brass aluminum toggle switch series remains available. We will also keep your requirements on file and notify you if we expand into Australian-standard products. Thank you for your consideration.</td></tr>
+<tr><td class="no">51</td><td class="date">2026-08-11</td><td class="name">客户51</td><td class="country">CA 加拿大</td><td>电气采购特征（C1系列选型，材质关注），L1，因无UL未成 🟡</td><td>问美标拨杆开关，无UL可否，要目录（C1系列），问材质（铝）</td><td class="script">Dear 客户51, thank you for your inquiry. Our C1 series toggle switches feature die-cast aluminum construction with a premium finish, and the catalog is attached. Regarding UL certification — our current US-standard products do not carry UL, so formal installation in Canada/US projects requiring certification would not be compliant. For decorative or low-voltage applications without certification requirements, samples can be arranged. Please let us know your application details, and we will advise the best option.</td></tr>
+<tr><td class="no">52</td><td class="date">2026-08-11</td><td class="name">客户52</td><td class="country">FR 法国</td><td>旅法塞内加尔转售商，已付款$410.56（成交），无显著风险 🟢</td><td>已下单410.56USD，确认16A插座，PayPal支付，货到巴黎（75018）再转塞内加尔，已付款并安排发货</td><td class="script">Dear 客户52, thank you for your order of USD 410.56 — we have confirmed receipt of your PayPal payment, and your 16A sockets are being prepared for shipment to Paris (75018) as arranged. The tracking number will be shared as soon as the carrier picks up the goods. Please feel free to contact us anytime for shipment updates or future reorders; as a valued customer, you will enjoy priority pricing on your next order. Thank you for your trust in Longyang.</td></tr>
+<tr><td class="no">53</td><td class="date">2026-08-11</td><td class="name">客户53</td><td class="country">FR 法国</td><td>批发转售特征（几内亚市场，旅法），100件试单+远期3万件线索（远期未证实） 🟢</td><td>问基础版（非智能）开关价格阶梯和包装规格；100件试单，备货3-5天，一箱13kg/100件；问几内亚科纳克里发货+Trade Assurance</td><td class="script">Dear 客户53, thank you for your detailed inquiry. Our basic (non-smart) switch series offers tiered pricing starting from 100 pcs, and packaging is 100 pcs per carton (approx. 13kg). Yes, we ship to Conakry, Guinea, and we support Alibaba Trade Assurance for payment security. For your 100-pc trial order, the lead time is 3-5 days after confirmation. I will send the price-tier list and packaging specs — once you confirm the models, we will issue the PI with shipping options to Conakry. We are ready to support your larger program (30,000 pcs) with volume pricing when the time comes.</td></tr>
+<tr><td class="no">54</td><td class="date">2026-08-12</td><td class="name">客户54</td><td class="country">FR 法国</td><td>电气贸易特征（德标+复位面板），无公开主体信息 🟡</td><td>欧标开关插座（德标+复位面板），感兴趣要更多详情</td><td class="script">Dear 客户54, thank you for your interest. Our German-standard (Type F) switches and sockets, including the reset/flat-panel design you mentioned, are available in multiple series and colors with CE/RoHS certification. I have attached the catalog and price list — please let us know which models and colors you prefer and the quantities, and we will send a detailed quotation with delivery options to France. Looking forward to your reply.</td></tr>
+<tr><td class="no">55</td><td class="date">2026-08-12</td><td class="name">客户55</td><td class="country">CL 智利</td><td>电气贸易特征（试单意图，每样10件，西语沟通），无公开主体信息 🟡</td><td>每样买10件，问型号，要目录（西语沟通）</td><td class="script">Dear 客户55, thank you for your inquiry. We would be glad to support a trial order of 10 pcs per model — this is a practical way to verify our quality. The catalog with model numbers is attached (a Spanish version can be provided on request). Please select the models you need, and we will prepare a quotation with sample pricing and shipping options to Chile. We are a factory-direct manufacturer with CE/RoHS certification. Saludos cordiales.</td></tr>
+<tr><td class="no">56</td><td class="date">2026-08-12</td><td class="name">客户56</td><td class="country">BJ 贝宁</td><td>批发转售特征，60件已确认数量，收货走广州仓（货代特征，正常贸易模式） 🟡</td><td>采购20插座+20单开关+20双开关，白色；走广州仓（AIR/SEA-BENIN），问重量约9kg和包装尺寸，要付款链接</td><td class="script">Dear 客户56, thank you for confirming your order details. For 20 sockets + 20 single switches + 20 double switches (white), the estimated weight is approx. 9kg with carton size 48.5×36×26cm, and we can deliver to your Guangzhou warehouse for onward AIR/SEA shipment to Benin. The payment link is being prepared and will be sent shortly. Please confirm the final model numbers, and we will issue the PI with Trade Assurance payment today.</td></tr>
+<tr><td class="no">57</td><td class="date">2026-08-12</td><td class="name">客户57</td><td class="country">GE 格鲁吉亚</td><td>L3等级，订单清单具体（含LY3系列型号），十余件组合单 🟡</td><td>详细订单：3位开关、单插座、嵌入式桌面插座、4位开关×2、双位×2、组合开关插座、单开关、黑色嵌入式组合开关插座×3；LY3-015/007不锈钢黑/白/灰，要价目表</td><td class="script">Dear 客户57, thank you for your detailed order list. Your combination (3-gang switch, single socket, recessed desk socket, 4-gang×2, 2-gang×2, combos, etc.) based on the LY3 series in stainless steel (black/white/grey) can be supplied as a complete set. The price list is attached, and I will prepare a consolidated quotation for your full list within 24 hours. Please confirm the color choice (black/white/grey) and any quantity adjustments, and we will issue the PI with shipping to Georgia.</td></tr>
+<tr><td class="no">58</td><td class="date">2026-08-12</td><td class="name">客户58</td><td class="country">US 美国</td><td>电气贸易特征（选金色，要价目表），无公开主体信息 🟡</td><td>发产品卡片，选金色，要价目表</td><td class="script">Dear 客户58, thank you for your interest. Our gold-finish series (including stainless-steel and painted options) is very popular, and the price list is attached. Please let us know which models you prefer and the quantities, and we will prepare a quotation with shipping options. We also offer samples so you can verify the gold finish quality before ordering. Looking forward to your reply.</td></tr>
+<tr><td class="no">59</td><td class="date">2026-08-12</td><td class="name">客户59</td><td class="country">TW 台湾</td><td>自称Jumeirah company采购，邮箱为免费域名与自称主体不符（先核实身份，风险关注） 🟡</td><td>公司采购：要材质颜色选项、MOQ、样品成本和周期、批量价；要求发采购经理邮箱（ashfordsuplies@gmail.com / zohomail.com）</td><td class="script">Dear 客户59, thank you for your inquiry. We would be glad to support your procurement with material/color options, MOQ, sample cost and lead time, and volume pricing — all details are being prepared. Before sending the quotation to your procurement manager, may we kindly ask for your company registration/website or a business card for verification, as part of our standard vendor compliance process for corporate accounts? This helps us provide accurate terms and priority service. Once confirmed, we will respond within 24 hours.</td></tr>
+<tr><td class="no">60</td><td class="date">2026-08-12</td><td class="name">客户60</td><td class="country">IQ 伊拉克</td><td>自称伊朗300间酒店项目（国家显示伊拉克），酒店工程采购，敏感地区需核实项目真实性 🟡</td><td>伊朗酒店建设项目（300间房），要从中国进口酒店用开关插座，要酒店目录</td><td class="script">Dear 客户60, thank you for your inquiry — a 300-room hotel project is a great opportunity. We supply a dedicated hotel series (uniform design, durable finishes, optional USB charging, master-switch functions) and the hotel catalog is attached. To prepare an accurate quotation, could you kindly confirm the project location and your company details (registration or website)? This helps us arrange the right certification and logistics plan for your region. We will then provide a complete hotel package quotation with MOQ and lead time.</td></tr>
+<tr><td class="no">61</td><td class="date">2026-08-12</td><td class="name">客户61</td><td class="country">UA 乌克兰</td><td>品牌商/分销特征（OEM自有品牌意向），无公开主体信息 🟡</td><td>问OEM/自有品牌服务：能否贴自己品牌logo+自有包装</td><td class="script">Dear 客户61, thank you for your inquiry. Yes, we fully support OEM/private-label services: your logo can be laser-engraved or printed on products, and custom packaging with your brand design is available. The MOQ for logo branding is 500 pcs per model (custom packaging negotiable for larger volumes). We will send our OEM cooperation guide with sample costs and lead times — please share your target models and quantities, and we will prepare a proposal.</td></tr>
+<tr><td class="no">62</td><td class="date">2026-08-12</td><td class="name">客户62</td><td class="country">CN 中国</td><td>智能家居特征（定制咨询，产品不匹配未成，已关闭） 🟡</td><td>问能否定制4键433MHz无线壁控（电池款），卖家答复做不了</td><td class="script">Dear 客户62, thank you for your inquiry. Unfortunately we do not currently manufacture 4-gang 433MHz wireless wall controllers (battery-powered), as our production focuses on wired switches and sockets. We appreciate your interest and will keep your requirement on file in case we expand into smart/wireless controls. If you have any needs for our standard range, please feel free to reach out. Thank you for your understanding.</td></tr>
+<tr><td class="no">63</td><td class="date">2026-08-13</td><td class="name">客户63</td><td class="country">MA 摩洛哥</td><td>电气批发/工程特征（法标市场，关注铝制系列），无公开主体信息 🟡</td><td>索要产品目录；标准为法标；对经典铝制系列感兴趣，讨论2P+T开关差异和底盒问题</td><td class="script">Dear 客户63, thank you for your inquiry. Our classic aluminum series is available in French-standard configurations, and we can clarify the 2P+T switch options and matching mounting-box requirements in detail — technical drawings are attached. The full catalog is also included. Please let us know the models and quantities you are considering, and we will prepare a quotation with shipping options to Morocco. We look forward to your reply.</td></tr>
+<tr><td class="no">64</td><td class="date">2026-08-13</td><td class="name">客户64</td><td class="country">VN 越南</td><td>酒店装饰/建材特征（英标复古面板+OEM定制），无公开主体信息 🟡</td><td>英标胡桃木/黄铜复古面板（酒店装饰）；问OEM logo附加费、黄铜价格波动政策、是否可定制包装</td><td class="script">Dear 客户64, thank you for your inquiry. Our walnut/brass vintage panels are well suited for hotel decoration projects. For OEM: logo printing/engraving is available with a small surcharge per piece depending on the method, and we can customize packaging to your design. Regarding brass price fluctuation — we can hold prices for a specified period (e.g. 30-60 days) once the order is confirmed, to protect your quotation. Please share your target models and quantities, and we will send a detailed OEM quotation.</td></tr>
+<tr><td class="no">65</td><td class="date">2026-08-13</td><td class="name">客户65</td><td class="country">VE 委内瑞拉</td><td>电气分销特征（110V市场明确），无公开主体信息 🟡</td><td>要看完整目录，委内瑞拉110V市场</td><td class="script">Dear 客户65, thank you for your inquiry. Our full catalog is attached, covering European, British and US standard series with multiple finishes. For the Venezuelan 110V market, we can supply 110V-rated configurations on request — please confirm which series you plan to distribute and the estimated volumes, and we will prepare a quotation with the correct voltage specifications and shipping options. We are factory-direct and support distributor cooperation.</td></tr>
+<tr><td class="no">66</td><td class="date">2026-08-13</td><td class="name">客户66</td><td class="country">PA 巴拿马</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户66, thank you for your interest. We are a factory-direct manufacturer of switches and sockets with a wide range of series (PC, stainless steel, aluminum, vintage). Our catalog is attached — please let us know which products interest you and the quantities, and we will send a quotation with shipping options to Panama. We look forward to hearing from you.</td></tr>
+<tr><td class="no">67</td><td class="date">2026-08-13</td><td class="name">客户67</td><td class="country">MX 墨西哥</td><td>自称Pevamex公司代理（公网未核实，建议核实代理身份） 🟡</td><td>Pevamex公司代理；问MOQ是否100，能否首单约30件（按样品单处理）；要目录选型</td><td class="script">Dear 客户67, thank you for your inquiry on behalf of Pevamex. Our standard MOQ is 100 pcs per model, but we can accommodate a first order of approx. 30 pcs as a sample/trial order so you can verify quality before committing to volume. The catalog is attached for selection. Could you kindly share your company website or registration for our records? This helps us set up the distributor terms and pricing for Pevamex properly. We will prepare the quotation once the models are chosen.</td></tr>
+<tr><td class="no">68</td><td class="date">2026-08-13</td><td class="name">客户68</td><td class="country">AR 阿根廷</td><td>专业外贸问法（HS code/Excel报价/样品），首单试质量 🟡</td><td>要最便宜简约款开关价格；需要澳大利亚插座（无，开模MOQ很高）；要HS code（开关8536500090/插座8536690000）、Excel格式报价、样品建议</td><td class="script">Dear 客户68, thank you for your professional inquiry. For our most economical minimalist switch range, the Excel-format quotation is attached with HS codes (switches 8536500090 / sockets 8536690000). Unfortunately Australian-standard sockets are not currently in our program — tooling cost would be high, so we can only consider this with a substantial MOQ. For your first order, we recommend starting with samples (a few pieces) to test quality, followed by a trial batch. Please share your target models and quantities, and we will confirm pricing and shipping to Argentina.</td></tr>
+<tr><td class="no">69</td><td class="date">2026-08-13</td><td class="name">客户69</td><td class="country">MX 墨西哥</td><td>无买家文字消息（仅卖家TA卡片），信息量极低 🔴</td><td>会话存在但买家无文字消息（仅卖家Trade Assurance卡片）</td><td class="script">Dear 客户69, thank you for your interest. We noticed you viewed our Trade Assurance offer — we would be glad to help. We are a factory-direct manufacturer of switches and sockets with competitive pricing and secure payment via Trade Assurance. Please let us know which products you are interested in and the quantities, and we will prepare a quotation for you promptly. Looking forward to your reply.</td></tr>
+<tr><td class="no">70</td><td class="date">2026-08-13</td><td class="name">客户70</td><td class="country">CN 中国</td><td>外贸代理特征（美国市场），因无UL未成（已关闭） 🟡</td><td>外贸公司帮美国客户找开关和灯具；要图册；问UL（无，美国市场必须UL）</td><td class="script">Dear 客户70, thank you for your inquiry. We appreciate the opportunity, and our catalog is attached for your reference. Unfortunately our products do not currently carry UL certification, which is required for the US market, so we are unable to supply for formal US installation at this stage. We will notify you if UL-certified products become available. If your clients have needs in other markets (EU, Middle East, Africa), our CE/RoHS range may be a fit. Thank you for your understanding.</td></tr>
+<tr><td class="no">71</td><td class="date">2026-08-13</td><td class="name">客户71</td><td class="country">MV 马尔代夫</td><td>采购特征（大面板彩绘系列），无公开主体信息 🟡</td><td>大面板彩绘开关插座，要产品目录</td><td class="script">Dear 客户71, thank you for your inquiry. Our large-panel painted switches and sockets are available in multiple colors and configurations, and the catalog is attached. Please let us know which models and colors you prefer and the quantities, and we will send a quotation with shipping options to the Maldives. We are a factory-direct manufacturer with CE/RoHS certification and flexible MOQs. Looking forward to your reply.</td></tr>
+<tr><td class="no">72</td><td class="date">2026-08-13</td><td class="name">客户72</td><td class="country">VE 委内瑞拉</td><td>电气进口特征，认证要求极专业详尽（进口商/工程商），合规流程专业 🟢</td><td>计划进口欧标插座开关，下单前要全套资料：CE DoC（LVD+RoHS）、IEC/EN 60884-1 Type F安全门测试报告、EN 60669-1开关报告、RoHS 2.0、USB/RED/EMC、VDE/KEMA/NF等欧洲认证</td><td class="script">Dear 客户72, thank you for your thorough inquiry — we appreciate your professional approach to compliance. We can provide the full documentation package: CE DoC (LVD + RoHS), IEC/EN 60884-1 Type F shutter test report, EN 60669-1 switch test report, RoHS 2.0, and USB/RED/EMC documentation where applicable. VDE/KEMA/NF certificates are available for selected models. All documents will be compiled in a compliance dossier for your review before ordering. Please share your target models and quantities, and we will send the dossier together with a quotation.</td></tr>
+<tr><td class="no">73</td><td class="date">2026-08-13</td><td class="name">客户73</td><td class="country">EC 厄瓜多尔</td><td>批发特征（约200件），无公开主体信息 🟡</td><td>大面板彩绘开关插座，考虑批发，约200件不同型号</td><td class="script">Dear 客户73, thank you for your inquiry. For a wholesale order of approx. 200 pcs of large-panel painted switches and sockets across different models, we can offer tiered wholesale pricing and a mixed-model order. The catalog and price list are attached — please select the models and colors, and we will prepare a consolidated quotation with shipping options to Ecuador. We also support samples for quality checks before the full order.</td></tr>
+<tr><td class="no">74</td><td class="date">2026-08-13</td><td class="name">客户74</td><td class="country">EG 埃及</td><td>自称埃及批发商（有电器展厅），OEM定制意向，主体无公开信息需核实 🟡</td><td>埃及批发商（有电器展厅），问OEM/自有品牌定制；要现代亮面直板设计（暂无，等新品通知）</td><td class="script">Dear 客户74, thank you for your inquiry. We fully support OEM/private-label production for distributors like you — logo branding, custom packaging and exclusive design options are available. Regarding the modern glossy flat design you requested: it is not yet in our current program, but we are developing new series and will notify you as soon as it launches. Meanwhile, our existing flat and painted series are attached for your review. Please share your estimated volumes, and we will prepare an OEM proposal.</td></tr>
+<tr><td class="no">75</td><td class="date">2026-08-14</td><td class="name">客户75</td><td class="country">ES 西班牙</td><td>电气贸易特征（留WhatsApp推进沟通），无公开主体信息 🟡</td><td>发产品卡片询问信息，留联系方式（西班牙，WhatsApp 34 600530813）；问PC面板欧标价格</td><td class="script">Dear 客户75, thank you for your inquiry. Our PC-panel European-standard switches and sockets are available in multiple colors with CE/RoHS certification, and I will send the price list to your WhatsApp (34 600530813) for your convenience. The catalog is attached as well. Please let us know the models and quantities you need, and we will prepare a quotation with shipping options to Spain. Looking forward to your reply.</td></tr>
+<tr><td class="no">76</td><td class="date">2026-08-14</td><td class="name">客户76</td><td class="country">PK 巴基斯坦</td><td>电气批发特征（关注质保与工厂品牌，供应商尽调意向），无公开主体信息 🟡</td><td>问目录、质保（12年）、交期（视数量）、品牌/工厂名（Longyang）</td><td class="script">Dear 客户76, thank you for your inquiry. We are Longyang Electrical — a factory-direct manufacturer in Wenzhou, China. Our products carry a warranty of up to 12 years depending on the series, and lead time is 3-7 days for standard models (scale-dependent for bulk orders). The catalog and factory profile are attached. Please share your target models and quantities, and we will confirm pricing, warranty terms and delivery schedule. We welcome factory visits or video calls to build trust.</td></tr>
+<tr><td class="no">77</td><td class="date">2026-08-14</td><td class="name">客户77</td><td class="country">FR 法国</td><td>家装/工程特征，清单具体（约112件），问中国代理与含运费报价 🟡</td><td>磨砂触摸欧标插座：调光器500W×5、法式双插座×4、TV插座×3、法式插座×100；白色；问中国代理、含运费报价</td><td class="script">Dear 客户77, thank you for your detailed list. For your package (5× 500W dimmers, 4× French double sockets, 3× TV sockets, 100× French sockets, white, frosted touch), we can provide a quotation including freight to France. We can also arrange delivery via a Chinese forwarder/agent or DDP service, whichever suits you best. Please confirm the exact models, and we will send the all-inclusive quotation with weight and packaging details within 24 hours.</td></tr>
+<tr><td class="no">78</td><td class="date">2026-08-14</td><td class="name">客户78</td><td class="country">UZ 乌兹别克斯坦</td><td>进口分销特征（公司决策流程，给老板汇报），处选型比价阶段 🟡</td><td>进口乌兹别克斯坦（Namangan）；要USD价格表，问LY4/LY5区别（弧面vs超薄平面，材质均PC），给老板汇报</td><td class="script">Dear 客户78, thank you for your inquiry. To support your report to the management: the LY4 series features a curved face while LY5 is an ultra-slim flat design — both are PC (flame-retardant) material, and the USD price list for both series is attached for your comparison. We can also provide samples for evaluation. Please let us know the series preference and quantities, and we will prepare a formal quotation for your Namangan import plan. We look forward to a smooth decision process.</td></tr>
+<tr><td class="no">79</td><td class="date">2026-08-14</td><td class="name">客户79</td><td class="country">AE 阿联酋</td><td>家装/采购特征（8件小单，目标明确），无公开主体信息 🟡</td><td>英标胡桃木/黄铜复古面板，4位双控×8件</td><td class="script">Dear 客户79, thank you for your inquiry. Our British-standard walnut/brass vintage panels are available in the 4-gang 2-way configuration you need. For 8 pcs, we can offer a small-order price and ship to the UAE by express or air. The product photos and specifications are attached. Please confirm the color (walnut/brass) and finish, and we will send a quotation with shipping cost and delivery time.</td></tr>
+<tr><td class="no">80</td><td class="date">2026-08-14</td><td class="name">客户80</td><td class="country">CN 中国</td><td>建材/大理石装饰特征（出口爱尔兰），已答复不单卖配件（已关闭） 🟡</td><td>英标黄铜开关面板（出口爱尔兰）；大理石工厂需要里面黄铜配件，问是否单卖配件（否）、厚度、大理石包边可行性（难做）</td><td class="script">Dear 客户80, thank you for your inquiry. Unfortunately we do not sell the brass inserts separately, as our products are supplied as complete assembled panels; marble inlay customization is also difficult with our current process. If your marble factory is interested in complete brass switch panels for the Irish market, we can supply those with OEM branding. Please share the target quantities, and we will prepare a quotation. Thank you for your understanding.</td></tr>
+<tr><td class="no">81</td><td class="date">2026-08-14</td><td class="name">客户81</td><td class="country">PH 菲律宾</td><td>电气采购特征（17件小单，数量明确），无公开主体信息 🟡</td><td>买开关：10×1位、5×2位、2×3位；问1way/2way</td><td class="script">Dear 客户81, thank you for your inquiry. We can supply 10× 1-gang, 5× 2-gang and 2× 3-gang switches in both 1-way and 2-way versions, with PC, stainless-steel or aluminum finishes. For your quantity of 17 pcs, we will confirm the unit prices and shipping to the Philippines by express. Please let us know the way type (1-way/2-way) and finish you need, and we will send a quotation today.</td></tr>
+<tr><td class="no">82</td><td class="date">2026-08-14</td><td class="name">客户82</td><td class="country">US 美国</td><td>L3等级，材质咨询（实心黄铜不可做，已关闭） 🟡</td><td>问产品能否做实心黄铜（实为不锈钢仿古铜色，不能）</td><td class="script">Dear 客户82, thank you for your inquiry. Our &quot;brass&quot; finish products are made of stainless steel with an antique-brass coating, not solid brass, so they may not meet your requirement if solid brass is essential. If the antique-brass appearance works for your project, we can send samples for evaluation. Please let us know your application and quantities, and we will advise the best option.</td></tr>
+<tr><td class="no">83</td><td class="date">2026-08-14</td><td class="name">客户83</td><td class="country">DO 多米尼加</td><td>电气批发/工程特征，样品流程明确推进（样品33USD+运费60USD） 🟢</td><td>118美标铝制开关插座约300件；要样品确认（C1-002/006/041深金色，含1USB+1USB-C款）；样品33USD+运费60USD</td><td class="script">Dear 客户83, thank you for moving forward with the sample step. Your samples (C1-002/006/041, dark gold, including the USB and USB-C models) are being prepared — sample cost USD 33 + shipping USD 60, total USD 93, and the payment link will be sent shortly. Once you approve the samples, we will prepare the quotation for your approx. 300-pc order (1/2/3-gang switches and sockets mix) with volume pricing and delivery to the Dominican Republic. We appreciate your trust in Longyang.</td></tr>
+<tr><td class="no">84</td><td class="date">2026-08-15</td><td class="name">客户84</td><td class="country">GH 加纳</td><td>L3等级，英标市场选型阶段，无公开主体信息 🟡</td><td>UK标准不锈钢面板开关（双13A插座带2USB），感兴趣；看目录后待反馈</td><td class="script">Dear 客户84, thank you for your interest. Our UK-standard stainless-steel panels include the 2× 13A socket with 2 USB ports model you asked about — a strong seller for the Ghanaian market. The catalog with this model is attached, and we can arrange samples for quality verification. Please let us know the quantities you are considering, and we will send a quotation with tiered pricing and shipping options to Ghana. Looking forward to your feedback.</td></tr>
+<tr><td class="no">85</td><td class="date">2026-08-15</td><td class="name">客户85</td><td class="country">BE 比利时</td><td>转售贸易特征（西非市场，旅比），真实选品，收货走广州仓代理（货代特征，正常贸易模式） 🟡</td><td>选中多款不锈钢系列产品（2件/10件/3件等），要求不锈钢色（非黑色），留WhatsApp，收货走广州仓代理</td><td class="script">Dear 客户85, thank you for your selection. We confirm the stainless-steel color (not black) for your chosen items, and the order can be delivered to your Guangzhou warehouse agent as requested. I will send the confirmed item list with unit prices and total via WhatsApp. Please verify the quantities per model, and we will issue the PI with Trade Assurance payment. We are happy to support your resale program in the West African market.</td></tr>
+<tr><td class="no">86</td><td class="date">2026-08-15</td><td class="name">客户86</td><td class="country">FR 法国</td><td>电气贸易特征（法标产品意向），无公开主体信息 🟡</td><td>对产品感兴趣（法标）</td><td class="script">Dear 客户86, thank you for your interest. Our French-standard switches and sockets are available in multiple series (PC, stainless steel, painted) with CE/RoHS certification. The catalog and price list are attached — please let us know which models you prefer and the quantities, and we will prepare a quotation with delivery options to France. We look forward to cooperating with you.</td></tr>
+<tr><td class="no">87</td><td class="date">2026-08-15</td><td class="name">客户87</td><td class="country">NG 尼日利亚</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户87, thank you for your interest. We are a factory-direct manufacturer of switches and sockets, well suited to the Nigerian market with UK-standard products, competitive wholesale pricing and Trade Assurance support. Our catalog is attached — please let us know which products interest you and the quantities, and we will send a detailed quotation. Looking forward to your reply.</td></tr>
+<tr><td class="no">88</td><td class="date">2026-08-15</td><td class="name">客户88</td><td class="country">PH 菲律宾</td><td>L3等级，美标PC面板批发特征，无公开主体信息 🟡</td><td>美标PC面板开关插座；要价目表，选黑色</td><td class="script">Dear 客户88, thank you for your inquiry. Our US-standard PC-panel switches and sockets are available in black, and the price list is attached. Please let us know the models and quantities you need, and we will prepare a quotation with shipping options to the Philippines. We also offer samples and tiered wholesale pricing for larger orders. Looking forward to your reply.</td></tr>
+<tr><td class="no">89</td><td class="date">2026-08-15</td><td class="name">客户89</td><td class="country">US 美国</td><td>L3等级，询价待确认，无公开主体信息 🟡</td><td>问产品价格，卖家发文件确认</td><td class="script">Dear 客户89, thank you for your inquiry. Following up on the quotation I sent — I would be glad to clarify any details or adjust the offer to your needs. Please let me know which models and quantities you are considering, and whether you prefer a specific finish or certification, and I will confirm the best pricing for you. We look forward to your decision.</td></tr>
+<tr><td class="no">90</td><td class="date">2026-08-15</td><td class="name">客户90</td><td class="country">ES 西班牙</td><td>住宅装修特征（家装全套，清单具体），无公开主体信息 🟡</td><td>家装全套（白色）：30双控开关、25单开关、40按钮、55插座、100边框、25电动窗帘按钮；发西班牙</td><td class="script">Dear 客户90, thank you for your detailed home-renovation list. We can supply the full white package (30 2-way switches, 25 1-way switches, 40 push buttons, 55 sockets, 100 frames, 25 electric curtain buttons) as one complete set with matching design. The quotation with unit prices and total will be prepared within 24 hours, including shipping to Spain. Please confirm the series you prefer (PC or stainless steel), and we will issue the PI.</td></tr>
+<tr><td class="no">91</td><td class="date">2026-08-15</td><td class="name">客户91</td><td class="country">TJ 塔吉克斯坦</td><td>进口特征（价格询问具体），无公开主体信息 🟡</td><td>欧标阻燃开关插座；问法式双插座价格（1.369USD）；问WhatsApp（暂不可用）</td><td class="script">Dear 客户91, thank you for your inquiry. Our flame-retardant European-standard switches and sockets are CE/RoHS certified. Regarding the French double socket — the price of USD 1.369/pcs applies at standard quantities, with better tiered pricing for larger orders. Our WhatsApp is temporarily unavailable, but we can communicate here or via email; please share your target quantities and models, and we will send a formal quotation with shipping options to Tajikistan.</td></tr>
+<tr><td class="no">92</td><td class="date">2026-08-15</td><td class="name">客户92</td><td class="country">DE 德国</td><td>非采购类（营销推销模式，每月$500推广费），已拒绝，建议忽略 🔴</td><td>请求帮助创建子账号推广产品（每月$500，非采购需求，卖家拒绝）</td><td class="script">Dear 客户92, thank you for your proposal. At this stage we are not looking for third-party promotion services, as we focus on direct manufacturing and customer cooperation. We appreciate your offer but will decline the USD 500/month arrangement. If you have genuine procurement needs for our switches and sockets in the future, we would be happy to help. Thank you for your understanding.</td></tr>
+<tr><td class="no">93</td><td class="date">2026-08-16</td><td class="name">客户93</td><td class="country">TZ 坦桑尼亚</td><td>L1等级，多品项询价（英标品类），无公开主体信息 🟡</td><td>对木纹产品感兴趣；询1/2/3/4位开关、单/双插座、DP开关、TV插座、Cooker插座、中间开关价格</td><td class="script">Dear 客户93, thank you for your inquiry. Our wood-grain finish series is available, and we can supply the full British-standard range you listed — 1/2/3/4-gang switches, single/double sockets, DP switches, TV sockets, cooker outlets and intermediate switches. The price list for these items is attached. Please let us know the mix and quantities, and we will prepare a consolidated quotation with shipping options to Tanzania.</td></tr>
+<tr><td class="no">94</td><td class="date">2026-08-16</td><td class="name">客户94</td><td class="country">GH 加纳</td><td>L3等级，试单20pcs，已推进至PI阶段，接受仿古铜色 🟡</td><td>问产品价格，要灰色20pcs，接受仿古铜色，问黑色；卖家发报价单并准备PI</td><td class="script">Dear 客户94, thank you for your order progress. Your quotation for 20 pcs (grey, with antique-brass and black options available) has been sent, and we are preparing the PI now. Once you confirm the final color, we will issue the proforma invoice with payment via Trade Assurance and shipping options to Ghana. As a first trial order, we can also include a few free samples with your shipment so you can evaluate other series. Looking forward to your confirmation.</td></tr>
+<tr><td class="no">95</td><td class="date">2026-08-16</td><td class="name">客户95</td><td class="country">GN 几内亚</td><td>L3等级，批发转售特征，100件（1箱），中性包装要求明确 🟡</td><td>询产品信息、实物图、型号单价、每箱100件、包装10小盒×10，采购100件；问品牌（中性包装）</td><td class="script">Dear 客户95, thank you for your detailed inquiry. For your 100-pc order (1 carton, packed 10 inner boxes × 10), we can provide neutral packaging without our brand, as requested. Product photos, model numbers and unit prices are attached. Please confirm the model selection, and we will issue a quotation with carton weight/size and shipping options to Guinea. We are a factory-direct manufacturer with CE/RoHS certification.</td></tr>
+<tr><td class="no">96</td><td class="date">2026-08-16</td><td class="name">客户96</td><td class="country">SN 塞内加尔</td><td>电气批发/工程特征（模块化技术咨询，法标底盒），无公开主体信息 🟡</td><td>白色方形插座开关；问是否可模块化装双/三联面板、相关价格（法标底盒适配）</td><td class="script">Dear 客户96, thank you for your technical inquiry. Yes, our white square sockets and switches support modular assembly — you can combine them into 2-gang and 3-gang frames, compatible with French-standard mounting boxes. The modular frame prices are included in the attached price list. Please let us know the combination you plan (e.g. 2× socket, socket+switch) and quantities, and we will prepare a quotation.</td></tr>
+<tr><td class="no">97</td><td class="date">2026-08-16</td><td class="name">客户97</td><td class="country">DE 德国</td><td>德国买家，已发Trade Assurance付款链接（临近成交） 🟢</td><td>选同色系列（浅灰），含门铃同色；MOQ 100pcs/款（可2色各50），要报价和付款链接，确认运费唛头</td><td class="script">Dear 客户97, thank you for your order progress. The quotation for your light-grey same-series package (including the matching doorbell) has been confirmed, and the Trade Assurance payment link has been sent to you. We have noted the MOQ arrangement (100 pcs/model, or 50+50 across two colors), and the shipping marks will be confirmed as per your instruction before dispatch. Once payment is received, production takes 3-5 days and we will share the tracking number promptly. Thank you for trusting Longyang.</td></tr>
+<tr><td class="no">98</td><td class="date">2026-08-16</td><td class="name">客户98</td><td class="country">RO 罗马尼亚</td><td>L3等级，准备下单，空运细节明确（邮编011748），EU标准关注 🟡</td><td>下单不锈钢系列，空运到布加勒斯特（邮编011748）；问EU标准、双USB插座（无），要报价</td><td class="script">Dear 客户98, thank you for your order intention. Our stainless-steel series is CE/RoHS certified and fully compliant with EU standards; unfortunately we do not currently offer a dual-USB socket in this series (single USB-A/C versions are available). The quotation for your selected items will be prepared within 24 hours, including air freight to Bucharest (011748). Please confirm the final model list, and we will issue the PI with exact weight and shipping cost.</td></tr>
+<tr><td class="no">99</td><td class="date">2026-08-16</td><td class="name">客户99</td><td class="country">MV 马尔代夫</td><td>采购特征（款式选型咨询），无公开主体信息 🟡</td><td>要可用产品目录，问是否只有这些款式（是否有按键式/触摸式开关）</td><td class="script">Dear 客户99, thank you for your inquiry. Besides the styles in the catalog, we also offer push-button and touch switches within our standard series — the additional options are attached. Our range covers PC, stainless-steel and aluminum finishes in multiple colors. Please let us know which style and configuration you prefer and the quantities, and we will send a quotation with shipping options to the Maldives.</td></tr>
+<tr><td class="no">100</td><td class="date">2026-08-16</td><td class="name">客户100</td><td class="country">CD 刚果(金)</td><td>批发特征（100件多型号询价），无公开主体信息 🟡</td><td>要100件不同型号（欧标）</td><td class="script">Dear 客户100, thank you for your inquiry. For 100 pcs across different models (European standard), we can offer a mixed-model wholesale quotation with unit prices per model. The catalog is attached for your selection — please choose the models and colors, and we will prepare a consolidated quotation with shipping options to DR Congo. We support Trade Assurance payment and small trial orders. Looking forward to your reply.</td></tr>
+<tr><td class="no">101</td><td class="date">2026-08-17</td><td class="name">客户101</td><td class="country">TH 泰国</td><td>进口分销特征（出口曼谷），无公开主体信息 🟡</td><td>找现代开关插座，出口曼谷，要产品目录</td><td class="script">Dear 客户101, thank you for your inquiry. Our modern switch and socket series are well suited for the Bangkok market, with contemporary designs, multiple colors and CE/RoHS certification. The catalog is attached — please let us know which series and quantities you plan to import, and we will prepare a quotation with shipping options to Bangkok. We support distributor cooperation and OEM branding as well. Looking forward to your reply.</td></tr>
+<tr><td class="no">102</td><td class="date">2026-08-17</td><td class="name">客户102</td><td class="country">UK 英国</td><td>信息量较低（仅索要目录） 🔴</td><td>发产品卡片，请求产品目录</td><td class="script">Dear 客户102, thank you for your interest. Our full catalog is attached, covering British-standard switches and sockets in stainless steel, aluminum, PC and vintage series with CE/RoHS certification. Please let us know which products interest you and the quantities, and we will send a quotation with shipping options to the UK. We look forward to hearing from you.</td></tr>
+<tr><td class="no">103</td><td class="date">2026-08-17</td><td class="name">客户103</td><td class="country">FR 法国</td><td>电气贸易特征（潜在订单洽谈），L1，无公开主体信息 🟡</td><td>欧标法德插座，想谈潜在订单</td><td class="script">Dear 客户103, thank you for reaching out. We would be glad to discuss a potential order — our French/German-standard sockets are factory-direct with CE/RoHS certification and competitive pricing. Please share the target models, quantities and destination, and we will prepare a proposal. We can also arrange samples for quality evaluation. Looking forward to a fruitful discussion.</td></tr>
+<tr><td class="no">104</td><td class="date">2026-08-17</td><td class="name">客户104</td><td class="country">US 美国</td><td>中文询盘（疑在美华人），已答复无此面板（已关闭） 🔴</td><td>中文询：是否有某种面板（卖家答复无，类似款也没有）</td><td class="script">Dear 客户104, thank you for your inquiry. Unfortunately we do not currently have the specific panel you asked about, nor a similar style in our program. If you can share a photo or more details of the design you are looking for, we will check whether a custom option is feasible — otherwise we will keep your request on file and notify you if it becomes available. Thank you for your understanding.</td></tr>
+<tr><td class="no">105</td><td class="date">2026-08-17</td><td class="name">客户105</td><td class="country">GN 几内亚</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户105, thank you for your interest. We are a factory-direct manufacturer of switches and sockets for the West African market, offering French-standard products, CE/RoHS certification and wholesale pricing. Our catalog is attached — please let us know which models you like and the quantities, and we will send a quotation with shipping options to Guinea. Looking forward to your reply.</td></tr>
+<tr><td class="no">106</td><td class="date">2026-08-17</td><td class="name">客户106</td><td class="country">BD 孟加拉国</td><td>电气批发特征（MOQ明确+验货意向），无公开主体信息 🟡</td><td>要全部产品价目表，MOQ 100pcs/款；要4位开关和5针插座真实视频</td><td class="script">Dear 客户106, thank you for your inquiry. The complete product price list is attached, with a flexible MOQ of 100 pcs per model. Regarding the 4-gang switch and 5-pin socket — I will send you real product videos so you can verify the build quality and operation before ordering. Please let us know the models you plan to start with, and we will prepare a quotation with shipping options to Bangladesh.</td></tr>
+<tr><td class="no">107</td><td class="date">2026-08-17</td><td class="name">客户107</td><td class="country">US 美国</td><td>L3等级，塑料系列三色关注，无公开主体信息 🟡</td><td>发产品卡片，看塑料系列三色</td><td class="script">Dear 客户107, thank you for your interest. Our plastic (PC) series is available in three colors as you noted — white, grey and black — all flame-retardant with CE/RoHS certification. The catalog with color options is attached. Please let us know which models and colors you prefer and the quantities, and we will send a quotation with shipping options. We also offer samples for color/quality evaluation.</td></tr>
+<tr><td class="no">108</td><td class="date">2026-08-17</td><td class="name">客户108</td><td class="country">BJ 贝宁</td><td>批发转售特征，两段会话大单，价格敏感（议价行为，非风险），收货走广州SEA仓 🟡</td><td>大单：门铃/TV插座/单插座/断路器/双控等系列，黑/白配色，84×80mm；单价确认，运费6USD、备货2-3天+运输2-3天（觉得慢），后对价格质疑（比店价高），问CBM（一箱0.046）、库存</td><td class="script">Dear 客户108, thank you for your continued engagement on this order. Regarding the price comparison with our storefront — our quotation reflects the consolidated set, freight (USD 6) and packaging; I will re-verify each line item against the store price and send you a transparent breakdown so you can see the calculation. On lead time: we can shorten production to 2 days for this order and arrange expedited SEA shipping from Guangzhou to reduce the total time. CBM per carton is 0.046 as confirmed, and stock for the selected items is available. Please review the breakdown and let us know your final confirmation.</td></tr>
+<tr><td class="no">109</td><td class="date">2026-08-17</td><td class="name">客户109</td><td class="country">US 美国</td><td>电气贸易特征（询产品优势与价格），无公开主体信息 🟡</td><td>对产品感兴趣，问产品优势和价格</td><td class="script">Dear 客户109, thank you for your interest. Our key advantages: factory-direct pricing (no middleman), CE/RoHS certifications, flexible MOQs, custom/OEM support and proven quality with 12-year warranty options. The price list is attached — please let us know which series and quantities you are considering, and we will prepare a tailored quotation. We also offer samples for evaluation. Looking forward to your reply.</td></tr>
+<tr><td class="no">110</td><td class="date">2026-08-17</td><td class="name">客户110</td><td class="country">NL 荷兰</td><td>家装/采购特征（尺寸细节咨询），无公开主体信息 🟡</td><td>问产品视频、尺寸（86×86 vs 88×86），英标超薄面板，想配套采购开关组合</td><td class="script">Dear 客户110, thank you for your inquiry. Our ultra-slim British-standard panels are available in 86×86mm and 88×86mm sizes — I will send you product videos and a size comparison so you can see the difference. We support mixed procurement of switch combinations within the same series for a uniform look. Please let us know the combination and quantities you plan, and we will prepare a quotation with shipping options to the Netherlands.</td></tr>
+<tr><td class="no">111</td><td class="date">2026-08-17</td><td class="name">客户111</td><td class="country">RO 罗马尼亚</td><td>内容营销特征（非采购需求，免费样品换测评），已拒绝 🔴</td><td>TikTok内容创作者，请求免费样品做测评推广（罗马尼亚市场），卖家拒绝该合作方式</td><td class="script">Dear 客户111, thank you for your proposal. We appreciate your offer, but our current policy does not include free samples for influencer review programs. If you are interested in purchasing samples at cost for a genuine product review, we would be glad to support that — and if the collaboration brings measurable results, we can discuss future cooperation. Please let us know your interest.</td></tr>
+<tr><td class="no">112</td><td class="date">2026-08-17</td><td class="name">客户112</td><td class="country">TM 土库曼斯坦</td><td>进口特征（价格谈判流程专业：EXW→FOB），无公开主体信息 🟡</td><td>问开关插座价格（俄语）；LY4 PC系列黑白灰金四色，需求20单开+20双开+20单插座+10双插座，三色各90件共270件；要LED指示灯，先看EXW价再谈FOB</td><td class="script">Dear 客户112, thank you for your inquiry. For the LY4 PC series (black/white/grey/gold) with LED indicator option, your requirement of 270 pcs (20 1-gang + 20 2-gang switches, 20 single + 10 double sockets, plus 90 pcs each in three colors) — the EXW price list is attached, and we can then discuss FOB terms once you review it. LED indicator versions are available at a small surcharge. Please confirm the color mix, and we will issue a formal quotation.</td></tr>
+<tr><td class="no">113</td><td class="date">2026-08-17</td><td class="name">客户113</td><td class="country">MA 摩洛哥</td><td>灯具/建材特征（黄铜灯具样品，后推PC面板），无公开主体信息 🟡</td><td>要黄铜灯具样品，问样品+运费到摩洛哥费用（不锈钢不感兴趣，后推PC面板）</td><td class="script">Dear 客户113, thank you for your inquiry. Regarding the brass lamp samples — we can arrange sample pieces, and I will confirm the sample cost plus shipping to Morocco shortly. Since brass items are not part of our current switch program, we also recommend our PC-panel series as an alternative for your project; samples are available for both options. Please let us know which direction you prefer, and we will prepare the quotation accordingly.</td></tr>
+<tr><td class="no">114</td><td class="date">2026-08-18</td><td class="name">客户114</td><td class="country">PT 葡萄牙</td><td>电气贸易特征（准备报价，问支付方式），无公开主体信息 🟡</td><td>欧标彩绘开关插座；问是否可用信用卡支付；选灰色系列（插座/开关/按钮/电视/网络），准备报价</td><td class="script">Dear 客户114, thank you for your inquiry. We can accept credit-card payment through Alibaba Trade Assurance for your order — a secure and convenient option. For your grey series selection (sockets, switches, push buttons, TV and network sockets), the quotation is being prepared and will be sent within 24 hours. Please confirm the model quantities, and we will include shipping options to Portugal. Looking forward to your confirmation.</td></tr>
+<tr><td class="no">115</td><td class="date">2026-08-18</td><td class="name">客户115</td><td class="country">MA 摩洛哥</td><td>电气贸易特征（复古拨杆开关，铝/木材质比价），L1，无公开主体信息 🟡</td><td>找复古拨杆开关，问目录与价格、是否欧标适配；询50单插座/4双插座/20单开关/6双开关/12双控开关，铝和木两种材质价格</td><td class="script">Dear 客户115, thank you for your inquiry. Our vintage toggle switches are available in aluminum and wood finishes, both suitable for European-standard installation — the catalog and prices for both materials are attached. For your list (50 single sockets, 4 double sockets, 20 single switches, 6 double switches, 12 2-way switches), I will prepare a side-by-side quotation for aluminum vs wood so you can compare. Please confirm the finish preference, and we will send the quotation with shipping options to Morocco.</td></tr>
+<tr><td class="no">116</td><td class="date">2026-08-18</td><td class="name">客户116</td><td class="country">MY 马来西亚</td><td>家装/采购特征（拟下单），无公开主体信息 🟡</td><td>玻璃系列灰色：1位10+2位10+3位10+4位10+开关20，13A插座，问是否可下单</td><td class="script">Dear 客户116, thank you for your inquiry. Yes, your order can be confirmed: 10 pcs each of 1/2/3/4-gang plus 20 switches in the grey glass series, along with 13A sockets. We will prepare the PI with unit prices, total amount and shipping options to Malaysia within 24 hours. Payment via Trade Assurance is available. Please confirm the final quantities, and we will proceed with the order.</td></tr>
+<tr><td class="no">117</td><td class="date">2026-08-18</td><td class="name">客户117</td><td class="country">DE 德国</td><td>电气采购特征（目标产品明确），无公开主体信息 🟡</td><td>要英标3针+欧标2针二合一墙插</td><td class="script">Dear 客户117, thank you for your inquiry. Regarding the combined UK 3-pin + EU 2-pin wall socket (2-in-1) — this is a special configuration; let me confirm availability with our production team and get back to you within 24 hours with the model options, MOQ and pricing. If we do not have an exact 2-in-1 model, we can explore a custom solution based on your volume. Please also let us know the estimated quantity and target market.</td></tr>
+<tr><td class="no">118</td><td class="date">2026-08-18</td><td class="name">客户118</td><td class="country">DZ 阿尔及利亚</td><td>批发特征（1000件，关注箱规），无公开主体信息 🟡</td><td>问价格和每箱插座数量（100件/箱），采购1000件</td><td class="script">Dear 客户118, thank you for your inquiry. For 1000 pcs of sockets, we can offer volume pricing with a favorable unit rate. Standard packing is 100 pcs per carton (approx. 13kg), and I will confirm the exact carton size in the quotation. Please let us know the model and color you need, and we will send a formal quotation with shipping options to Algeria. We support Trade Assurance payment and samples for evaluation.</td></tr>
+<tr><td class="no">119</td><td class="date">2026-08-19</td><td class="name">客户119</td><td class="country">ET 埃塞俄比亚</td><td>进出口贸易特征（计划进口卢旺达，找商业伙伴），无公开主体信息 🟡</td><td>美标PC面板1-4位开关插座，想找商业伙伴；计划进口到卢旺达；看英标目录选型</td><td class="script">Dear 客户119, thank you for your inquiry. We would be glad to explore a business partnership for your Rwanda import plan. Our US-standard PC panels (1-4 gang switches and sockets) and British-standard series are both available — the catalogs for both are attached for your selection. Please let us know which standard and models you prefer and the estimated quantities, and we will prepare a partnership proposal with pricing and MOQ terms.</td></tr>
+<tr><td class="no">120</td><td class="date">2026-08-19</td><td class="name">客户120</td><td class="country">NL 荷兰</td><td>出口转售特征（非洲市场，旅荷），数量明确1000件，葡语沟通 🟡</td><td>16A欧标法德插座；要1000件寄往非洲（葡萄牙语沟通），选白色，4款各250件，等价格表</td><td class="script">Dear 客户120, thank you for your inquiry. For 1000 pcs of 16A French/German-standard sockets in white (4 models × 250 pcs), we will prepare a quotation with unit prices, total weight and shipping options to Africa. We can also provide the price list in Portuguese for your convenience. Please confirm the 4 models, and we will send the quotation within 24 hours. As a factory-direct supplier, we offer competitive pricing for volume orders and support Trade Assurance.</td></tr>
+<tr><td class="no">121</td><td class="date">2026-08-19</td><td class="name">客户121</td><td class="country">DE 德国</td><td>电气贸易特征（德语询盘，不锈钢面板系列），无公开主体信息 🟡</td><td>欧标不锈钢面板开关插座，想洽谈（德语）</td><td class="script">Dear 客户121, thank you for your inquiry. Our European-standard stainless-steel panel switches and sockets are available in brushed steel, matte black, gold and silver with CE/RoHS certification. The catalog and price list are attached (a German version can be provided on request). Please let us know the models and quantities you are considering, and we will prepare a quotation with delivery options to Germany. Wir freuen uns auf eine Zusammenarbeit.</td></tr>
+<tr><td class="no">122</td><td class="date">2026-08-19</td><td class="name">客户122</td><td class="country">NG 尼日利亚</td><td>信息量极低（仅卡片），无公开主体信息 🔴</td><td>仅发产品卡片（无文字询盘）</td><td class="script">Dear 客户122, thank you for your interest. We are a factory-direct manufacturer of switches and sockets serving the Nigerian market with UK-standard products, competitive wholesale pricing and Trade Assurance support. Our catalog and price list are attached — please let us know which products interest you and the quantities, and we will send a detailed quotation. We look forward to your reply.</td></tr>
+<tr><td class="no">123</td><td class="date">2026-08-19</td><td class="name">客户123</td><td class="country">VN 越南</td><td>建筑电气工程特征，万件级大单（工程承包商），清单极详实，建议分阶段交付 🟢</td><td>越南建筑项目大单：单控开关5319、双控2128、Panasonic MCB、插拔断路器、2插1开面板2255、2插2开2128、3插面板2426、单插座979、暗装盒12128、配电箱42、线管2277卷等；要图/规格/EXW价/包装/MOQ</td><td class="script">Dear 客户123, thank you for your comprehensive project list — this is a substantial order and we take it very seriously. We will prepare a phased quotation with EXW pricing, product drawings, specifications, packaging details and MOQ for each item on your list. For items we cannot supply (e.g. incompatible switches, Panasonic MCB brand parts), we have noted the gaps and will clearly mark alternatives or sourcing options. Given the scale, we recommend a phased delivery plan to secure quality and timeline; we can also arrange a video meeting to walk through the full proposal. Please confirm the project schedule, and we will send the detailed quotation within 48 hours.</td></tr>
+<tr><td class="no">124</td><td class="date">2026-08-19</td><td class="name">客户124</td><td class="country">CD 刚果(金)</td><td>批发特征（100件询价），沟通内容需留意（消息含无关乱语） 🟡</td><td>问100件英标开关插座价格（消息含无关乱语，卖家澄清只售开关插座）</td><td class="script">Dear 客户124, thank you for your inquiry. For 100 pcs of British-standard switches and sockets, I will prepare a quotation with unit prices and shipping options to DR Congo. To proceed accurately, please confirm the specific models and colors you need (our scope covers switches and sockets). If any of your previous messages were unclear, feel free to resend the details — we are happy to help.</td></tr>
+<tr><td class="no">125</td><td class="date">2026-08-19</td><td class="name">客户125</td><td class="country">SN 塞内加尔</td><td>批发/工程特征，清单具体，总价已谈至$155（接近成交），名称占位无法核实主体 🟢</td><td>详细清单：50接地插座+10防水插座+10TV插座+50单开关+30双开关+15双控+10按钮+30双联板；不锈钢银/黑或PC白/黑/灰，总价$155，约28kg，走中国货代</td><td class="script">Dear 客户125, thank you for confirming the final details. We have prepared the PI for your set (50 earthed sockets + 10 waterproof + 10 TV + 50 1-gang + 30 2-gang + 15 2-way + 10 push buttons + 30 2-gang frames) at the agreed total of USD 155, approx. 28kg, with delivery to your Chinese forwarder. Please confirm the final finish (stainless silver/black or PC white/black/grey — waterproof items to be replaced with PC panels as discussed), and we will send the payment link via Trade Assurance. Thank you for your trust in Longyang.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <b>数据与口径说明</b><br>
+  1. 询盘数据来源：Alibaba.com 国际站全店 5 账号（账号已脱敏），周期 2026-08-06 ~ 2026-08-19，共 352 会话 / 3891 条消息，provenanceStatus=verified，failures=0，命中 125 条新询盘。<br>
+  2. 背调方式：重点买家深度 OSINT 检索（姓名+国家、公司名、邮箱域名、社媒、企业注册库等，约 90 次），其余买家快速核验。公网未发现任何买家与公开企业主体匹配，亦未发现负面或合规名单信息 —— 买家多为中小贸易商/个人，公网足迹稀少属正常现象。<br>
+  3. 置信度口径：🟢 高（含付款、到厂考察、明确金额等强信号且无矛盾）；🟡 中（询盘具体但无交易证据）；🔴 低（仅产品卡片/打招呼/无实质信息）。<br>
+  4. 采购规模与金额为基于询盘内容的区间估算，标注"推断"者非公开实证，最终以实际报价与订单为准。<br>
+  5. 合规声明：全部信息来自公开渠道（OSINT）与站内询盘记录，未使用任何非公开数据，未编造公司名称、规模或交易记录。<br>
+  <br>
+  生成日期：2026-08-19 · Alibaba.com 店铺经营辅助文档（已脱敏）
+</footer>
+
+</div>
+</body>
+</html>

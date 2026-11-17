@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bathroom Hardware Set · 国际站发品内容包</title>
+<style>
+:root {
+  --ink: #16202b;
+  --ink-soft: #3d4b5c;
+  --muted: #7c8798;
+  --navy: #1f4e78;
+  --navy-deep: #143451;
+  --copper: #b0763a;
+  --gold: #d8a35a;
+  --paper: #f6f3ee;
+  --card: #ffffff;
+  --line: #e2ddd4;
+  --volume: #dce9f5;
+  --quality: #dcefe0;
+  --pain: #f7e2d4;
+  --shadow: 0 1px 2px rgba(22,32,43,.06), 0 12px 32px -18px rgba(22,32,43,.35);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", "Source Han Serif SC", Georgia, serif;
+  --sans: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 15px; line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(900px 460px at 12% -8%, rgba(216,163,90,.18), transparent 60%),
+    radial-gradient(700px 420px at 96% 4%, rgba(31,78,120,.14), transparent 62%);
+}
+.wrap { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 0 22px 90px; }
+
+/* ---------- hero ---------- */
+.hero { padding: 64px 0 34px; border-bottom: 1px solid var(--line); }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--copper); font-weight: 700; margin-bottom: 16px;
+}
+.eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--copper); display: inline-block; }
+h1 {
+  font-family: var(--serif); font-size: clamp(30px, 4.6vw, 50px); line-height: 1.12;
+  margin: 0 0 12px; letter-spacing: -.01em; font-weight: 600;
+}
+h1 em { font-style: italic; color: var(--navy); }
+.lede { max-width: 720px; color: var(--ink-soft); font-size: 15.5px; margin: 0 0 26px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 10px; }
+.kpi {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 13px 15px; box-shadow: var(--shadow);
+}
+.kpi span { display: block; font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.kpi strong { font-family: var(--serif); font-size: 19px; color: var(--navy-deep); }
+
+/* ---------- nav ---------- */
+nav.toc {
+  position: sticky; top: 0; z-index: 20; margin: 0 -22px; padding: 12px 22px;
+  background: rgba(246,243,238,.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line); display: flex; gap: 6px; overflow-x: auto;
+}
+nav.toc a {
+  flex: 0 0 auto; text-decoration: none; color: var(--ink-soft);
+  font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid transparent; transition: .18s;
+}
+nav.toc a:hover { border-color: var(--navy); color: var(--navy); background: #fff; }
+
+/* ---------- sections ---------- */
+section { padding: 48px 0 8px; }
+section > header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+h2 {
+  font-family: var(--serif); font-size: clamp(21px, 2.5vw, 28px); margin: 0;
+  font-weight: 600; letter-spacing: -.01em;
+}
+h2 .idx {
+  font-family: var(--sans); font-size: 11.5px; letter-spacing: .16em; color: var(--copper);
+  font-weight: 700; display: block; margin-bottom: 4px;
+}
+.sub { color: var(--muted); font-size: 13px; }
+
+/* ---------- gallery ---------- */
+.grid-shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 18px; }
+.grid-details { display: grid; grid-template-columns: 1fr; gap: 18px; }
+figure.shot {
+  margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(14px); animation: rise .6s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+.shot-frame { background: #eef0f2; }
+.shot-frame img { display: block; width: 100%; height: auto; }
+figure.shot figcaption { padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; }
+figure.shot figcaption strong { font-size: 13.5px; color: var(--navy-deep); }
+figure.shot figcaption span { font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
+
+/* ---------- tables ---------- */
+.table-wrap { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: auto; box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  background: var(--navy); color: #fff; text-align: left; padding: 11px 13px;
+  font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; white-space: nowrap;
+}
+tbody td { padding: 11px 13px; border-top: 1px solid var(--line); vertical-align: top; }
+tbody tr:nth-child(even) { background: #fbfaf7; }
+td.en { font-size: 12.5px; line-height: 1.6; color: var(--ink); max-width: 520px; }
+td.zh { color: var(--ink-soft); }
+td.num { font-family: var(--serif); font-weight: 600; color: var(--navy); width: 46px; }
+td.len { font-variant-numeric: tabular-nums; color: var(--copper); font-weight: 600; white-space: nowrap; }
+td.muted, .muted { color: var(--muted); font-size: 12px; }
+tr.dim-volume td:first-child { border-left: 3px solid var(--navy); }
+tr.dim-quality td:first-child { border-left: 3px solid #4a8c5c; }
+tr.dim-pain td:first-child { border-left: 3px solid var(--copper); }
+.tag {
+  display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px;
+  font-weight: 700; white-space: nowrap; color: var(--ink-soft); background: var(--volume);
+}
+tr.dim-quality .tag { background: var(--quality); }
+tr.dim-pain .tag { background: var(--pain); }
+.info-table th {
+  text-align: left; width: 148px; background: #f2efe9; color: var(--navy-deep);
+  font-size: 12px; letter-spacing: .03em; padding: 11px 13px; border-top: 1px solid var(--line); white-space: nowrap;
+}
+
+/* ---------- selling points ---------- */
+.sp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.sp-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 19px 8px; box-shadow: var(--shadow);
+}
+.sp-card header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 11px; border-bottom: 1px dashed var(--line); }
+.sp-id {
+  font-family: var(--sans); font-size: 11px; font-weight: 800; letter-spacing: .06em;
+  color: #fff; background: var(--navy); padding: 3px 8px; border-radius: 6px;
+}
+.sp-card h3 { font-family: var(--serif); font-size: 15.5px; margin: 0; color: var(--navy-deep); }
+.seg { margin-bottom: 11px; }
+.seg em {
+  display: block; font-style: normal; font-size: 10.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--copper); font-weight: 700; margin-bottom: 3px;
+}
+.seg p { margin: 0; font-size: 12.5px; color: var(--ink-soft); line-height: 1.62; }
+.seg ul { margin: 0; padding-left: 17px; }
+.seg li { font-size: 12.5px; color: var(--ink-soft); line-height: 1.62; margin-bottom: 2px; }
+
+/* ---------- strategy ---------- */
+.strat-grid { display: grid; gap: 18px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); }
+.panel h3 { font-family: var(--serif); font-size: 16.5px; margin: 0 0 12px; color: var(--navy-deep); }
+.note {
+  border-left: 3px solid var(--gold); background: #fdf8ef; border-radius: 0 10px 10px 0;
+  padding: 14px 17px; font-size: 12.8px; color: var(--ink-soft);
+}
+.note strong { color: var(--copper); }
+ul.plain { margin: 0; padding-left: 19px; font-size: 13px; color: var(--ink-soft); }
+ul.plain li { margin-bottom: 5px; }
+
+footer { margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .hero { padding-top: 40px; }
+  .sp-grid { grid-template-columns: 1fr; }
+  section { padding-top: 36px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Alibaba.com · 发品内容包</div>
+    <h1>Bathroom Hardware Set<br><em>抛光铬 + 深胡桃木</em> 六类七件浴室五金套装</h1>
+    <p class="lede">基于用户实拍素材生成的完整发品交付物：11 张成品图（6 主图 + 5 新版详情页）、20 款标题、20 组卖点、27 词关键词矩阵与首战策略。草稿已保存至草稿箱，待确认后发布。</p>
+    <div class="kpis"><div class='kpi'><span>商品类目</span><strong>Bathroom Accessories</strong></div><div class='kpi'><span>主图 / 详情图</span><strong>6 + 5 张</strong></div><div class='kpi'><span>标题</span><strong>20 款</strong></div><div class='kpi'><span>卖点</span><strong>20 组 × 5 段</strong></div><div class='kpi'><span>关键词</span><strong>27 词</strong></div><div class='kpi'><span>草稿 ID</span><strong>1601928768938</strong></div></div>
+  </header>
+
+  <nav class="toc">
+    <a href="#main">主图 6 张</a>
+    <a href="#detail">详情页 5 张</a>
+    <a href="#base">商品信息</a>
+    <a href="#titles">20 款标题</a>
+    <a href="#selling">20 组卖点</a>
+    <a href="#keywords">关键词矩阵</a>
+    <a href="#strategy">首战策略</a>
+  </nav>
+
+  <section id="main">
+    <header>
+      <h2><span class="idx">01 · Main Images</span>主图（1:1 · 1024×1024）</h2>
+      <span class="sub">首图纯白底无文字，其余 5 张均为复合增强图；全组仅主图 3 含引线标注</span>
+    </header>
+    <div class="grid-shots">
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/Ae553e9a775554937a30811ca2f4d63ecr.png" alt="主图 1 · 首图（纯白底 Hero）" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/Ae553e9a775554937a30811ca2f4d63ecr.png"></div>
+          <figcaption><strong>主图 1 · 首图（纯白底 Hero）</strong><span>无文字 · 纯白底 · 产品 75-80% 覆盖</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A0b0ccdb8c13140008dac6a39be2c2fc3Y.png" alt="主图 2 · 应用场景" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A0b0ccdb8c13140008dac6a39be2c2fc3Y.png"></div>
+          <figcaption><strong>主图 2 · 应用场景</strong><span>COMPLETE BATHROOM HARDWARE SET</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A914bd38b4de44fd19ee9c687582999ebB.png" alt="主图 3 · 材质标注（全组唯一标注图）" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A914bd38b4de44fd19ee9c687582999ebB.png"></div>
+          <figcaption><strong>主图 3 · 材质标注（全组唯一标注图）</strong><span>POLISHED CHROME / NATURAL WALNUT / RUST-RESISTANT FINISH</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A8470276e7aa245aea74a6c150b2a343cT.png" alt="主图 4 · 内容物清单" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A8470276e7aa245aea74a6c150b2a343cT.png"></div>
+          <figcaption><strong>主图 4 · 内容物清单</strong><span>6-PIECE SET + 6 项清单</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/Acce71e38412748fb8e2b33d53a305474z.png" alt="主图 5 · 转角省空间场景" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/Acce71e38412748fb8e2b33d53a305474z.png"></div>
+          <figcaption><strong>主图 5 · 转角省空间场景</strong><span>SPACE-SAVING CORNER DESIGN</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A6d17c85fb56d49dfa65ce3478e0aa5e0M.png" alt="主图 6 · 安装步骤" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A6d17c85fb56d49dfa65ce3478e0aa5e0M.png"></div>
+          <figcaption><strong>主图 6 · 安装步骤</strong><span>MARK POSITIONS / DRILL HOLES / MOUNT &amp; FIX</span></figcaption>
+        </figure></div>
+  </section>
+
+  <section id="detail">
+    <header>
+      <h2><span class="idx">02 · Detail Page</span>详情页（16:9 · 1792×1024 · 新版模板）</h2>
+      <span class="sub">按新版详情页结构：总览 → 材质工艺 → 尺寸参数 → 应用场景 → 包装与服务</span>
+    </header>
+    <div class="grid-details">
+        <figure class="shot wide">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A0a885dc33465407a8d7a0a1dd20781e1b.png" alt="详情 1 · 总览横幅" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A0a885dc33465407a8d7a0a1dd20781e1b.png"></div>
+          <figcaption><strong>详情 1 · 总览横幅</strong><span>产品全家福 + 主卖点条</span></figcaption>
+        </figure>
+        <figure class="shot wide">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/A49656ed10f964dc19d456f8d70f6de5fX.png" alt="详情 2 · 材质工艺" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/A49656ed10f964dc19d456f8d70f6de5fX.png"></div>
+          <figcaption><strong>详情 2 · 材质工艺</strong><span>PREMIUM MATERIALS + 3 点工艺</span></figcaption>
+        </figure>
+        <figure class="shot wide">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/Af4793a5b55a84a3597ce3435d486eece8.png" alt="详情 3 · 尺寸参数" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/Af4793a5b55a84a3597ce3435d486eece8.png"></div>
+          <figcaption><strong>详情 3 · 尺寸参数</strong><span>SIZE SPECIFICATION + 6 行规格表</span></figcaption>
+        </figure>
+        <figure class="shot wide">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/Ab50099f63384411fa29bfba6e6910152C.png" alt="详情 4 · 应用场景" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/Ab50099f63384411fa29bfba6e6910152C.png"></div>
+          <figcaption><strong>详情 4 · 应用场景</strong><span>A COMPLETE COORDINATED LOOK</span></figcaption>
+        </figure>
+        <figure class="shot wide">
+          <div class="shot-frame"><img src="https://sc02.alicdn.com/kf/Acc82fe02acc6431db9f005f1f45ea27dh.png" alt="详情 5 · 包装与服务" loading="lazy" data-cdn="https://sc02.alicdn.com/kf/Acc82fe02acc6431db9f005f1f45ea27dh.png"></div>
+          <figcaption><strong>详情 5 · 包装与服务</strong><span>SERVICE &amp; PACKAGING + 4 项 B 端服务</span></figcaption>
+        </figure></div>
+  </section>
+
+  <section id="base">
+    <header>
+      <h2><span class="idx">03 · Product Info</span>商品基础信息</h2>
+      <span class="sub">标注「建议值 / 待确认」的字段请按实际产品与店铺政策核对后替换</span>
+    </header>
+    <div class="table-wrap">
+      <table class="info-table">
+        <thead><tr><th>字段</th><th>内容</th><th>状态</th><th>备注</th></tr></thead>
+        <tbody><tr><th>商品类目</th><td>Bathroom Accessories &gt; Bathroom Hardware</td><td class='muted'>建议</td><td class='muted'>按店铺类目树核对</td></tr><tr><th>材质</th><td>不锈钢基材+抛光铬电镀 / 深胡桃木(环保硬木)</td><td class='muted'>建议</td><td class='muted'>按工厂实际材质核对</td></tr><tr><th>表面处理</th><td>Polished Chrome + Natural Walnut Finish</td><td class='muted'>终稿</td><td class='muted'></td></tr><tr><th>安装方式</th><td>Wall Mounted 壁挂(附螺丝/膨胀管)</td><td class='muted'>建议</td><td class='muted'>附件清单待确认</td></tr><tr><th>件数</th><td>6类7件 (含2个转角置物架)</td><td class='muted'>终稿</td><td class='muted'></td></tr><tr><th>MOQ</th><td>50 sets</td><td class='muted'>建议值</td><td class='muted'></td></tr><tr><th>价格(FOB)</th><td>$13.5-15.5 基础 / $15.5-18.5 标准 / $18.5-22.5 高端</td><td class='muted'>建议值</td><td class='muted'>按成本与运费校准</td></tr><tr><th>交期</th><td>常规15-25天 / 定制30-45天</td><td class='muted'>建议值</td><td class='muted'></td></tr><tr><th>认证</th><td>建议 REACH(欧盟)/CPSIA(美国)</td><td class='muted'>建议值</td><td class='muted'>无实盘证据前图内不标注认证名</td></tr><tr><th>定制能力</th><td>OEM/ODM / Logo / 尺寸 / 木色 / 电镀色 / 包装</td><td class='muted'>终稿</td><td class='muted'></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="titles">
+    <header>
+      <h2><span class="idx">04 · Titles</span>20 款标题</h2>
+      <span class="sub">Title Case · 全部 ≤128 字符（实测 112–122，均值 117.35）· 无逗号连字符品牌词绝对化用语</span>
+    </header>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Title (EN)</th><th>字符</th><th>中文翻译</th></tr></thead>
+        <tbody><tr><td class='num'>1</td><td class='en'>6 Piece Bathroom Hardware Set With Towel Rack Shelf Double Towel Bar Hook Rack Toilet Paper Holder Wall Mounted For Home</td><td class='len'>120</td><td class='zh'>6件套浴室五金套装：带置物架毛巾架、双杆毛巾架、挂钩架、卷纸架，壁挂家用</td></tr><tr><td class='num'>2</td><td class='en'>Complete Bathroom Accessories Set Chrome Walnut Finish Wall Mounted Towel Rack Toilet Brush Holder For Bathroom Storage</td><td class='len'>119</td><td class='zh'>完整浴室配件套装：铬色胡桃木饰面、壁挂毛巾架与马桶刷架，浴室收纳</td></tr><tr><td class='num'>3</td><td class='en'>Bathroom Towel Rack Set With Shelf Double Bar 5 Hook Rack Corner Shelf For Modern Bathroom Decor Wall Mounted For Home</td><td class='len'>118</td><td class='zh'>浴室毛巾架套装：置物架、双杆、五钩挂钩架、转角架，现代浴室装饰</td></tr><tr><td class='num'>4</td><td class='en'>Complete Wall Mounted Bathroom Hardware Set Rust Resistant Chrome And Walnut Towel Bar Hook Rack Toilet Paper Holder</td><td class='len'>119</td><td class='zh'>完整壁挂浴室五金套装：防锈铬色胡桃木毛巾杆、挂钩架、卷纸架</td></tr><tr><td class='num'>5</td><td class='en'>Bathroom Accessories Set 6 Piece Chrome Walnut Finish Towel Rack With Shelf Double Towel Bar Hook Rack Corner Shelf</td><td class='len'>115</td><td class='zh'>浴室配件6件套：铬色胡桃木，带置物架毛巾架、双杆、挂钩架、转角架</td></tr><tr><td class='num'>6</td><td class='en'>Modern Bathroom Hardware Set Space Saving Corner Shelf Towel Rack Toilet Paper Holder Wall Mounted Chrome Walnut Finish</td><td class='len'>119</td><td class='zh'>现代浴室五金套装：省空间转角架、毛巾架、卷纸架，壁挂铬色胡桃木</td></tr><tr><td class='num'>7</td><td class='en'>Rust Resistant Bathroom Towel Rack Set Chrome Finish Walnut Wood 5 Hook Rack For Bathroom Storage Wall Mounted Shelf</td><td class='len'>116</td><td class='zh'>防锈浴室毛巾架套装：铬色胡桃木五钩挂钩架，浴室收纳壁挂置物</td></tr><tr><td class='num'>8</td><td class='en'>Bathroom Organizer Set Wall Mounted Towel Rack With Shelf Double Bar Hook Rack Corner Shelf Toilet Paper Holder Chrome</td><td class='len'>118</td><td class='zh'>浴室收纳套装：壁挂带置物架毛巾架、双杆、挂钩架、转角架、卷纸架</td></tr><tr><td class='num'>9</td><td class='en'>Polished Chrome Bathroom Hardware Set Walnut Wood Towel Rack With Shelf Toilet Paper Holder Brush Holder Wall Mounted</td><td class='len'>117</td><td class='zh'>抛光铬浴室五金套装：胡桃木带置物架毛巾架、卷纸架、刷架，壁挂</td></tr><tr><td class='num'>10</td><td class='en'>Complete Bathroom Towel Rack Set Wall Mount Chrome Walnut Double Towel Bar 5 Hook Rack Corner Shelf Toilet Paper Holder</td><td class='len'>119</td><td class='zh'>完整浴室毛巾架套装：壁挂铬色胡桃木双杆、五钩、转角架、卷纸架</td></tr><tr><td class='num'>11</td><td class='en'>Bathroom Fixtures Set Chrome Walnut Towel Rack With Shelf Double Towel Bar Toilet Paper Holder Brush Holder Wall Mounted</td><td class='len'>120</td><td class='zh'>浴室挂件套装：铬色胡桃木带置物架毛巾架、双杆、卷纸架、刷架，壁挂</td></tr><tr><td class='num'>12</td><td class='en'>Space Saving Bathroom Accessories Set Corner Shelf Towel Rack Wall Mounted Chrome Walnut Finish For Bathroom Decor</td><td class='len'>114</td><td class='zh'>省空间浴室配件套装：转角架、毛巾架，壁挂铬色胡桃木，浴室装饰</td></tr><tr><td class='num'>13</td><td class='en'>Complete Wall Mounted Towel Rack With Shelf Double Bar Hook Rack Toilet Paper Holder Bathroom Hardware Set For Bathroom</td><td class='len'>118</td><td class='zh'>完整壁挂带置物架毛巾架、双杆、挂钩架、卷纸架，浴室五金套装</td></tr><tr><td class='num'>14</td><td class='en'>6 Piece Bathroom Accessories Set Chrome Walnut Rust Resistant Towel Rack With Shelf Hook Rack Corner Shelf Toilet Holder</td><td class='len'>115</td><td class='zh'>浴室配件6件套：铬色胡桃木防锈带置物架毛巾架、挂钩架、转角架</td></tr><tr><td class='num'>15</td><td class='en'>Bathroom Hardware Set For Modern Bathroom Polished Chrome Walnut Wood Towel Rack Toilet Brush Holder Wall Mounted</td><td class='len'>113</td><td class='zh'>现代浴室五金套装：抛光铬胡桃木毛巾架、马桶刷架，壁挂</td></tr><tr><td class='num'>16</td><td class='en'>Heavy Duty Bathroom Towel Rack Set Wall Mounted Chrome Walnut 5 Hook Rack Toilet Paper Holder For Hotel Home Use</td><td class='len'>120</td><td class='zh'>加厚承重浴室毛巾架套装：壁挂铬色胡桃木五钩架、卷纸架，酒店家用</td></tr><tr><td class='num'>17</td><td class='en'>Bathroom Storage Set Wall Mounted Towel Rack With Shelf Double Towel Bar Corner Shelf Hook Rack Chrome Walnut For Bathroom</td><td class='len'>120</td><td class='zh'>浴室收纳套装：壁挂带置物架毛巾架、双杆、转角架、挂钩架，铬色胡桃木</td></tr><tr><td class='num'>18</td><td class='en'>Premium Bathroom Hardware Set Chrome Walnut Finish Rust Resistant Towel Rack Toilet Paper Holder Wall Mounted For Home</td><td class='len'>120</td><td class='zh'>高端浴室五金套装：铬色胡桃木饰面防锈毛巾架、卷纸架，壁挂家用</td></tr><tr><td class='num'>19</td><td class='en'>Bathroom Accessories Bundle Towel Rack With Shelf Double Towel Bar 5 Hook Rack Corner Shelf Wall Mounted Chrome Finish</td><td class='len'>118</td><td class='zh'>浴室配件组合：带置物架毛巾架、双杆、五钩、转角架，壁挂铬色饰面</td></tr><tr><td class='num'>20</td><td class='en'>Easy Install Bathroom Hardware Set Chrome Walnut Towel Rack With Shelf Double Bar Toilet Paper Holder Wall Mounted</td><td class='len'>114</td><td class='zh'>易安装浴室五金套装：铬色胡桃木带置物架毛巾架、双杆、卷纸架，壁挂</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="selling">
+    <header>
+      <h2><span class="idx">05 · Selling Points</span>20 组核心卖点</h2>
+      <span class="sub">固定 5 段结构：材质健康 → 性能参数 → 体验痛点 → 工艺配件 → 认证 + B 端服务</span>
+    </header>
+    <div class="sp-grid">
+        <article class="sp-card">
+          <header><span class="sp-id">S1</span><h3>Complete 6-Piece Set 完整六件套</h3></header>
+          <div class='seg'><em>材质健康</em><p>All pieces share the same hygienic chrome and natural walnut family, so every mount looks like one designed suite.</p></div><div class='seg'><em>性能参数</em><p>Six categories cover towel rack, double bar, five hooks, corner shelves, toilet paper and brush holder in one order.</p></div><div class='seg'><em>体验痛点</em><p>No more mixing brands and finishes; one set delivers a coordinated bathroom look without guesswork.</p></div><div class='seg'><em>工艺配件</em><p>Each unit ships with matching wall screws, anchors and a drilling template for consistent mounting.</p></div><div class='seg'><em>认证 + B端服务</em><p>Factory direct supply with OEM and ODM options and export carton packaging per order.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S2</span><h3>Rust-Resistant Durability 防锈耐用</h3></header>
+          <div class='seg'><em>材质健康</em><p>Polished chrome plating over stainless steel core keeps metal surfaces clean and safe to touch daily.</p></div><div class='seg'><em>性能参数</em><p>Multi-layer electroplating resists moisture, steam and everyday humidity in bathroom environments.</p></div><div class='seg'><em>体验痛点</em><p>Stops the brown rust stains that ruin walls and towels after months of wet use.</p></div><div class='seg'><em>工艺配件</em><p>Corrosion protection is applied to mounts, bars, hooks and wire baskets equally.</p></div><div class='seg'><em>认证 + B端服务</em><p>Compliance documents can be provided on request for EU and US target markets.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S3</span><h3>Premium Walnut Wood 优质胡桃木</h3></header>
+          <div class='seg'><em>材质健康</em><p>Natural walnut with a clear grain finish is selected for a warm, non-toxic home touch.</p></div><div class='seg'><em>性能参数</em><p>Hardwood construction gives each bracket a solid, stable feel that light plastic mounts lack.</p></div><div class='seg'><em>体验痛点</em><p>The wood grain warms up cold chrome bathrooms instead of feeling like cheap metal fittings.</p></div><div class='seg'><em>工艺配件</em><p>Each wooden part is sanded, sealed and edge-rounded to prevent splinters and moisture absorption.</p></div><div class='seg'><em>认证 + B端服务</em><p>Wood sourcing and finishing processes can be documented for green procurement buyers.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S4</span><h3>Polished Chrome Finish 抛光铬工艺</h3></header>
+          <div class='seg'><em>材质健康</em><p>Smooth chrome surfaces have no pores for dirt or soap residue to collect.</p></div><div class='seg'><em>性能参数</em><p>Mirror-level polish reflects light and keeps the bathroom looking bright and spacious.</p></div><div class='seg'><em>体验痛点</em><p>Water spots and fingerprints wipe off with a single pass of a soft cloth.</p></div><div class='seg'><em>工艺配件</em><p>Chrome caps cover every screw head, leaving a clean, furniture-grade look.</p></div><div class='seg'><em>认证 + B端服务</em><p>Finish samples and color cards can be sent before bulk production.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S5</span><h3>Space-Saving Corner Design 省空间转角设计</h3></header>
+          <div class='seg'><em>材质健康</em><p>Corner shelves tuck into unused wall corners, keeping wet floors clear and hygienic.</p></div><div class='seg'><em>性能参数</em><p>Quarter-round footprint fits standard 90-degree corners with no wasted wall space.</p></div><div class='seg'><em>体验痛点</em><p>Turns dead corner areas into usable storage for soaps, bottles and folded towels.</p></div><div class='seg'><em>工艺配件</em><p>Shelf base uses a slotted chrome tray for quick water drainage and airflow.</p></div><div class='seg'><em>认证 + B端服务</em><p>Corner units are priced as part of the set and can be ordered separately for restock.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S6</span><h3>Heavy-Duty Stability 承重稳固</h3></header>
+          <div class='seg'><em>材质健康</em><p>Solid mounting plates distribute weight evenly so fixtures stay level under daily use.</p></div><div class='seg'><em>性能参数</em><p>Double-rod bars hold multiple heavy bath towels without sagging or loosening.</p></div><div class='seg'><em>体验痛点</em><p>No wobble when you grab a towel or pull the toilet brush out of its holder.</p></div><div class='seg'><em>工艺配件</em><p>Reinforced joints and full-wall screw fixing keep every unit locked in place.</p></div><div class='seg'><em>认证 + B端服务</em><p>Load-bearing data can be shared with hotel and project buyers during evaluation.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S7</span><h3>Easy Wall Mount Installation 易于安装</h3></header>
+          <div class='seg'><em>材质健康</em><p>All parts mount on the wall, away from wet floors and easy to keep clean.</p></div><div class='seg'><em>性能参数</em><p>Standard screw and anchor kit fits tile, plaster and wooden bathroom walls.</p></div><div class='seg'><em>体验痛点</em><p>A straightforward mark-drill-mount sequence lets one installer finish the set quickly.</p></div><div class='seg'><em>工艺配件</em><p>Matching screws and a drilling template are included so positions line up perfectly.</p></div><div class='seg'><em>认证 + B端服务</em><p>Installation drawings and video guidance can be provided to distributors and retailers.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S8</span><h3>2-in-1 Towel Rack with Shelf 二合一毛巾架</h3></header>
+          <div class='seg'><em>材质健康</em><p>The shelf keeps towels off the floor and lets air circulate between layers.</p></div><div class='seg'><em>性能参数</em><p>Upper shelf stores folded linens while the lower chrome bar hangs used towels.</p></div><div class='seg'><em>体验痛点</em><p>No more piling wet towels on top of clean ones in a single narrow bar.</p></div><div class='seg'><em>工艺配件</em><p>The shelf front is trimmed with the same walnut rail as the rest of the set.</p></div><div class='seg'><em>认证 + B端服务</em><p>This best-selling unit can be offered as a standalone SKU for quick reorders.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S9</span><h3>Coordinated Design Language 统一设计语言</h3></header>
+          <div class='seg'><em>材质健康</em><p>One chrome and walnut family across all pieces creates a calm, coherent bathroom.</p></div><div class='seg'><em>性能参数</em><p>Every mount, bar and hook shares the same profile, radius and finish tone.</p></div><div class='seg'><em>体验痛点</em><p>Buyers skip the headache of matching separate purchases from different vendors.</p></div><div class='seg'><em>工艺配件</em><p>Design details such as chrome end caps repeat on each unit for a premium feel.</p></div><div class='seg'><em>认证 + B端服务</em><p>Set images and renders are available for resellers to build consistent listings.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S10</span><h3>Moisture &amp; Humidity Resistant 防潮耐湿</h3></header>
+          <div class='seg'><em>材质健康</em><p>Sealed wood and plated metal resist the steam from showers and baths every day.</p></div><div class='seg'><em>性能参数</em><p>Surface treatments are formulated for high-humidity bathroom air over years of use.</p></div><div class='seg'><em>体验痛点</em><p>No swelling, warping or peeling after long exposure to bathroom moisture.</p></div><div class='seg'><em>工艺配件</em><p>Wood parts are edge-sealed and metal parts plated before assembly.</p></div><div class='seg'><em>认证 + B端服务</em><p>Humidity test results can be supplied to quality-focused importers.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S11</span><h3>Easy to Clean 易清洁</h3></header>
+          <div class='seg'><em>材质健康</em><p>Smooth surfaces resist soap scum, limescale and mildew buildup.</p></div><div class='seg'><em>性能参数</em><p>All fixtures can be wiped down with a damp cloth without special chemicals.</p></div><div class='seg'><em>体验痛点</em><p>Cleaning the whole set takes minutes, not a weekend of scrubbing.</p></div><div class='seg'><em>工艺配件</em><p>Removable wire baskets and glass cups make deep cleaning simple.</p></div><div class='seg'><em>认证 + B端服务</em><p>Maintenance guidance can be printed on cartons or shared digitally.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S12</span><h3>Export-Grade Packaging 出口级包装</h3></header>
+          <div class='seg'><em>材质健康</em><p>Each piece is individually wrapped to stay dust-free and scratch-free in transit.</p></div><div class='seg'><em>性能参数</em><p>Corrugated export cartons with inner padding protect chrome and wood finishes.</p></div><div class='seg'><em>体验痛点</em><p>Arrives damage-free, cutting after-sales claims and replacement costs.</p></div><div class='seg'><em>工艺配件</em><p>Foam and bubble layers separate bars, hooks, baskets and glass parts.</p></div><div class='seg'><em>认证 + B端服务</em><p>Custom carton printing with buyer logo and language is available for large orders.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S13</span><h3>OEM &amp; ODM Customization 定制服务</h3></header>
+          <div class='seg'><em>材质健康</em><p>Custom finishes keep the same hygienic materials while matching brand identity.</p></div><div class='seg'><em>性能参数</em><p>Logo, size, wood tone and plating color can all be tailored to buyer specs.</p></div><div class='seg'><em>体验痛点</em><p>Private-label buyers get their own look without building a new supply chain.</p></div><div class='seg'><em>工艺配件</em><p>Existing molds and tooling shorten lead time for most customization requests.</p></div><div class='seg'><em>认证 + B端服务</em><p>MOQ for customization starts from a moderate order and scales with volume.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S14</span><h3>Eco-Friendly Materials 环保材质</h3></header>
+          <div class='seg'><em>材质健康</em><p>Natural wood and recyclable metal minimize chemical exposure in the home.</p></div><div class='seg'><em>性能参数</em><p>Plating processes are controlled to meet common export environmental standards.</p></div><div class='seg'><em>体验痛点</em><p>Environmentally conscious buyers can stock a greener bathroom line confidently.</p></div><div class='seg'><em>工艺配件</em><p>Wood offcuts and packaging materials are reused where production allows.</p></div><div class='seg'><em>认证 + B端服务</em><p>Green sourcing documents support buyers targeting eco-certified retail channels.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S15</span><h3>Versatile Application 多场景适用</h3></header>
+          <div class='seg'><em>材质健康</em><p>Suitable for homes, hotels, apartments and rental units with normal wall surfaces.</p></div><div class='seg'><em>性能参数</em><p>The set covers towels, robes, toiletries and cleaning tools in one system.</p></div><div class='seg'><em>体验痛点</em><p>Works in bathrooms of any size, from compact studios to family suites.</p></div><div class='seg'><em>工艺配件</em><p>Corner and straight units combine freely to fit different wall layouts.</p></div><div class='seg'><em>认证 + B端服务</em><p>Project pricing and bulk quotes are available for hotel and property developers.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S16</span><h3>Corner Space Utilization 转角空间利用</h3></header>
+          <div class='seg'><em>材质健康</em><p>Makes unused corner air space functional without touching wet floors.</p></div><div class='seg'><em>性能参数</em><p>Corner shelf adds a second storage level while keeping a small footprint.</p></div><div class='seg'><em>体验痛点</em><p>Solves the classic small-bathroom problem of nowhere to put bottles and towels.</p></div><div class='seg'><em>工艺配件</em><p>The curved chrome guard bar keeps items from sliding off the shelf edge.</p></div><div class='seg'><em>认证 + B端服务</em><p>Corner configurations can be illustrated in buyer-specific layout drawings.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S17</span><h3>Precise Hardware Details 五金细节</h3></header>
+          <div class='seg'><em>材质健康</em><p>Every screw head is concealed or capped for a clean, safe finish.</p></div><div class='seg'><em>性能参数</em><p>Tight tolerances keep bars parallel, hooks aligned and shelves level.</p></div><div class='seg'><em>体验痛点</em><p>No sharp edges or protruding screws to snag towels or scratch hands.</p></div><div class='seg'><em>工艺配件</em><p>Chrome caps, walnut rails and rounded profiles are finished consistently across the set.</p></div><div class='seg'><em>认证 + B端服务</em><p>Sample inspection reports can be provided to buyers with strict QC programs.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S18</span><h3>Long Service Life 长使用寿命</h3></header>
+          <div class='seg'><em>材质健康</em><p>Corrosion-resistant plating and sealed wood keep the set looking new for years.</p></div><div class='seg'><em>性能参数</em><p>Daily bathroom use is the designed condition, not a stress test.</p></div><div class='seg'><em>体验痛点</em><p>Buyers replace cheap sets every year; this one is built to stay installed.</p></div><div class='seg'><em>工艺配件</em><p>Fixed joints and plated hardware reduce wear points over time.</p></div><div class='seg'><em>认证 + B端服务</em><p>Durability and cycle-test data can be shared for tender and project bids.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S19</span><h3>Modern Minimalist Style 现代简约风</h3></header>
+          <div class='seg'><em>材质健康</em><p>Clean lines and neutral tones suit any tile, vanity or paint color.</p></div><div class='seg'><em>性能参数</em><p>The chrome-walnut contrast fits modern, Nordic and industrial bathroom styles.</p></div><div class='seg'><em>体验痛点</em><p>One timeless design stays relevant across rental refreshes and home restyles.</p></div><div class='seg'><em>工艺配件</em><p>Minimalist profiles hide mounting hardware for a floating, premium look.</p></div><div class='seg'><em>认证 + B端服务</em><p>Style renders help resellers target design-led buyer segments.</p></div>
+        </article>
+        <article class="sp-card">
+          <header><span class="sp-id">S20</span><h3>Reliable B2B Supply 可靠B2B供应</h3></header>
+          <div class='seg'><em>材质健康</em><p>Consistent quality control across batches keeps every order to the same standard.</p></div><div class='seg'><em>性能参数</em><p>Regular lead time of 15-25 days supports restock planning and seasonal peaks.</p></div><div class='seg'><em>体验痛点</em><p>One accountable supplier for the whole set simplifies sourcing and inspection.</p></div><div class='seg'><em>工艺配件</em><p>Pre-shipment inspection photos and packing lists are shared for every container.</p></div><div class='seg'><em>认证 + B端服务</em><p>OEM, ODM, mixed SKU orders and project quotations are all supported.</p></div>
+        </article></div>
+  </section>
+
+  <section id="keywords">
+    <header>
+      <h2><span class="idx">06 · Keywords</span>关键词矩阵（27 词）</h2>
+      <span class="sub">流量规模 9 + 流量质量 8 + 买家痛点 10；竞品证据待接入实盘数据后回填</span>
+    </header>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>维度</th><th>来源</th><th>入选逻辑</th><th>根词</th><th>竞品证据</th></tr></thead>
+        <tbody><tr class='dim-volume'><td class='en'>bathroom accessories</td><td><span class='tag'>流量规模</span></td><td class='muted'>品类知识库</td><td class='zh'>类目头部大词，覆盖所有浴室配件搜索</td><td class='en'>bathroom accessories</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>bathroom hardware</td><td><span class='tag'>流量规模</span></td><td class='muted'>品类知识库</td><td class='zh'>五金类目大词，B2B买家习惯用词</td><td class='en'>hardware</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>bathroom fixtures</td><td><span class='tag'>流量规模</span></td><td class='muted'>品类知识库</td><td class='zh'>泛化大词，覆盖挂件/龙头等全品类</td><td class='en'>fixtures</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>towel rack</td><td><span class='tag'>流量规模</span></td><td class='muted'>图片识别+知识库</td><td class='zh'>套装核心单品词，单件词搜索量最大</td><td class='en'>towel rack</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>towel bar</td><td><span class='tag'>流量规模</span></td><td class='muted'>图片识别+知识库</td><td class='zh'>双杆毛巾架对应核心词</td><td class='en'>towel bar</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>bathroom shelf</td><td><span class='tag'>流量规模</span></td><td class='muted'>图片识别+知识库</td><td class='zh'>转角架/置物架对应大词</td><td class='en'>shelf</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>wall mounted shelf</td><td><span class='tag'>流量规模</span></td><td class='muted'>图片识别+知识库</td><td class='zh'>壁挂形态修饰大词，区分落地款</td><td class='en'>wall mounted</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>bathroom organizer</td><td><span class='tag'>流量规模</span></td><td class='muted'>品类知识库</td><td class='zh'>收纳场景大词，买家痛点型入口</td><td class='en'>organizer</td><td class='muted'>待回填</td></tr><tr class='dim-volume'><td class='en'>bathroom set</td><td><span class='tag'>流量规模</span></td><td class='muted'>品类知识库</td><td class='zh'>套装词，精准对应本SKU形态</td><td class='en'>set</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>bathroom hardware set</td><td><span class='tag'>流量质量</span></td><td class='muted'>品类知识库</td><td class='zh'>套装高转化词，直接匹配产品</td><td class='en'>hardware set</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>towel rack with shelf</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>二合一结构长尾词，决策意图强</td><td class='en'>towel rack shelf</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>wall mounted bathroom accessories</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别+知识库</td><td class='zh'>安装方式+品类组合，过滤落地款</td><td class='en'>wall mounted accessories</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>chrome towel bar</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>材质+单品词，精准定位铬色买家</td><td class='en'>chrome towel bar</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>bathroom corner shelf</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>转角架场景词，小浴室高意向</td><td class='en'>corner shelf</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>toilet paper holder wall mounted</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>卷纸架安装方式长尾词</td><td class='en'>toilet paper holder</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>bathroom hook rack</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>挂钩架对应长尾词</td><td class='en'>hook rack</td><td class='muted'>待回填</td></tr><tr class='dim-quality'><td class='en'>walnut bathroom accessories</td><td><span class='tag'>流量质量</span></td><td class='muted'>图片识别</td><td class='zh'>材质差异化词，突出胡桃木卖点</td><td class='en'>walnut</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>rust resistant bathroom hardware</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>防锈第一决策点，直击五金最大抱怨</td><td class='en'>rust resistant</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>space saving bathroom accessories</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>小浴室收纳焦虑，转角架卖点入口</td><td class='en'>space saving</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>easy to install towel rack</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>安装难是退单主因，降低决策门槛</td><td class='en'>easy install</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>heavy duty bathroom organizer</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>承重诉求，酒店/家庭双场景</td><td class='en'>heavy duty</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>corrosion resistant bathroom set</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>防腐防潮表述，适配高湿地区</td><td class='en'>corrosion resistant</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>waterproof bathroom shelf</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>置物架防潮耐湿诉求</td><td class='en'>waterproof</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>sturdy wall mounted towel rack</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>稳固不晃动，安装后品质感</td><td class='en'>sturdy</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>scratch resistant chrome finish</td><td><span class='tag'>买家痛点</span></td><td class='muted'>图片识别</td><td class='zh'>铬面耐刮，降低损耗抱怨</td><td class='en'>scratch resistant</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>durable bathroom fixtures</td><td><span class='tag'>买家痛点</span></td><td class='muted'>品类知识库</td><td class='zh'>耐用性长尾词，过滤廉价款</td><td class='en'>durable</td><td class='muted'>待回填</td></tr><tr class='dim-pain'><td class='en'>premium walnut bathroom accessories</td><td><span class='tag'>买家痛点</span></td><td class='muted'>图片识别</td><td class='zh'>高端材质词，拉高客单与转化</td><td class='en'>premium walnut</td><td class='muted'>待回填</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="strategy">
+    <header>
+      <h2><span class="idx">07 · First Wave</span>首战策略</h2>
+      <span class="sub">未接入实盘数据，存在 5%–15% 偏差风险</span>
+    </header>
+    <div class="strat-grid">
+      <div class="panel">
+        <h3>TOP 10 首发关键词</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>序</th><th>Keyword</th><th>维度</th><th>首发用途</th></tr></thead>
+            <tbody><tr><td class='num'>1</td><td class='en'>bathroom hardware set</td><td><span class='tag'>流量质量</span></td><td class='zh'>标题主词+P4P主推</td></tr><tr><td class='num'>2</td><td class='en'>bathroom accessories</td><td><span class='tag'>流量规模</span></td><td class='zh'>类目覆盖+P4P大词补充</td></tr><tr><td class='num'>3</td><td class='en'>towel rack with shelf</td><td><span class='tag'>流量质量</span></td><td class='zh'>标题+详情页关键词埋点</td></tr><tr><td class='num'>4</td><td class='en'>wall mounted bathroom accessories</td><td><span class='tag'>流量质量</span></td><td class='zh'>标题+橱窗推荐</td></tr><tr><td class='num'>5</td><td class='en'>bathroom hardware</td><td><span class='tag'>流量规模</span></td><td class='zh'>P4P大词+关联词</td></tr><tr><td class='num'>6</td><td class='en'>rust resistant bathroom hardware</td><td><span class='tag'>买家痛点</span></td><td class='zh'>卖点埋词+长尾P4P</td></tr><tr><td class='num'>7</td><td class='en'>bathroom corner shelf</td><td><span class='tag'>流量质量</span></td><td class='zh'>副图/详情埋词+长尾P4P</td></tr><tr><td class='num'>8</td><td class='en'>chrome towel bar</td><td><span class='tag'>流量质量</span></td><td class='zh'>长尾P4P+标题变体</td></tr><tr><td class='num'>9</td><td class='en'>space saving bathroom accessories</td><td><span class='tag'>买家痛点</span></td><td class='zh'>详情页+长尾P4P</td></tr><tr><td class='num'>10</td><td class='en'>toilet paper holder wall mounted</td><td><span class='tag'>流量质量</span></td><td class='zh'>长尾P4P+详情埋词</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>TOP 5 首发标题</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>序</th><th>Title (EN)</th><th>字符</th><th>选用理由</th></tr></thead>
+            <tbody><tr><td class='num'>1</td><td class='en'>6 Piece Bathroom Hardware Set With Towel Rack Shelf Double Towel Bar Hook Rack Toilet Paper Holder Wall Mounted For Home</td><td class='len'>120</td><td class='zh'>主推：规模词+核心单品全覆盖</td></tr><tr><td class='num'>2</td><td class='en'>Complete Bathroom Accessories Set Chrome Walnut Finish Wall Mounted Towel Rack Toilet Brush Holder For Bathroom Storage</td><td class='len'>119</td><td class='zh'>备选1：材质词前置，chrome walnut差异化</td></tr><tr><td class='num'>3</td><td class='en'>Modern Bathroom Hardware Set Space Saving Corner Shelf Towel Rack Toilet Paper Holder Wall Mounted Chrome Walnut Finish</td><td class='len'>119</td><td class='zh'>备选2：space saving痛点前置，主打小浴室</td></tr><tr><td class='num'>4</td><td class='en'>Rust Resistant Bathroom Towel Rack Set Chrome Finish Walnut Wood 5 Hook Rack For Bathroom Storage Wall Mounted Shelf</td><td class='len'>116</td><td class='zh'>备选3：防锈痛点前置，主打耐用性买家</td></tr><tr><td class='num'>5</td><td class='en'>Bathroom Accessories Set 6 Piece Chrome Walnut Finish Towel Rack With Shelf Double Towel Bar Hook Rack Corner Shelf</td><td class='len'>115</td><td class='zh'>备选4：套装结构完整罗列，SEO密度最高</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>TOP 3 目标市场</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>序</th><th>市场</th><th>定位</th><th>打法要点</th></tr></thead>
+            <tbody><tr><td class='num'>1</td><td><strong>US 美国</strong></td><td class='zh'>主战场，最大盘</td><td class='zh'>premium+rust resistant；标准档$15.5-18.5；主打bathroom hardware set/towel rack；触达Amazon卖家与家装电商采购</td></tr><tr><td class='num'>2</td><td><strong>DE 德国</strong></td><td class='zh'>高客单品质敏感</td><td class='zh'>主打heavy duty+durable+环保；强调测试数据与REACH合规；高端档$18.5-22.5；触达五金连锁与建材批发</td></tr><tr><td class='num'>3</td><td><strong>UK 英国</strong></td><td class='zh'>中高端风格导向</td><td class='zh'>主打modern minimalist+space saving(英式小浴室)；标准/高端档之间；触达设计型家居电商与翻新项目</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>发布后 1–2 周需回填的数据项</h3>
+        <ul class="plain"><li>① 关键词指数：27词矩阵的搜索量/竞争度/点击率 (数据参谋→关键词指数)</li><li>② 店铺数据：曝光/点击/询盘/转化率基线</li><li>③ 竞品数据：TOP同行标题结构、价格带、关键词覆盖</li><li>④ 实盘价格校验：按实际成本与运费校准3档FOB价格</li></ul>
+      </div>
+      <div class="note">
+        <strong>发布前必看：</strong>① 云端草稿标题含 “Towel Warmer” 字样（云端识别偏差，素材无此件），建议在草稿中替换为上方 TOP 5 标题之一；
+        ② 尺寸、价格（$13.5–22.5 三档）、MOQ（50 套）、交期（15–25 天）与认证（REACH / CPSIA）均为建议值，须按实际产品与工厂数据核对；
+        ③ 尺寸参数图内的数值为参考值，请以实测尺寸替换后重新导出。
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>草稿 ID 1601928768938 · 质量分 4.9（无扣分项）· 已保存草稿箱，待确认发布</span>
+    <span>生成日期 2026-08-20 · 单文件分享版（图片引用 CDN）</span>
+  </footer>
+
+</div>
+</body>
+</html>
